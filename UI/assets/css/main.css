@@ -1,0 +1,116 @@
+body {
+    background-image: url(../img/back2.jpg);
+    background-size: cover;
+    margin: 0px;
+}
+
+h3 {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(68, 138, 105);
+}
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(42, 42, 110);
+}
+
+input {
+    display: block;
+    width: 80%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    margin: 20px 25px 20px 25px;
+}
+
+input:hover {
+    border: 1px solid rgba(0, 187, 125, 0.253);
+}
+
+input:visited {
+    border: 2px solid rgba(5, 235, 158, 0.877);
+}
+
+#login_btn {
+    background-color: rgb(5, 179, 141);
+    border: none;
+    border-radius: 3px;
+    border: 2px solid rgb(4, 196, 154);
+    color: white;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    display: block;
+    width: 80%;
+    margin: 20px 25px 20px 25px;
+}
+
+#login_btn:hover {
+    background-color: rgb(8, 230, 182);
+    border-color: rgb(8, 230, 182);
+}
+
+.Login-container {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+p {
+    font-size: 17px;
+    margin: 2px 2px 2px 23px;
+    color: grey;
+}
+
+.banner-img {
+    height: 100px;
+    width: auto;
+    margin-left: 20%;
+}
+
+.login_link {
+    color: rgb(15, 168, 105);
+    text-decoration: none;
+}
+
+@media (min-width: 600px) {
+    .container {
+        margin-top: 7px;
+        margin: 5% 35% 5% 35%;
+    }
+}
+
+@media (max-width:600px) {
+    .container {
+        margin-top: 7px;
+        margin: 5% 10% 5% 10%;
+    }
+}
+
+@media (max-width:850px) {
+    .container {
+        margin-top: 7px;
+        margin: 15% 20% 15% 20%;
+    }
+    .banner-img {
+        height: 80px;
+        margin-left: 5%;
+    }
+    body {
+        background-size: 250%;
+        margin: 0px;
+    }
+}

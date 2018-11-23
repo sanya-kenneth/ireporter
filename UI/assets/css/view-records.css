@@ -1,0 +1,48 @@
+.content {
+    margin-left: 50px;
+    padding-left: 30px;
+}
+
+.h3heading {
+    background-color: white;
+    box-shadow: 0px 1px 4px 1px #6d6c6c8c;
+    padding: 4px;
+    margin-right: 70%;
+    text-align: center;
+}
+
+.user-records {
+    background-color: rgba(137, 43, 226, 0.089);
+    padding: 5px 10px 5px 10px;
+    margin-top: 0px;
+    margin-right: 100px;
+    color: rgb(65, 64, 64);
+}
+
+.user-records:hover {
+    background-color: #f7f7f746;
+    cursor: default;
+}
+
+h3 {
+    color: rgb(0, 128, 79);
+}
+
+img {
+    height: 20px;
+    width: auto;
+    border-radius: 9px;
+}
+
+.edit {
+    margin-left: 40px;
+    float: right;
+    cursor: pointer;
+}
+
+.trash {
+    margin-left: 10px;
+    margin-right: 10px;
+    float: right;
+    cursor: pointer;
+}
