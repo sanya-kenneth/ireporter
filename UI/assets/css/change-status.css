@@ -17,11 +17,13 @@
 .pp {
     height: 100px;
     margin-left: 35px;
+    margin-bottom: 0px;
 }
 
 h5 {
     color: rgb(196, 195, 195);
     margin-left: 43px;
+    margin-top: 3px;
 }
 
 .status {
@@ -72,4 +74,73 @@ button:hover {
     background-color: rgb(8, 143, 98);
     border-color: rgb(8, 143, 98);
     cursor: pointer;
+}
+
+@media (max-width:700px) {
+    .menu-container {
+        /* margin-top: 7px; */
+        /* margin: 5% 10% 5% 10%; */
+    }
+    .flex-container-grid {
+        display: grid;
+        grid-template-columns: 12fr;
+        /* margin-top: 2%; */
+    }
+    .extra-space {
+        margin-top: 0px;
+    }
+    .pp {
+        height: 50px;
+        margin-left: 35px;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+    .banner-img {
+        margin-left: 30px;
+    }
+    .h3heading {
+        margin-right: 35% !important;
+        text-align: center;
+    }
+    h5 {
+        margin-top: 4px;
+    }
+    .mark-status {
+        width: 100px;
+        display: block;
+        margin-left: 0px;
+        /* float: inherit; */
+    }
+    .mark-status2 {
+        width: 100px;
+        display: inline;
+        margin-left: 0px;
+        float: inherit;
+    }
+    .mark-status3 {
+        width: 100px;
+        display: inline;
+        margin-left: 0px;
+        float: inherit;
+    }
+    .mark-status4 {
+        width: 100px;
+        display: inline;
+        margin-left: 0px;
+        float: inherit;
+    }
+    button {
+        width: 100px;
+        height: 45px;
+        margin-left: 0px;
+        float: left;
+        display: block;
+        margin-top: 0px;
+    }
+    .user-records {
+        margin-bottom: 60px;
+    }
+    .extra-space {
+        margin-top: 0px;
+    }
 }

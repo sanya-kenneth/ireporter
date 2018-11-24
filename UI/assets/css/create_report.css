@@ -24,10 +24,11 @@ body {
 ul li a {
     text-decoration: none;
     color: rgb(253, 253, 253);
-    padding-top: 4px;
-    padding-bottom: 5px;
-    padding-left: 3px;
-    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 16px;
+    padding-left: 5px;
+    padding-right: 10px;
     border-radius: .1em;
 }
 
@@ -143,4 +144,54 @@ button:hover {
     background-color: rgb(8, 143, 98);
     border-color: rgb(8, 143, 98);
     cursor: pointer;
+}
+
+@media (max-width:700px) {
+    .menu-container {
+        /* margin-top: 7px; */
+        /* margin: 5% 10% 5% 10%; */
+    }
+    .flex-container-grid {
+        display: grid;
+        grid-template-columns: 12fr;
+        /* margin-top: 2%; */
+    }
+    .number-info {
+        margin-top: 20px !important;
+    }
+    .number-info-big {
+        margin-top: 500px !important;
+    }
+    .wrap-all-records {
+        margin-right: 5% !important;
+    }
+    .extra-space {
+        margin-top: 0px;
+    }
+    .pp {
+        height: 50px;
+        margin-left: 35px;
+        border-radius: 10px;
+    }
+    .banner-img {
+        margin-left: 70px;
+    }
+    ul li {
+        display: inline;
+    }
+    .h3heading {
+        margin-right: 35% !important;
+        text-align: center;
+    }
+    .user-records {
+        margin-bottom: 30px;
+    }
+    .dot {
+        display: block !important;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    h5 {
+        margin-top: 4px;
+    }
 }
