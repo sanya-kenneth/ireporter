@@ -13,6 +13,7 @@ class Incident:
         self.Images = Images
         self.Videos = Videos
         self.comment = comment
+        self.status = 'Draft'
 
     def to_json(self):
         return {
@@ -23,5 +24,6 @@ class Incident:
                  "location": self.location,
                  "Images": self.Images,
                  "Videos": self.Videos,
-                 "comment": self.comment
+                 "comment": self.comment,
+                 "status": self.status
                }

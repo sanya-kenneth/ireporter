@@ -69,6 +69,9 @@ def edit_incident_location(incident_id):
                         'error': 'only numbers are allowed for location field'}), 400
     for incident_record in incident_db:
         if incident_record['incident_id'] == incident_id:
+            if incident_record['status'] != 'Draft':
+                return jsonify({'status': 400,
+                        'error': 'You cannot change the location while the incident status is not Draft'}), 400 
             incident_record['location'] = location
             incident_record_type = incident_record['type']
             return jsonify({'status': 200, 'data': incident_record,
