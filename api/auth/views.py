@@ -1,4 +1,5 @@
-from flask import request, jsonify, json
+from flask import request, jsonify
+import json
 from api.auth import auths
 from api.auth.models import User, Admin
 from api.auth.utilities import validateUser
@@ -10,14 +11,15 @@ user_db = []
 
 @auths.route('/users', methods=['POST'])
 def signup():
-   data = json.loads(request.data)
-   firstName = data['firstname']
-   lastName = data['lastname']
-   otherNames = data['othernames']
-   email = data['email']
-   phoneNumber = data['phonenumber']
-   userName = data['username']
-   userPassword = data['password']
+   # data = json.loads(request.data)
+   data = request.get_json()
+   firstName = data.get('firstname')
+   lastName = data.get('lastname')
+   otherNames = data.get('othernames')
+   email = data.get('email')
+   phoneNumber = data.get('phonenumber')
+   userName = data.get('username')
+   userPassword = data.get('password')
    if not firstName or not lastName or not\
            otherNames or not email or not phoneNumber or not \
            userName or not userPassword:
