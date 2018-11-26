@@ -92,6 +92,9 @@ def edit_incident_comment(incident_id):
                         'error': 'comment must be a string'}), 400
     for search_incident in incident_db:
         if search_incident['incident_id'] == incident_id:
+            if search_incident['status'] != 'Draft':
+                return jsonify({'status': 400,
+                        'error': 'You cannot change the location while the incident status is not Draft'}), 400 
             search_incident['comment'] = comment
             search_incident_type = search_incident['type']
             return jsonify({'status': 200, 'data': search_incident,
