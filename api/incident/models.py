@@ -2,6 +2,9 @@ import uuid
 import datetime
 
 
+incident_db = []
+
+
 class Incident:
     def __init__(self, createdBy, type, location,
                  Images, Videos, comment):
@@ -27,3 +30,9 @@ class Incident:
                  "comment": self.comment,
                  "status": self.status
                }
+
+    @staticmethod
+    def check_incident_record(id):
+        for incident in incident_db:
+            if incident['incident_id'] == id:
+                return incident
