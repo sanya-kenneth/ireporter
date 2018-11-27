@@ -1,5 +1,7 @@
 # iReporter
 
+ [![Build Status](https://travis-ci.org/sanya-kenneth/ireporter.svg?branch=ft-API)](https://travis-ci.org/sanya-kenneth/ireporter) [![Coverage Status](https://coveralls.io/repos/github/sanya-kenneth/ireporter/badge.svg?branch=ft-API)](https://coveralls.io/github/sanya-kenneth/ireporter?branch=ft-API) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/66cc30326bca466d990d32aabd8a2158)](https://www.codacy.com/app/sanya-kenneth/ireporter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sanya-kenneth/ireporter&amp;utm_campaign=Badge_Grade)
+
 ## About
 
 iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention
