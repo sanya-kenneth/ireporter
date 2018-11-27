@@ -3,6 +3,7 @@ class BaseConfig:
     class are shared across all environments  """
     DEBUG = False
     TESTING = False
+    SECRET = 'qwertyuiopasdfghjklsdfghjklzxcvbnmdfgh'
 
 
 class DevelopmentConfig(BaseConfig):
