@@ -4,6 +4,6 @@ from api import create_app
 app = create_app('Development')
 
 
-# App entry point
+# Entry point to the app
 if __name__ == '__main__':
     app.run()
