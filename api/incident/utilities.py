@@ -8,10 +8,6 @@ class validateIncident:
          or record_type == 'intervention'
 
     @staticmethod
-    def validate_location(location):
-        return isinstance(location, int)
-
-    @staticmethod
     def validate_comment(comment):
         return isinstance(comment, str)
 
@@ -34,3 +30,9 @@ class validateIncident:
                isinstance(store_values[0], str) and \
                isinstance(store_values[1], str)
 
+    @staticmethod
+    def validate_location(location):
+        value1 = float(location[0])
+        value2 = float(location[1])
+        return isinstance(location, list) and isinstance(value1, float) and\
+         isinstance(value2, float) and len(location) == 2

@@ -20,7 +20,7 @@ def post_incident(current_user):
                         'error':'type must a string and must be red-flag or intervention'}), 400
     if not validateIncident.validate_location(location):
         return jsonify({'status': 400,
-                        'error': 'only numbers are allowed for location field'
+                        'error': 'Location field only takes in a list of valid Lat and Long cordinates'
                         }), 400
     if not validateIncident.validate_comment(comment):
         return jsonify({'status': 400,
