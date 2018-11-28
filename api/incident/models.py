@@ -6,12 +6,12 @@ incident_db = []
 
 
 class Incident:
-    def __init__(self, createdBy, type, location,
+    def __init__(self, createdBy, record_type, location,
                  Images, Videos, comment):
         self.incident_id = uuid.uuid4()
         self.createdOn = datetime.datetime.now()
         self.createdBy = createdBy
-        self.type = type
+        self.record_type = record_type
         self.location = location
         self.Images = Images
         self.Videos = Videos
@@ -23,7 +23,7 @@ class Incident:
                  "incident_id": str(self.incident_id.int)[:10],
                  "createdOn": self.createdOn,
                  "createdBy": self.createdBy,
-                 "type": self.type,
+                 "type": self.record_type,
                  "location": self.location,
                  "Images": self.Images,
                  "Videos": self.Videos,

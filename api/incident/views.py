@@ -1,7 +1,7 @@
 from api.incident import incidents_bp
 from flask import jsonify
 from api.auth.utilities import protected, check_is_admin
-from api.incident.utilities import post_incident,\
+from api.incident.controller import post_incident,\
                                     fetch_all_incidents, fetch_an_incident,\
                                     edit_location_of_incident,\
                                     edit_comment_of_incident,\
