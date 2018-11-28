@@ -33,7 +33,8 @@ class User:
                  "isAdmin": self.isAdmin
                }
 
-    def check_user_exists(self, email):
+    @staticmethod
+    def check_user_exists(email):
         for user in user_db:
             return user['email'] == email
 
@@ -51,21 +52,3 @@ class Admin(User):
         self.password = password
         self.registered = datetime.datetime.now()
         self.isAdmin = True
-
-    def to_json(self):
-        return {
-                 "user_id": str(self.user_id.int)[:10],
-                 "firstname": self.firstname,
-                 "lastname": self.lastname,
-                 "othername": self.othernames,
-                 "email": self.email,
-                 "phoneNumber": self.phoneNumber,
-                 "username": self.username,
-                 "userpassword": self.password,
-                 "registered": self.registered,
-                 "isAdmin": self.isAdmin
-               }
-
-    def check_admin_isthere(self, email):
-        for admin in user_db:
-            return admin['email'] == email

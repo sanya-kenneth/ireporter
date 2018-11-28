@@ -1,5 +1,5 @@
 from api.auth import auths
-from api.auth.utilities import signup_user, login_user
+from api.auth.controller import signup_user, login_user
 from flask import make_response, jsonify
 
 
