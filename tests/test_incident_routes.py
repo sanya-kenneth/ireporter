@@ -8,7 +8,7 @@ class IncidentTestCase(BaseTest):
     def test_returns_error_if_the_record_type_is_invalid(self):
         data = {
                 "type":"",
-                "location":2222222,
+                "location":[3333.33, 444.1],
                 "comment": "its terrible",
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
                 "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
@@ -22,7 +22,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(response_data['error'], "A required field is either missing or empty")
         data = {
                 "type":"red",
-                "location":2222222,
+                "location":[3333.33, 444.1],
                 "comment": "its terrible",
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
                 "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
@@ -36,7 +36,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(response_data['error'], "type must a string and must be red-flag or intervention")
         data = {
                 "type":9,
-                "location":2222222,
+                "location":[3333.33, 444.1],
                 "comment": "its terrible",
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
                 "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
@@ -63,12 +63,12 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(res.status_code,400)
         self.assertEqual(response_data['status'], 400)
         self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "only numbers are allowed for location field")
+        self.assertEqual(response_data['error'], "Location field only takes in a list of valid Lat and Long cordinates")
 
     def test_returns_error_if_comment_is_not_valid(self):
         data = {
                 "type":"red-flag",
-                "location":2222222,
+                "location":[3333.33, 444.1],
                 "comment": 99,
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
                 "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
@@ -84,7 +84,7 @@ class IncidentTestCase(BaseTest):
     def test_returns_error_if_image_url_or_title_is_invalid(self):
         data = {
             "type":"red-flag",
-            "location":2222222,
+            "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"trytle":"sassaqwqwq","url":"sasasdsdd"},
             "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
@@ -99,7 +99,7 @@ class IncidentTestCase(BaseTest):
 
         data = {
             "type":"red-flag",
-            "location":2222222,
+            "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","ul":"sasasdsdd"},
             "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
@@ -114,7 +114,7 @@ class IncidentTestCase(BaseTest):
 
         data = {
             "type":"red-flag",
-            "location":2222222,
+            "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"trytle":"sassaqwqwq","rl":"sasasdsdd"},
             "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
@@ -129,7 +129,7 @@ class IncidentTestCase(BaseTest):
 
         data = {
             "type":"red-flag",
-            "location":2222222,
+            "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":10},
             "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
@@ -145,7 +145,7 @@ class IncidentTestCase(BaseTest):
     def test_returns_error_video_url_or_title_is_invalid(self):
         data = {
             "type":"red-flag",
-            "location":2222222,
+            "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"ti":"sassaqwqwq","url":"sasasdsdd"}
@@ -160,7 +160,7 @@ class IncidentTestCase(BaseTest):
 
         data = {
             "type":"red-flag",
-            "location":2222222,
+            "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":8,"url":"sasasdsdd"}
@@ -176,7 +176,7 @@ class IncidentTestCase(BaseTest):
     def test_returns_error_if_unauthorised_user_tries_to_post_record(self):
         data = {
             "type":"red-flag",
-            "location":2222222,
+            "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":"the Meg","url":"sasasdsdd"}
@@ -192,7 +192,7 @@ class IncidentTestCase(BaseTest):
     def test_posts_incident_record(self):
         data = {
             "type":"red-flag",
-            "location":2222222,
+            "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":"the Meg","url":"sasasdsdd"}
@@ -209,7 +209,7 @@ class IncidentTestCase(BaseTest):
     def test_returns_all_incident_records(self):
         data = {
             "type":"red-flag",
-            "location":2222222,
+            "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":"the Meg","url":"sasasdsdd"}
@@ -223,11 +223,20 @@ class IncidentTestCase(BaseTest):
         self.assertIsInstance(response_data, dict)
         self.assertIn("the pot holes are many", str(response_data['data']))
 
+    def test_returns_error_if_the_incident_db_is_empty(self):
+        res = self.app.get('/api/v1/incidents', headers = {'token':self.get_token_user()})
+        response_data = json.loads(res.data.decode())
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(response_data['status'], 200)
+        self.assertIsInstance(response_data, dict)
+        self.assertIn("No incidents recorded yet", str(response_data['message']))
+
+
     def test_returns_error_id_incident_record_not_found(self):
         record = {
                 "incident_id":1,
                 "type":"red-flag",
-                "location":2222222,
+                "location":[3333.33, 444.1],
                 "comment": "the pot holes are many",
                 "image":{"title":"sassaqwqwq","url":"sasasa"},
                 "video":{"title":"the Meg","url":"sasasdsdd"}
