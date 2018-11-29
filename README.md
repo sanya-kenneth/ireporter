@@ -30,7 +30,7 @@ iReporter enables any/every citizen to bring any form of corruption to the notic
 
 ## Getting Started
 
-Clone the project from this [link]()
+Clone the project from this [link](https://github.com/sanya-kenneth/ireporter)
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ Clone the project from this [link]()
 
 ## Installing
 
-Clone the project from this [link]()
+Clone the project from this [link](https://github.com/sanya-kenneth/ireporter)
 
 Open your terminal or command prompt for windows users
 
@@ -61,7 +61,7 @@ $ python run.py
 
 The API is hosted on Heroku. Use the link below to navigate to it.
 
-[heroku]()
+[heroku](https://ireporterch2.herokuapp.com/)
 
 ## Testing the Api
 
