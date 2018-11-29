@@ -1,6 +1,7 @@
 from api.incident import incidents_bp
 from flask import jsonify
-from api.auth.utilities import protected, check_is_admin
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from api.auth.utilities import check_is_admin, get_user
 from api.incident.controller import post_incident,\
                                     fetch_all_incidents, fetch_an_incident,\
                                     edit_location_of_incident,\
@@ -10,33 +11,37 @@ from api.incident.controller import post_incident,\
 
 # Post incident route
 @incidents_bp.route('/incidents', methods=['POST'])
-@protected
-def post(current_user):
+@jwt_required
+def post():
+    current_user = get_jwt_identity()
+    current_user = get_user(current_user)
     if check_is_admin(current_user):
         return jsonify({'status': 403,
                         'error': 'Access denied'}), 403
-    return post_incident(current_user)
+    return post_incident()
 
 
 # fetch all incidents route
 @incidents_bp.route('/incidents', methods=['GET'])
-@protected
-def get_all_incidents(current_user):
+@jwt_required
+def get_all_incidents():
     return fetch_all_incidents()
 
 
 # fetch a specific incident route
 @incidents_bp.route('/incidents/<incident_id>', methods=['GET'])
-@protected
-def get_an_incident(curreent_user, incident_id):
+@jwt_required
+def get_an_incident(incident_id):
     return fetch_an_incident(incident_id)
 
 
 # Update incident location route
 @incidents_bp.route('/incidents/<incident_id>/incident_location',
                     methods=['PATCH'])
-@protected
-def edit_incident_location(current_user, incident_id):
+@jwt_required
+def edit_incident_location(incident_id):
+    current_user = get_jwt_identity()
+    current_user = get_user(current_user)
     if check_is_admin(current_user):
         return jsonify({'status': 403,
                         'error': 'Access denied'}), 403
@@ -46,8 +51,10 @@ def edit_incident_location(current_user, incident_id):
 # Update incident comment route
 @incidents_bp.route('/incidents/<incident_id>/incident_comment',
                     methods=['PATCH'])
-@protected
-def edit_incident_comment(current_user, incident_id):
+@jwt_required
+def edit_incident_comment(incident_id):
+    current_user = get_jwt_identity()
+    current_user = get_user(current_user)
     if check_is_admin(current_user):
         return jsonify({'status': 403,
                         'error': 'Access denied'}), 403
@@ -56,8 +63,10 @@ def edit_incident_comment(current_user, incident_id):
 
 # Delete incident route
 @incidents_bp.route('/incidents/<incident_id>', methods=['DELETE'])
-@protected
-def delete_incident_record(current_user, incident_id):
+@jwt_required
+def delete_incident_record(incident_id):
+    current_user = get_jwt_identity()
+    current_user = get_user(current_user)
     if check_is_admin(current_user):
         return jsonify({'status': 403,
                         'error': 'Access denied'}), 403
@@ -66,8 +75,10 @@ def delete_incident_record(current_user, incident_id):
 
 # change incident status route
 @incidents_bp.route('/incidents/<incident_id>/status', methods=['PATCH'])
-@protected
-def change_incident_status(current_user, incident_id):
+@jwt_required
+def change_incident_status(incident_id):
+    current_user = get_jwt_identity()
+    current_user = get_user(current_user)
     if not check_is_admin(current_user):
         return jsonify({'status': 403,
                         'error': 'Access denied'}), 403
