@@ -3,7 +3,7 @@ class BaseConfig:
     class are shared across all environments  """
     DEBUG = False
     TESTING = False
-    SECRET = 'qwertyuiopasdfghjklsdfghjklzxcvbnmdfgh'
+    JWT_SECRET_KEY = 'qwertyuiopasdfghjklsdfghjklzxcvbnmdfgh'
 
 
 class DevelopmentConfig(BaseConfig):
