@@ -3,10 +3,10 @@ from validate_email import validate_email
 from api.auth.models import User, Admin, user_db
 from api.auth.utilities import validateUser
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import create_access_token
 import datetime
-import jwt
 
-
+# function to signup a user
 def signup_user(user_type):
     data = request.get_json()
     firstName = data.get('firstname')
@@ -57,6 +57,7 @@ def signup_user(user_type):
                     'message': 'Your Account was created successfuly'}), 201
 
 
+# function to login a user
 def login_user():
     login_info = request.get_json()
     login_email = login_info.get('email')
@@ -72,10 +73,7 @@ def login_user():
     for search_data in user_db:
         if search_data['email'] == login_email and \
              check_password_hash(search_data['userpassword'], login_password):
-            token = jwt.encode({'user': search_data['email'],
-                                'exp': datetime.datetime.utcnow()+datetime.timedelta(hours=24)},
-                               app.config['SECRET'],
-                               algorithm='HS256')
-            return jsonify({'status': 200, 'token': token.decode('UTF-8'),
+            access_token = create_access_token(identity=search_data['email'])
+            return jsonify({'status': 200, 'access_token': access_token,
                             'message': 'You are now loggedin'}), 200
-    return jsonify({'status': 401, 'error': 'Wrong email or password'}), 401
+    return jsonify({'status': 403, 'error': 'Wrong email or password'}), 403
