@@ -35,7 +35,7 @@ class BaseTest(unittest.TestCase):
         self.app.post('/api/v1/users/admin', content_type="application/json", data=json.dumps(admin_data))
         res = self.app.post('/api/v1/users/login', content_type="application/json", data=json.dumps(admin_data_login))
         data = json.loads(res.data.decode())
-        return data['token']
+        return data['access_token']
 
 
     def get_token_user(self):
@@ -55,7 +55,15 @@ class BaseTest(unittest.TestCase):
         self.app.post('/api/v1/users', content_type="application/json", data=json.dumps(user_data))
         res = self.app.post('/api/v1/users/login', content_type="application/json", data=json.dumps(user_data_login))
         data = json.loads(res.data.decode())
-        return data['token']
+        return data
+
+    def user_header(self):
+        return { 'content_type':"application/json",'Authorization':
+                 'Bearer ' + self.get_token_user()['access_token']}
+
+    def admin_header(self):
+        return {'content_type':"application/json", 'Authorization':
+        'Bearer ' + self.get_token_admin()}
 
 
 
