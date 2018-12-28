@@ -1,10 +1,10 @@
-from flask import request, jsonify, current_app as app
+from flask import request, jsonify
 from validate_email import validate_email
 from api.auth.models import User, Admin, user_db
 from api.auth.utilities import validateUser
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
-import datetime
+
 
 # function to signup a user
 def signup_user(user_type):

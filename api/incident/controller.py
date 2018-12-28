@@ -9,17 +9,17 @@ import json
 # function for posting an incident
 def post_incident():
     details = json.loads(request.data)
-    type = details['type']
+    incident_type = details['incident_type']
     location = details['location']
     comment = details['comment']
     image = details['image']
     video = details['video']
-    if not type or not location or not comment or not image\
+    if not incident_type or not location or not comment or not image\
          or not video:
         return jsonify({'status': 400,
                         'error': 'A required field is either missing or empty'
                         }), 400
-    if not validateIncident.validate_type(type):
+    if not validateIncident.validate_type(incident_type):
         return jsonify({'status': 400,
                         'error':'type must a string and must be red-flag or intervention'}), 400
     if not validateIncident.validate_location(location):
@@ -36,11 +36,11 @@ def post_incident():
                         'error': 'Image url or title or video url or title is invalid'}), 400
     current_user = get_jwt_identity()
     current_user = get_user(current_user)
-    incident = Incident(current_user['user_id'], type, location, image, video, comment)
+    incident = Incident(current_user['user_id'], incident_type, location, image, video, comment)
     incident_db.append(incident.to_json())
     return jsonify({'data': incident.to_json(),
                     'status': 201,
-                    'message': f'created {type} record successfuly'}), 201
+                    'message': f'created {incident_type} record successfuly'}), 201
 
 
 # function for getting all incidents
@@ -89,7 +89,7 @@ def edit_location_of_incident(incident_id):
                 return jsonify({'status': 400,
                                 'error': 'You cannot change the location while the incident status is not Draft'}), 400
             incident_record['location'] = location
-            incident_record_type = incident_record['type']
+            incident_record_type = incident_record['incident_type']
             return jsonify({'status': 200, 'data': incident_record,
                             'message': f"Updated {incident_record_type} record's location"
                             }), 200
@@ -119,7 +119,7 @@ def edit_comment_of_incident(incident_id):
                 return jsonify({'status': 400,
                                 'error': 'You cannot change the location while the incident status is not Draft'}), 400
             search_incident['comment'] = comment
-            search_incident_type = search_incident['type']
+            search_incident_type = search_incident['incident_type']
             return jsonify({'status': 200, 'data': search_incident,
                            'message': f"Updated {search_incident_type} record's comment"}), 200
     return jsonify({'status': 200,
@@ -137,7 +137,7 @@ def delete_incident(incident_id):
         if int(incident_data['incident_id']) == incident_Id:
             incident_db.remove(incident_data)
             return jsonify({'status': 200, 'data': incident_data,
-                            'message': f"{incident_data['type']} record has been deleted"}), 200
+                            'message': f"{incident_data['incident_type']} record has been deleted"}), 200
     return jsonify({'status': 200,
                    'message': 'incident record not found'}), 200
 
@@ -162,6 +162,6 @@ def change_status(incident_id):
         if incident_item['incident_id'] == incident_Id:
             incident_item['status'] = status
             return jsonify({'status': 200, 'data': incident_item,
-                            'message': f"{incident_item['type']} record's status was successfuly updated"}), 200
+                            'message': f"{incident_item['incident_type']} record's status was successfuly updated"}), 200
     return jsonify({'status': 200,
                    'message': 'incident record not found'}), 200

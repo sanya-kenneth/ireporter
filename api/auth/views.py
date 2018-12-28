@@ -23,7 +23,7 @@ def login():
 
 # custom error handler
 @auths.app_errorhandler(400)
-def not_found(error):
+def bad_request(error):
     """ Customise HTTP 400 Bad request error to return custom message
         when ever an HTTP error 400 is raised.
     """

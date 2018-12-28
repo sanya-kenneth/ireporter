@@ -1,5 +1,7 @@
-from flask import request, jsonify, current_app as app
+from flask import jsonify
 from api.auth.models import user_db
+from functools import wraps
+from flask_jwt_extended import get_jwt_identity
 import re
 
 
@@ -31,4 +33,10 @@ def get_user(current_user):
 
 def check_is_admin(current_user):
     """function checks if a user is an admin """
-    return current_user['isAdmin']
+    return current_user['isAdmin'] == True
+
+
+def user_identity():
+    current_user = get_jwt_identity()
+    current_user = get_user(current_user)
+    return current_user

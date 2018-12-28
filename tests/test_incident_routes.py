@@ -7,7 +7,7 @@ import json
 class IncidentTestCase(BaseTest):
     def test_returns_error_if_the_record_type_is_invalid(self):
         data = {
-                "type":"",
+                "incident_type":"",
                 "location":[3333.33, 444.1],
                 "comment": "its terrible",
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
@@ -21,7 +21,7 @@ class IncidentTestCase(BaseTest):
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "A required field is either missing or empty")
         data = {
-                "type":"red",
+                "incident_type":"red",
                 "location":[3333.33, 444.1],
                 "comment": "its terrible",
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
@@ -35,7 +35,7 @@ class IncidentTestCase(BaseTest):
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "type must a string and must be red-flag or intervention")
         data = {
-                "type":9,
+                "incident_type":9,
                 "location":[3333.33, 444.1],
                 "comment": "its terrible",
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
@@ -51,7 +51,7 @@ class IncidentTestCase(BaseTest):
 
     def test_return_error_if_location_is_invalid(self):
         data = {
-                "type":"red-flag",
+                "incident_type":"red-flag",
                 "location":"2222222",
                 "comment": "its terrible",
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
@@ -67,7 +67,7 @@ class IncidentTestCase(BaseTest):
 
     def test_returns_error_if_comment_is_not_valid(self):
         data = {
-                "type":"red-flag",
+                "incident_type":"red-flag",
                 "location":[3333.33, 444.1],
                 "comment": 99,
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
@@ -83,7 +83,7 @@ class IncidentTestCase(BaseTest):
 
     def test_returns_error_if_image_url_or_title_is_invalid(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"trytle":"sassaqwqwq","url":"sasasdsdd"},
@@ -98,7 +98,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","ul":"sasasdsdd"},
@@ -113,7 +113,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"trytle":"sassaqwqwq","rl":"sasasdsdd"},
@@ -128,7 +128,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":10},
@@ -144,7 +144,7 @@ class IncidentTestCase(BaseTest):
 
     def test_returns_error_video_url_or_title_is_invalid(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -159,7 +159,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -175,7 +175,7 @@ class IncidentTestCase(BaseTest):
 
     def test_returns_error_if_unauthorised_user_tries_to_post_record(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -191,7 +191,7 @@ class IncidentTestCase(BaseTest):
 
     def test_posts_incident_record(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -208,7 +208,7 @@ class IncidentTestCase(BaseTest):
 
     def test_returns_all_incident_records(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -225,7 +225,7 @@ class IncidentTestCase(BaseTest):
 
     def test_returns_one_record(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -252,7 +252,7 @@ class IncidentTestCase(BaseTest):
     def test_returns_error_id_incident_record_not_found(self):
         record = {
                 "incident_id":14,
-                "type":"red-flag",
+                "incident_type":"red-flag",
                 "location":[3333.33, 444.1],
                 "comment": "the pot holes are many",
                 "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -268,7 +268,7 @@ class IncidentTestCase(BaseTest):
 
     def test_edits_incident_location(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -289,7 +289,7 @@ class IncidentTestCase(BaseTest):
 
     def test_updates_incident_comment(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -311,7 +311,7 @@ class IncidentTestCase(BaseTest):
 
     def test_returns_error_if_user_tries_to_delete_record_thats_not_there(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -328,7 +328,7 @@ class IncidentTestCase(BaseTest):
 
     def test_deletes_incident_record(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},
@@ -346,7 +346,7 @@ class IncidentTestCase(BaseTest):
 
     def test_changes_incident_record_status(self):
         data = {
-            "type":"red-flag",
+            "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
             "image":{"title":"sassaqwqwq","url":"sasasa"},

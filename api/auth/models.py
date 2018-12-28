@@ -21,7 +21,7 @@ class User:
         self.isAdmin = False
 
     def to_json(self):
-        """method returns data from the user class instance as json data"""
+        """method returns data from the user class instance to json format"""
         return {
                  "user_id": self.user_id,
                  "firstname": self.firstname,
@@ -43,7 +43,7 @@ class User:
 
 
 class Admin(User):
-    """model class for an admin. when an instance of 
+    """model class for an admin. when an instance of
     this class is created, isAdmin is set to True """
     def __init__(self, fname, lname, admin_othernames,
                  admin_email, admin_mobile_number, admin_username, admin_password):

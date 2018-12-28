@@ -1,4 +1,3 @@
-import re
 
 
 class validateIncident:
@@ -11,7 +10,7 @@ class validateIncident:
 
     @staticmethod
     def validate_comment(comment):
-        """method validates the comment being attached 
+        """method validates the comment being attached
         to an incident record"""
         return isinstance(comment, str)
 

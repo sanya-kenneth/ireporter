@@ -1,4 +1,3 @@
-import uuid
 import datetime
 
 
@@ -20,12 +19,12 @@ class Incident:
         self.status = 'Draft'
 
     def to_json(self):
-        """method converts data from the incident class object in json"""
+        """method converts data from the incident class object to json format"""
         return {
                  "incident_id": self.incident_id,
                  "createdOn": self.createdOn,
                  "createdBy": self.createdBy,
-                 "type": self.record_type,
+                 "incident_type": self.record_type,
                  "location": self.location,
                  "Images": self.Images,
                  "Videos": self.Videos,
