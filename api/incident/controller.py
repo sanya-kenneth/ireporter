@@ -8,12 +8,12 @@ import json
 
 # function for posting an incident
 def post_incident():
-    details = json.loads(request.data)
-    incident_type = details['incident_type']
-    location = details['location']
-    comment = details['comment']
-    image = details['image']
-    video = details['video']
+    details = request.get_json()
+    incident_type = details.get('incident_type')
+    location = details.get('location')
+    comment = details.get('comment')
+    image = details.get('image')
+    video = details.get('video')
     if not incident_type or not location or not comment or not image\
          or not video:
         return jsonify({'status': 400,
@@ -68,8 +68,8 @@ def fetch_an_incident(incident_id):
 
 # function for editing the location of an incident
 def edit_location_of_incident(incident_id):
-    data = json.loads(request.data)
-    location = data['location']
+    data = request.get_json()
+    location = data.get('location')
     try:
         incident_Id = int(incident_id)
     except:
@@ -77,7 +77,7 @@ def edit_location_of_incident(incident_id):
                         'error': 'incident_id must be a valid number'}), 400
     if not location:
         return jsonify({'status': 400,
-                        'error': 'comment field is empty'
+                        'error': 'location field is empty or missing'
                         }), 400
     if not validateIncident.validate_location(location):
         return jsonify({'status': 400,
@@ -99,8 +99,8 @@ def edit_location_of_incident(incident_id):
 
 # function for editing the comment of an incident 
 def edit_comment_of_incident(incident_id):
-    info = json.loads(request.data)
-    comment = info['comment']
+    info = request.get_json()
+    comment = info.get('comment')
     try:
         incident_Id = int(incident_id)
     except:
@@ -108,7 +108,7 @@ def edit_comment_of_incident(incident_id):
                         'error': 'incident_id must be a valid number'}), 400
     if not comment:
         return jsonify({'status': 400,
-                        'error': 'comment field is empty'
+                        'error': 'comment field is empty or missing'
                         }), 400
     if not validateIncident.validate_comment(comment):
         return jsonify({'status': 400,
@@ -144,8 +144,8 @@ def delete_incident(incident_id):
 
 # function for changing the status of an incident
 def change_status(incident_id):
-    status_data = json.loads(request.data)
-    status = status_data['status']
+    status_data = request.get_json()
+    status = status_data.get('status')
     try:
         incident_Id = int(incident_id)
     except:
