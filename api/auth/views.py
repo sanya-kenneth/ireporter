@@ -6,13 +6,7 @@ from flask import make_response, jsonify
 # signup user route
 @auths.route('/users', methods=['POST'])
 def signup():
-   return signup_user('user')
-
-
-# signup admin route
-@auths.route('/users/admin', methods=['POST'])
-def admin_signup():
-   return signup_user('admin')
+   return signup_user()
 
 
 # login user or admin route

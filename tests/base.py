@@ -1,5 +1,6 @@
 from api.incident.models import incident_db
 from api.auth.models import user_db
+from api.auth.controller import create_admin
 from api import create_app
 import unittest
 import json
@@ -19,20 +20,11 @@ class BaseTest(unittest.TestCase):
         incident_db.clear()
 
     def get_token_admin(self):
-        admin_data = {
-                    "firstname":"kenneth",
-                    "lastname":"sanya",
-                    "othernames":"ken",
-                    "email":"sanya@gmail.com",
-                    "phonenumber":256706578719,
-                    "username":"skimo",
-                    "password":"qs1szwwwaAwx"
-                    }
         admin_data_login = {
-                            "email":"sanya@gmail.com",
-                            "password": "qs1szwwwaAwx"
+                            "email":"ken@gmail.com",
+                            "password": "Ken1234567"
                             }
-        self.app.post('/api/v1/users/admin', content_type="application/json", data=json.dumps(admin_data))
+        create_admin()
         res = self.app.post('/api/v1/users/login', content_type="application/json", data=json.dumps(admin_data_login))
         data = json.loads(res.data.decode())
         return data['access_token']

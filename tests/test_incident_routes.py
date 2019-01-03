@@ -5,7 +5,7 @@ import json
 
 
 class IncidentTestCase(BaseTest):
-    def test_returns_error_if_the_record_type_is_invalid(self):
+    def test_returns_error_if_the_record_type_is_empty(self):
         data = {
                 "incident_type":"",
                 "location":[3333.33, 444.1],
@@ -20,6 +20,8 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(response_data['status'], 400)
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "A required field is either missing or empty")
+
+    def test_returns_error_if_the_record_type_is_invalid(self):
         data = {
                 "incident_type":"red",
                 "location":[3333.33, 444.1],
@@ -34,6 +36,8 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(response_data['status'], 400)
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "type must a string and must be red-flag or intervention")
+        
+    def test_returns_error_if_the_record_type_is_not_a_string(self):
         data = {
                 "incident_type":9,
                 "location":[3333.33, 444.1],
@@ -81,7 +85,7 @@ class IncidentTestCase(BaseTest):
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "comment must be a string")
 
-    def test_returns_error_if_image_url_or_title_is_invalid(self):
+    def test_returns_error_if_image_title_is_invalid(self):
         data = {
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
@@ -97,6 +101,7 @@ class IncidentTestCase(BaseTest):
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
+    def test_returns_error_if_image_url_is_invalid(self):
         data = {
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
@@ -112,21 +117,7 @@ class IncidentTestCase(BaseTest):
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
-        data = {
-            "incident_type":"red-flag",
-            "location":[3333.33, 444.1],
-            "comment": "the pot holes are many",
-            "image":{"trytle":"sassaqwqwq","rl":"sasasdsdd"},
-            "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
-            }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
-            data=json.dumps(data), headers = self.user_header())
-        response_data = json.loads(res.data.decode())
-        self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
-
+    def test_returns_error_if_image_url_data_is_invalid(self):
         data = {
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
@@ -142,7 +133,7 @@ class IncidentTestCase(BaseTest):
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
-    def test_returns_error_video_url_or_title_is_invalid(self):
+    def test_returns_error_video_title_is_invalid(self):
         data = {
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
@@ -158,6 +149,7 @@ class IncidentTestCase(BaseTest):
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
+    def test_returns_error_video_title_data_is_invalid(self):
         data = {
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
