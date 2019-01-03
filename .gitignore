@@ -1,0 +1,7 @@
+/venv/
+.vscode/
+instance/__pycache__/
+api/__pycache__/
+api/auth/__pycache__/
+api/incident/__pycache__/
+tests/__pycache__/
