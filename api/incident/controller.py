@@ -1,8 +1,9 @@
 from flask import request, jsonify
-from api.auth.utilities import get_user
-from api.incident.models import Incident, incident_db
+from api.auth.utilities import user_identity
+from api.incident.models import Incident
 from api.incident.utilities import validateIncident
 from flask_jwt_extended import get_jwt_identity
+from api.database.db import db_handler
 import json
 
 
@@ -34,21 +35,23 @@ def post_incident():
             validateIncident.validate_images_and_video(video):
         return jsonify({'status': 400,
                         'error': 'Image url or title or video url or title is invalid'}), 400
-    current_user = get_jwt_identity()
-    current_user = get_user(current_user)
-    incident = Incident(current_user['user_id'], incident_type, location, image, video, comment)
-    incident_db.append(incident.to_json())
-    return jsonify({'data': incident.to_json(),
+    current_user = user_identity()
+    incident = Incident(current_user[0], incident_type, location, image, video, comment)
+    db_handler().add_incident_record(incident.createdOn, incident.createdBy, incident.record_type,\
+    incident.location, incident.Images['title'], incident.Images['url'], incident.Videos['title'],\
+    incident.Videos['url'], incident.comment, incident.status)
+    return jsonify({
                     'status': 201,
                     'message': f'created {incident_type} record successfuly'}), 201
 
 
 # function for getting all incidents
 def fetch_all_incidents():
-    if not incident_db:
+    fetched_data = db_handler().select_all_records('incident_table')
+    if not fetched_data:
         return jsonify({'status': 200,
                         'message': 'No incidents recorded yet'}), 200
-    return jsonify({'data': incident_db, 'status': 200}), 200
+    return jsonify({'data': fetched_data, 'status': 200}), 200
 
 
 # function for getting a single incident
@@ -58,10 +61,10 @@ def fetch_an_incident(incident_id):
     except:
         return jsonify({'status': 400,
                         'error': 'incident_id must be a valid number'}), 400
-    for incident_item in incident_db:
-        if int(incident_item['incident_id']) == incidentId:
-            return jsonify({'data': incident_item,
-                            'status': 200}), 200
+    record_data = db_handler().select_one_incident_record(incidentId)
+    if record_data:
+        return jsonify({'data': record_data,
+                        'status': 200}), 200
     return jsonify({'status': 200,
                     'message': 'incident record not found'}), 200
 
@@ -83,18 +86,18 @@ def edit_location_of_incident(incident_id):
         return jsonify({'status': 400,
                         'error': 'Location field only takes in a list of valid Lat and Long cordinates'
                         }), 400
-    for incident_record in incident_db:
-        if int(incident_record['incident_id']) == incident_Id:
-            if incident_record['status'] != 'Draft':
-                return jsonify({'status': 400,
-                                'error': 'You cannot change the location while the incident status is not Draft'}), 400
-            incident_record['location'] = location
-            incident_record_type = incident_record['incident_type']
-            return jsonify({'status': 200, 'data': incident_record,
-                            'message': f"Updated {incident_record_type} record's location"
-                            }), 200
-    return jsonify({'status': 200,
+    incident_data_fetch = db_handler().select_one_incident_record(incident_Id)
+    if not incident_data_fetch:
+        return jsonify({'status': 200,
                     'message': 'incident record not found'}), 200
+    if incident_data_fetch[10] != 'Draft':
+        return jsonify({'status': 400,
+                        'error': 'You cannot change the location while the incident status is not Draft'}), 400
+    db_handler().update_incident_record('incident_location', incident_Id, location)
+    incident_record_type = incident_data_fetch[3]
+    return jsonify({'status': 200,
+                    'message': f"Updated {incident_record_type} record's location"
+                    }), 200
 
 
 # function for editing the comment of an incident 
@@ -113,17 +116,17 @@ def edit_comment_of_incident(incident_id):
     if not validateIncident.validate_comment(comment):
         return jsonify({'status': 400,
                         'error': 'comment must be a string'}), 400
-    for search_incident in incident_db:
-        if search_incident['incident_id'] == incident_Id:
-            if search_incident['status'] != 'Draft':
-                return jsonify({'status': 400,
-                                'error': 'You cannot change the location while the incident status is not Draft'}), 400
-            search_incident['comment'] = comment
-            search_incident_type = search_incident['incident_type']
-            return jsonify({'status': 200, 'data': search_incident,
-                           'message': f"Updated {search_incident_type} record's comment"}), 200
-    return jsonify({'status': 200,
+    incident_result = db_handler().select_one_incident_record(incident_Id)
+    if not incident_result:
+        return jsonify({'status': 200,
                    'message': 'incident record not found'}), 200
+    if incident_result[10] != 'Draft':
+        return jsonify({'status': 400,
+                        'error': 'You cannot change the location while the incident status is not Draft'}), 400
+    db_handler().update_incident_record('comment', incident_Id, comment)
+    incident_type = incident_result[3]
+    return jsonify({'status': 200,
+                    'message': f"Updated {incident_type} record's comment"}), 200
 
 
 # function for deleting an incident
@@ -133,13 +136,13 @@ def delete_incident(incident_id):
     except:
         return jsonify({'status': 400,
                         'error': 'incident_id must be a valid number'}), 400
-    for incident_data in incident_db:
-        if int(incident_data['incident_id']) == incident_Id:
-            incident_db.remove(incident_data)
-            return jsonify({'status': 200, 'data': incident_data,
-                            'message': f"{incident_data['incident_type']} record has been deleted"}), 200
+    delete_data = db_handler().select_one_incident_record(incident_Id)
+    if not delete_data:
+        return jsonify({'status': 200,
+                        'message': 'incident record not found'}), 200
+    db_handler().delete_incident_record(incident_Id)
     return jsonify({'status': 200,
-                   'message': 'incident record not found'}), 200
+                    'message': f"{delete_data[3]} record has been deleted"}), 200
 
 
 # function for changing the status of an incident
@@ -158,10 +161,10 @@ def change_status(incident_id):
     if not validateIncident.validate_status(status):
         return jsonify({'status': 400,
                         'error': 'status must a string and must be under investigation or rejected or resolved'}), 400
-    for incident_item in incident_db:
-        if incident_item['incident_id'] == incident_Id:
-            incident_item['status'] = status
-            return jsonify({'status': 200, 'data': incident_item,
-                            'message': f"{incident_item['incident_type']} record's status was successfuly updated"}), 200
+    incident_record_data = db_handler().select_one_incident_record(incident_Id)
+    if not incident_record_data:
+        return jsonify({'status': 200,
+                        'message': 'incident record not found'}), 200
+    db_handler().update_incident_record('incident_status', incident_Id, status)       
     return jsonify({'status': 200,
-                   'message': 'incident record not found'}), 200
+                    'message': f"{incident_record_data[3]} record's status was successfuly updated"}), 200

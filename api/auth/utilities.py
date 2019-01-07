@@ -1,7 +1,5 @@
-from flask import jsonify
-from api.auth.models import user_db
-from functools import wraps
 from flask_jwt_extended import get_jwt_identity
+from api.database.db import db_handler
 import re
 
 
@@ -26,14 +24,12 @@ class validateUser:
 
 def get_user(current_user):
     """function returns data attached to the current user """
-    for user in user_db:
-        if user['email'] == current_user:
-            return user
-
+    user_data = db_handler().select_one_user(current_user)
+    return user_data
 
 def check_is_admin(current_user):
     """function checks if a user is an admin """
-    return current_user['isAdmin'] == True
+    return current_user[9] == True
 
 
 def user_identity():

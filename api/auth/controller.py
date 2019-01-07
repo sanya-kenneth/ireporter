@@ -1,9 +1,10 @@
 from flask import request, jsonify
 from validate_email import validate_email
-from api.auth.models import User, user_db
+from api.auth.models import User
 from api.auth.utilities import validateUser
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
+from api.database.db import db_handler
 
 
 # function to signup a user
@@ -40,11 +41,12 @@ def signup_user():
                         'error': 'Password must be atleast 8 characters and should have atleast one number and one capital letter'}), 400
     user = User(firstName, lastName, otherNames, email,
                 phoneNumber, userName, generate_password_hash(userPassword))
-    if User.check_user_exists(email):
+    if db_handler().select_one_user(email):
         return jsonify({'status': 400,
                         'error': 'User account already exists'}), 400
-    user_db.append(user.to_json())
-    return jsonify({'status': 201, 'data': user.to_json(),
+    db_handler().add_user(user.firstname, user.lastname, user.othernames,\
+    user.username, user.email, user.phoneNumber, user.password, user.registered, user.isAdmin)
+    return jsonify({'status': 201, 
                     'message': 'Your Account was created successfuly'}), 201
 
 
@@ -61,19 +63,20 @@ def login_user():
     if not validateUser.validate_password(login_password):
         return jsonify({'status': 400,
                         'error': 'Password must be atleast 8 characters and should have atleast one number and one capital letter'}), 400
-    for search_data in user_db:
-        if search_data['email'] == login_email and \
-             check_password_hash(search_data['userpassword'], login_password):
-            access_token = create_access_token(identity=search_data['email'])
-            print(user_db)
-            return jsonify({'status': 200, 'access_token': access_token,
-                            'message': 'You are now loggedin'}), 200
+    user_data = db_handler().select_one_user(login_email)
+    if user_data[5] == login_email and \
+         check_password_hash(user_data[7], login_password):
+        access_token = create_access_token(identity=user_data[5])
+        return jsonify({'status': 200, 'access_token': access_token,
+                        'message': 'You are now loggedin'}), 200
     return jsonify({'status': 403, 'error': 'Wrong email or password'}), 403
 
 
-def create_admin():
-    admin = User('ken', 'kennedy', 'kenx', 'ken@gmail.com',
-                  '0706578719', 'ken', generate_password_hash('Ken1234567'), isAdmin=True )
-    user_db.append(admin.to_json())
+# def create_admin():
+#     admin = User('ken', 'kennedy', 'kenx', 'ken@gmail.com',
+#                   '0706578719', 'ken', generate_password_hash('Ken1234567'), isAdmin=True )
+# db_handler().add_user('ken', 'kennedy', 'kenx', 'ken', 'ken@gmail.com',
+#                   '0706578719', generate_password_hash('Ken1234567'), datetime.datetime.now(), isAdmin=True)
+#     user_db.append(admin.to_json())
 
-create_admin()
+# create_admin()

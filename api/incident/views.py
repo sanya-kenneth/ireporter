@@ -7,6 +7,7 @@ from api.incident.controller import post_incident,\
                                     edit_location_of_incident,\
                                     edit_comment_of_incident,\
                                     delete_incident, change_status
+# from api.incident.controller import post_incident, delete_incident,fetch_all_incidents,fetch_an_incident,edit_location_of_incident,  edit_comment_of_incident
 
 
 # Post incident route

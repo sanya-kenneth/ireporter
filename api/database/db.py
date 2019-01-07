@@ -31,7 +31,7 @@ class Database:
         othernames VARCHAR(50) NOT NULL,
         username VARCHAR(50) NOT NULL,
         useremail VARCHAR(50) NOT NULL,
-        phoneNumber INT NOT NULL,
+        phoneNumber bigint NOT NULL,
         userpassword TEXT NOT NULL,
         registered TEXT NOT NULL,
         isAdmin BOOL NOT NULL
@@ -43,8 +43,10 @@ class Database:
         createdBy VARCHAR(50) NOT NULL,
         record_type VARCHAR(50) NOT NULL,
         incident_location TEXT NOT NULL,
-        incident_image TEXT NOT NULL,
-        incident_video TEXT NOT NULL,
+        incident_image_title VARCHAR(50) NOT NULL,
+        incident_image_url TEXT NOT NULL,
+        incident_video_title VARCHAR(50) NOT NULL,
+        incident_video_url TEXT NOT NULL,
         comment TEXT NOT NULL,
         incident_status VARCHAR(50) NOT NULL
         )
@@ -55,31 +57,51 @@ class Database:
             self.cursor.execute(command)
 
     
-    def select_all_incidents(self):
-        sql = ("""SELECT * from incident_table """)
+    def select_all_records(self, table_name):
+        sql = ("""SELECT * from {} """.format(table_name))
         self.cursor.execute(sql)
         return self.cursor.fetchall()
 
 
+    def select_one_user(self, user_email):
+        sql = ("SELECT * from user_table WHERE useremail = '{}'".format(user_email))
+        self.cursor.execute(sql)
+        return self.cursor.fetchone()
+
+
     def select_one_incident_record(self, incident_id_in):
-        sql = ("""SELECT * from incident_table WHERE incidentid = {} """\
+        sql = ("""SELECT * from incident_table WHERE incidentid = '{}' """\
         .format(incident_id_in))
         self.cursor.execute(sql)
         return self.cursor.fetchone()
 
 
     def add_incident_record(self, createdOn, createdBy, record_type, incident_location,
-                            incident_image, incident_video, comment, incident_status):
-        sql = ("""INSERT INTO user_table(username, useremail, userpassword,adminstatus) 
-        VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')"""\
+                            incident_image_title, incident_image_url, incident_video_title,
+                            incident_video_url, comment, incident_status):
+        sql = ("""INSERT INTO incident_table(createdOn, createdBy, record_type,
+                incident_location, incident_image_title, incident_image_url,
+                incident_video_title, incident_video_url, comment, incident_status) 
+        VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')"""\
         .format(createdOn, createdBy, record_type, incident_location,
-                incident_image, incident_video, comment, incident_status))
+                incident_image_title, incident_image_url, incident_video_title,
+                incident_video_url, comment, incident_status))
+        return self.cursor.execute(sql)
+
+
+    def add_user(self, firstname, lastname, othernames, username, useremail, phoneNumber,
+                            userpassword, registered, isAdmin):
+        sql = ("""INSERT INTO user_table(firstname, lastname, othernames, username, useremail, phoneNumber,
+                userpassword, registered, isAdmin)
+        VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')"""\
+        .format(firstname, lastname, othernames, username, useremail, phoneNumber,
+                userpassword, registered, isAdmin))
         return self.cursor.execute(sql)
 
 
     def update_incident_record(self, field_to_update, incident_id_in, input_data):
         sql = ("""UPDATE incident_table SET {} = '{}' WHERE incidentid = '{}'"""\
-        .format(field_to_update, incident_id_in, input_data))
+        .format(field_to_update, input_data, incident_id_in))
         return self.cursor.execute(sql)
 
 
@@ -98,3 +120,8 @@ class Database:
 def db_handler():
     database_obj = Database(app.config['DATABASE_URI'])
     return database_obj
+
+# db = Database('postgres://postgres:psql@localhost:5432/ireporter')
+# print(db.select_one_user('snya@gmail.com'))
+# print(db.select_all_records('user_table'))
+# print(db.select_one_incident_record(1))

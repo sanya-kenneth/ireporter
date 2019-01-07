@@ -1,7 +1,6 @@
-from api.incident.models import incident_db
-from api.auth.models import user_db
-from api.auth.controller import create_admin
 from api import create_app
+from flask import current_app as app
+from api.database.db import Database
 import unittest
 import json
 
@@ -14,17 +13,20 @@ class BaseTest(unittest.TestCase):
         """
         self.app = create_app('Testing')
         self.app = self.app.test_client()
+        self.db = Database(app.config['DATABASE_URI'])
+        self.db.create_tables()
 
     def tearDown(self):
-        user_db.clear()
-        incident_db.clear()
+        pass
+        # user_db.clear()
+        # incident_db.clear()
 
     def get_token_admin(self):
         admin_data_login = {
                             "email":"ken@gmail.com",
                             "password": "Ken1234567"
                             }
-        create_admin()
+        # create_admin()
         res = self.app.post('/api/v1/users/login', content_type="application/json", data=json.dumps(admin_data_login))
         data = json.loads(res.data.decode())
         return data['access_token']

@@ -1,6 +1,5 @@
 from tests.base import BaseTest
 from api.incident import views
-from api.incident.models import incident_db
 import json
 
 
