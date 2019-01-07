@@ -1,6 +1,9 @@
 from api import create_app
 from flask import current_app as app
 from api.database.db import Database
+from api.auth.models import User
+from werkzeug.security import generate_password_hash
+import datetime
 import unittest
 import json
 
@@ -12,21 +15,22 @@ class BaseTest(unittest.TestCase):
         It also initialises the test_client where tests will be run 
         """
         self.app = create_app('Testing')
-        self.app = self.app.test_client()
-        self.db = Database(app.config['DATABASE_URI'])
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        self.db = Database(self.app.config['DATABASE_URI'])
         self.db.create_tables()
+        self.app = self.app.test_client()
+        self.create_admin()
+        
 
     def tearDown(self):
-        pass
-        # user_db.clear()
-        # incident_db.clear()
+        self.db.drop_tables()
 
     def get_token_admin(self):
         admin_data_login = {
                             "email":"ken@gmail.com",
                             "password": "Ken1234567"
                             }
-        # create_admin()
         res = self.app.post('/api/v1/users/login', content_type="application/json", data=json.dumps(admin_data_login))
         data = json.loads(res.data.decode())
         return data['access_token']
@@ -58,6 +62,13 @@ class BaseTest(unittest.TestCase):
     def admin_header(self):
         return {'content_type':"application/json", 'Authorization':
         'Bearer ' + self.get_token_admin()}
+
+
+    def create_admin(self):
+        # admin = User('ken', 'kennedy', 'kenx', 'ken@gmail.com',
+        #             '0706578719', 'ken', generate_password_hash('Ken1234567'), isAdmin=True )
+        return self.db.add_user('ken', 'kennedy', 'kenx', 'ken', 'ken@gmail.com',
+                    '0706578719', generate_password_hash('Ken1234567'), datetime.datetime.now(), isAdmin=True)
 
 
 
