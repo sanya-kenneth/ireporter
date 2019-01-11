@@ -50,8 +50,8 @@ Open your terminal or command prompt for windows users
 Type
 
 ```
-$ cd Store-Manager
-$ git checkout ft-API
+$ cd ireporter
+$ git checkout database
 $ virtualenv venv
 $ pip install -r requirements.txt
 $ python run.py
