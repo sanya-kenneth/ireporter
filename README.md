@@ -1,6 +1,6 @@
 # iReporter
 
- [![Build Status](https://travis-ci.org/sanya-kenneth/ireporter.svg?branch=ft-API)](https://travis-ci.org/sanya-kenneth/ireporter) [![Coverage Status](https://coveralls.io/repos/github/sanya-kenneth/ireporter/badge.svg?branch=ft-API)](https://coveralls.io/github/sanya-kenneth/ireporter?branch=ft-API) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/66cc30326bca466d990d32aabd8a2158)](https://www.codacy.com/app/sanya-kenneth/ireporter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sanya-kenneth/ireporter&amp;utm_campaign=Badge_Grade)
+ [![Build Status](https://travis-ci.org/sanya-kenneth/ireporter.svg?branch=develop)](https://travis-ci.org/sanya-kenneth/ireporter) [![Coverage Status](https://coveralls.io/repos/github/sanya-kenneth/ireporter/badge.svg?branch=database)](https://coveralls.io/github/sanya-kenneth/ireporter?branch=database) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/66cc30326bca466d990d32aabd8a2158)](https://www.codacy.com/app/sanya-kenneth/ireporter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sanya-kenneth/ireporter&amp;utm_campaign=Badge_Grade) [![Maintainability](https://api.codeclimate.com/v1/badges/1a992289cc5d60ebd6c6/maintainability)](https://codeclimate.com/github/sanya-kenneth/ireporter/maintainability)
 
 ## About
 
@@ -85,7 +85,6 @@ Run the tests
 | `PATCH /api/v1/incidents/<incident_id>/status` | Change incident record's status |
 | `POST /api/v1/incidents` | Create an incident record |
 | `POST /api/v1/users` | Create user account |
-| `POST /api/v1/users/admin` | Create admin account |
 | `POST /api/v1/users/login` | Login user or admin |
 
 ## Built With
