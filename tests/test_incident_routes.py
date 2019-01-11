@@ -66,7 +66,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(res.status_code,400)
         self.assertEqual(response_data['status'], 400)
         self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Location field only takes in a list of valid Lat and Long cordinates")
+        self.assertEqual(response_data['error'],"Location field only takes in a list of valid Lat and Long cordinates")
 
     def test_returns_error_if_comment_is_not_valid(self):
         data = {

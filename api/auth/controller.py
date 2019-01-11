@@ -70,13 +70,3 @@ def login_user():
         return jsonify({'status': 200, 'access_token': access_token,
                         'message': 'You are now loggedin'}), 200
     return jsonify({'status': 403, 'error': 'Wrong email or password'}), 403
-
-
-# def create_admin():
-#     admin = User('ken', 'kennedy', 'kenx', 'ken@gmail.com',
-#                   '0706578719', 'ken', generate_password_hash('Ken1234567'), isAdmin=True )
-# db_handler().add_user('ken', 'kennedy', 'kenx', 'ken', 'ken@gmail.com',
-#                   '0706578719', generate_password_hash('Ken1234567'), datetime.datetime.now(), isAdmin=True)
-#     user_db.append(admin.to_json())
-
-# create_admin()

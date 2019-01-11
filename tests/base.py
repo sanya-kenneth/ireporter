@@ -31,7 +31,8 @@ class BaseTest(unittest.TestCase):
                             "email":"ken@gmail.com",
                             "password": "Ken1234567"
                             }
-        res = self.app.post('/api/v1/users/login', content_type="application/json", data=json.dumps(admin_data_login))
+        res = self.app.post('/api/v1/users/login', content_type="application/json",
+                            data=json.dumps(admin_data_login))
         data = json.loads(res.data.decode())
         return data['access_token']
 
@@ -50,8 +51,10 @@ class BaseTest(unittest.TestCase):
                             "email":"len@gmail.com",
                             "password": "1awQdddddd"
                             }
-        self.app.post('/api/v1/users', content_type="application/json", data=json.dumps(user_data))
-        res = self.app.post('/api/v1/users/login', content_type="application/json", data=json.dumps(user_data_login))
+        self.app.post('/api/v1/users', content_type="application/json",
+                      data=json.dumps(user_data))
+        res = self.app.post('/api/v1/users/login', content_type="application/json",
+                            data=json.dumps(user_data_login))
         data = json.loads(res.data.decode())
         return data
 
@@ -65,10 +68,9 @@ class BaseTest(unittest.TestCase):
 
 
     def create_admin(self):
-        # admin = User('ken', 'kennedy', 'kenx', 'ken@gmail.com',
-        #             '0706578719', 'ken', generate_password_hash('Ken1234567'), isAdmin=True )
         return self.db.add_user('ken', 'kennedy', 'kenx', 'ken', 'ken@gmail.com',
-                    '0706578719', generate_password_hash('Ken1234567'), datetime.datetime.now(), isAdmin=True)
+                    '0706578719', generate_password_hash('Ken1234567'),
+                    datetime.datetime.now(), isAdmin=True)
 
 
 
