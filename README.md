@@ -24,7 +24,7 @@ Clone the project into your repository using
 ## Deployment
 
 The pages are live on gh-pages
-- gh-pages link : 
+- gh-pages link : https://sanya-kenneth.github.io/ireporter/UI/templates/
 
 
 ## Built with
