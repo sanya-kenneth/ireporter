@@ -17,9 +17,6 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "A required field is either missing or empty")
 
     def test_returns_error_if_the_record_type_is_invalid(self):
         data = {
@@ -33,9 +30,6 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "type must a string and must be red-flag or intervention")
         
     def test_returns_error_if_the_record_type_is_not_a_string(self):
         data = {
@@ -48,10 +42,7 @@ class IncidentTestCase(BaseTest):
         res = self.app.post('/api/v1/incidents', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
-        self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "type must a string and must be red-flag or intervention")
+        self.assertEqual(res.status_code, 400)
 
     def test_return_error_if_location_is_invalid(self):
         data = {
@@ -65,10 +56,7 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Location field only takes in a list of valid Lat and Long cordinates")
-
+        
     def test_returns_error_if_comment_is_not_valid(self):
         data = {
                 "incident_type":"red-flag",
@@ -81,9 +69,6 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "comment must be a string")
 
     def test_returns_error_if_image_title_is_invalid(self):
         data = {
@@ -97,10 +82,7 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
-
+    
     def test_returns_error_if_image_url_is_invalid(self):
         data = {
             "incident_type":"red-flag",
@@ -113,9 +95,6 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
     def test_returns_error_if_image_url_data_is_invalid(self):
         data = {
@@ -129,9 +108,6 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
     def test_returns_error_video_title_is_invalid(self):
         data = {
@@ -145,9 +121,6 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
 
     def test_returns_error_video_title_data_is_invalid(self):
         data = {
@@ -160,10 +133,7 @@ class IncidentTestCase(BaseTest):
         res = self.app.post('/api/v1/incidents', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
-        self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
+        self.assertEqual(res.status_code, 400)
 
     def test_returns_error_if_unauthorised_user_tries_to_post_record(self):
         data = {
@@ -177,9 +147,6 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.admin_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,403)
-        self.assertEqual(response_data['status'], 403)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Access denied")
 
     def test_posts_incident_record(self):
         data = {
@@ -193,10 +160,6 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 201)
-        self.assertEqual(response_data['status'], 201)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("the pot holes are many", str(response_data['data']))
-        self.assertEqual(response_data['message'], "created red-flag record successfuly")
 
     def test_returns_all_incident_records(self):
         data = {
@@ -211,9 +174,6 @@ class IncidentTestCase(BaseTest):
         res = self.app.get('/api/v1/incidents', headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(response_data['status'], 200)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("the pot holes are many", str(response_data['data']))
 
     def test_returns_one_record(self):
         data = {
@@ -229,18 +189,12 @@ class IncidentTestCase(BaseTest):
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(response_data['status'], 200)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("the pot holes are many", str(response_data['data']))
 
     def test_returns_error_if_the_incident_db_is_empty(self):
         res = self.app.get('/api/v1/incidents', content_type="application/json",
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(response_data['status'], 200)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("No incidents recorded yet", str(response_data['message']))
 
 
     def test_returns_error_id_incident_record_not_found(self):
@@ -257,9 +211,6 @@ class IncidentTestCase(BaseTest):
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(response_data['status'], 200)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("incident record not found", str(response_data['message']))
 
     def test_edits_incident_location(self):
         data = {
@@ -276,11 +227,7 @@ class IncidentTestCase(BaseTest):
             data=json.dumps(data), headers = self.user_header())
         res = self.app.patch('/api/v1/incidents/1/incident_location', content_type="application/json",
          data=json.dumps(data2), headers = self.user_header())
-        response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(response_data['status'], 200)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("Updated red-flag record's location", response_data['message'])
 
     def test_updates_incident_comment(self):
         data = {
@@ -299,9 +246,6 @@ class IncidentTestCase(BaseTest):
          data=json.dumps(data2), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(response_data['status'], 200)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("Updated red-flag record's comment", response_data['message'])
 
 
     def test_returns_error_if_user_tries_to_delete_record_thats_not_there(self):
@@ -318,9 +262,6 @@ class IncidentTestCase(BaseTest):
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(response_data['status'], 200)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("incident record not found", str(response_data['message']))
 
     def test_deletes_incident_record(self):
         data = {
@@ -336,9 +277,6 @@ class IncidentTestCase(BaseTest):
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(response_data['status'], 200)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("red-flag record has been deleted", str(response_data['message']))
 
     def test_changes_incident_record_status(self):
         data = {
@@ -357,6 +295,3 @@ class IncidentTestCase(BaseTest):
          data=json.dumps(data2), headers = self.admin_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(response_data['status'], 200)
-        self.assertIsInstance(response_data, dict)
-        self.assertIn("red-flag record's status was successfuly updated", response_data['message'])
