@@ -1,5 +1,3 @@
-
-
 class validateIncident:
     """validator class for incident records"""
     @staticmethod

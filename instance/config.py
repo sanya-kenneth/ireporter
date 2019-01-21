@@ -4,6 +4,7 @@ class BaseConfig:
     DEBUG = False
     TESTING = False
     JWT_SECRET_KEY = 'qwertyuiopasdfghjklsdfghjklzxcvbnmdfgh'
+    DATABASE_URI = 'postgres://postgres:psql@localhost:5432/ireporter'
 
 
 class DevelopmentConfig(BaseConfig):
@@ -12,6 +13,7 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     TESTING = False
     ENV = "Development"
+    DATABASE_URI = 'postgres://postgres:psql@localhost:5432/ireporter'
 
 
 class TestingConfig(BaseConfig):
@@ -20,6 +22,7 @@ class TestingConfig(BaseConfig):
     DEBUG = True
     TESTING = True
     ENV = "Testing"
+    DATABASE_URI = 'postgres://postgres:psql@localhost:5432/test_ireporter'
 
 
 class ProductionConfig(BaseConfig):

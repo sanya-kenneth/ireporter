@@ -1,6 +1,5 @@
 from tests.base import BaseTest
 from api.incident import views
-from api.incident.models import incident_db
 import json
 
 
@@ -67,7 +66,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(res.status_code,400)
         self.assertEqual(response_data['status'], 400)
         self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Location field only takes in a list of valid Lat and Long cordinates")
+        self.assertEqual(response_data['error'],"Location field only takes in a list of valid Lat and Long cordinates")
 
     def test_returns_error_if_comment_is_not_valid(self):
         data = {
@@ -243,16 +242,7 @@ class IncidentTestCase(BaseTest):
         self.assertIn("No incidents recorded yet", str(response_data['message']))
 
 
-    def test_returns_error_id_incident_record_not_found(self):
-        record = {
-                "incident_id":14,
-                "incident_type":"red-flag",
-                "location":[3333.33, 444.1],
-                "comment": "the pot holes are many",
-                "image":{"title":"sassaqwqwq","url":"sasasa"},
-                "video":{"title":"the Meg","url":"sasasdsdd"}
-                }
-        incident_db.append(record)
+    def test_returns_error_if_incident_record_not_found(self):
         res = self.app.get('/api/v1/incidents/1', content_type="application/json",
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
