@@ -1,11 +1,14 @@
 from api.auth import auths
 from api.auth.controller import signup_user, login_user
 from flask import make_response, jsonify
-
+from api.database.db import db_handler
 
 # signup user route
+
+
 @auths.route('/users', methods=['POST'])
 def signup():
+    db_handler().create_tables()
     return signup_user()
 
 

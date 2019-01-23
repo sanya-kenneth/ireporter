@@ -3,7 +3,7 @@ class BaseConfig:
     class are shared across all environments  """
     DEBUG = False
     TESTING = False
-    JWT_SECRET_KEY = 'qwertyuiopasdfghjklsdfghjklzxcvbnmdfgh'
+    SECRET = 'qwertyuiopasdfghjklsdfghjklzxcvbnmdfgh'
     DATABASE_URI = 'postgres://postgres:psql@localhost:5432/ireporter'
 
 
@@ -34,7 +34,7 @@ class ProductionConfig(BaseConfig):
 
 
 app_config = {
-            "Development": DevelopmentConfig,
-            "Testing": TestingConfig,
-            "Production": ProductionConfig
-            }
+    "Development": DevelopmentConfig,
+    "Testing": TestingConfig,
+    "Production": ProductionConfig
+}
