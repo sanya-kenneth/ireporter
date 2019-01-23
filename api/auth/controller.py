@@ -1,9 +1,8 @@
 from flask import request, jsonify
 from validate_email import validate_email
 from api.auth.models import User
-from api.auth.utilities import validateUser
+from api.auth.utilities import validateUser, jwt_obj
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import create_access_token
 from api.database.db import db_handler
 
 
@@ -44,9 +43,9 @@ def signup_user():
     if db_handler().select_one_user(email):
         return jsonify({'status': 400,
                         'error': 'User account already exists'}), 400
-    db_handler().add_user(user.firstname, user.lastname, user.othernames,\
-    user.username, user.email, user.phoneNumber, user.password, user.registered, user.isAdmin)
-    return jsonify({'status': 201, 
+    db_handler().add_user(user.firstname, user.lastname, user.othernames,
+                          user.username, user.email, user.phoneNumber, user.password, user.registered, user.isAdmin)
+    return jsonify({'status': 201,
                     'message': 'Your Account was created successfuly'}), 201
 
 
@@ -65,8 +64,9 @@ def login_user():
                         'error': 'Password must be atleast 8 characters and should have atleast one number and one capital letter'}), 400
     user_data = db_handler().select_one_user(login_email)
     if user_data[5] == login_email and \
-         check_password_hash(user_data[7], login_password):
-        access_token = create_access_token(identity=user_data[5])
-        return jsonify({'status': 200, 'access_token': access_token,
+            check_password_hash(user_data[7], login_password):
+        # access_token = create_access_token(identity=user_data[5])
+        access_token = jwt_obj.encode_token(login_email)
+        return jsonify({'status': 200, 'access_token': access_token.decode('UTF-8'),
                         'message': 'You are now loggedin'}), 200
     return jsonify({'status': 403, 'error': 'Wrong email or password'}), 403

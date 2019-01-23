@@ -1,8 +1,7 @@
 from flask import request, jsonify
-from api.auth.utilities import user_identity
+from api.auth.utilities import protected_route
 from api.incident.models import Incident
 from api.incident.utilities import validateIncident
-from flask_jwt_extended import get_jwt_identity
 from api.database.db import db_handler
 import json
 
