@@ -10,7 +10,7 @@ incident_records = []
 
 
 # function for posting an incident
-def post_incident():
+def post_incident(current_user):
     details = request.get_json()
     incident_type = details.get('incident_type')
     location = details.get('location')
@@ -37,7 +37,6 @@ def post_incident():
             validateIncident.validate_images_and_video(video):
         return jsonify({'status': 400,
                         'error': 'Image url or title or video url or title is invalid'}), 400
-    current_user = user_identity()
     incident = Incident(current_user[0], incident_type, location, image, video, comment)
     db_handler().add_incident_record(incident.createdOn, incident.createdBy, incident.record_type,\
     incident.location, incident.Images['title'], incident.Images['url'], incident.Videos['title'],\

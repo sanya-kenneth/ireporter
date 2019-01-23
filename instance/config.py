@@ -1,9 +1,12 @@
+import os
+
+
 class BaseConfig:
     """Default configuration. Details from this configuration
     class are shared across all environments  """
     DEBUG = False
     TESTING = False
-    SECRET = 'qwertyuiopasdfghjklsdfghjklzxcvbnmdfgh'
+    SECRET = os.getenv('SECRET')
     DATABASE_URI = 'postgres://postgres:psql@localhost:5432/ireporter'
 
 
