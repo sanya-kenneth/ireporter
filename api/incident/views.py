@@ -16,7 +16,7 @@ def post(current_user):
         return jsonify({'status': 403,
                         'error': 'You do not have permission to perform this action'
                         }), 403
-    return post_incident()
+    return post_incident(current_user)
 
 
 # fetch all incidents route

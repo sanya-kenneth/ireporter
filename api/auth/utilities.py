@@ -40,7 +40,7 @@ class Jwt_protect:
         try:
             payload = {
                 # JWT expiration time
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=24),
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24),
                 # issued at
                 'iat': datetime.datetime.utcnow(),
                 # token user info

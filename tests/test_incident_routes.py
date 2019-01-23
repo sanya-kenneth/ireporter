@@ -178,7 +178,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(res.status_code,403)
         self.assertEqual(response_data['status'], 403)
         self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Access denied")
+        self.assertEqual(response_data['error'], "You do not have permission to perform this action")
 
     def test_posts_incident_record(self):
         data = {
