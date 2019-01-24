@@ -21,10 +21,9 @@ class Database:
         self.con.autocommit = True
         self.cursor = self.con.cursor()
 
-
     def create_tables(self):
         commands = (
-                    """
+            """
                     CREATE TABLE IF NOT EXISTS user_table(
                     userid SERIAL PRIMARY KEY,
                     firstname VARCHAR(50) NOT NULL,
@@ -38,7 +37,7 @@ class Database:
                     isAdmin BOOL NOT NULL
                     )
                     """,
-                    """ CREATE TABLE IF NOT EXISTS incident_table(
+            """ CREATE TABLE IF NOT EXISTS incident_table(
                     incidentid SERIAL PRIMARY KEY,
                     createdOn TEXT NOT NULL,
                     createdBy VARCHAR(50) NOT NULL,
@@ -52,31 +51,28 @@ class Database:
                     incident_status VARCHAR(50) NOT NULL
                     )
                     """
-                    )
+        )
 
         for command in commands:
             self.cursor.execute(command)
 
-
-    def select_all_records(self, table_name):
-        sql = ("""SELECT * from {} """.format(table_name))
+    def select_all_incidents(self, record_type):
+        sql = ("""SELECT * from incident_table WHERE record_type = '{}'"""
+               .format(record_type))
         self.cursor.execute(sql)
         return self.cursor.fetchall()
 
-
-    def select_one_user(self, user_email):
-        sql = ("SELECT * from user_table WHERE useremail = '{}'"
-               .format(user_email))
+    def select_one_record(self, table_name, criteria, input_data):
+        sql = ("""SELECT * from {} WHERE {} = '{}' """
+               .format(table_name, criteria, input_data))
         self.cursor.execute(sql)
         return self.cursor.fetchone()
 
-
-    def select_one_incident_record(self, incident_id_in):
-        sql = ("""SELECT * from incident_table WHERE incidentid = '{}' """
-               .format(incident_id_in))
+    def select_one_incident(self, table_name, criteria, input_data, record_type):
+        sql = ("""SELECT * from {} WHERE {} = '{}' AND record_type = '{}'"""
+               .format(table_name, criteria, input_data, record_type))
         self.cursor.execute(sql)
         return self.cursor.fetchone()
-
 
     def add_incident_record(self, createdOn, createdBy, record_type,
                             incident_location, incident_image_title,
@@ -93,7 +89,6 @@ class Database:
                        comment, incident_status))
         return self.cursor.execute(sql)
 
-
     def add_user(self, firstname, lastname, othernames, username, useremail,
                  phoneNumber, userpassword, registered, isAdmin):
         sql = ("""INSERT INTO user_table(firstname, lastname, othernames, username,
@@ -103,19 +98,16 @@ class Database:
                        phoneNumber, userpassword, registered, isAdmin))
         return self.cursor.execute(sql)
 
-
     def update_incident_record(self, field_to_update, incident_id_in,
-                               input_data):
-        sql = ("""UPDATE incident_table SET {} = '{}' WHERE incidentid = '{}'"""
-               .format(field_to_update, input_data, incident_id_in))
+                               input_data, record_type):
+        sql = ("""UPDATE incident_table SET {} = '{}' WHERE incidentid = '{}' AND record_type = '{}'"""
+               .format(field_to_update, input_data, incident_id_in, record_type))
         return self.cursor.execute(sql)
-
 
     def delete_incident_record(self, incident_id):
         sql = ("""DELETE from incident_table WHERE incidentid = '{}' """
                .format(incident_id))
         return self.cursor.execute(sql)
-
 
     def drop_tables(self):
         command = ("""DROP TABLE user_table """,
