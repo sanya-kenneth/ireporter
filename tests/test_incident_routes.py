@@ -249,7 +249,7 @@ class IncidentTestCase(BaseTest):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(response_data['status'], 200)
         self.assertIsInstance(response_data, dict)
-        self.assertIn("incident record not found", str(response_data['message']))
+        self.assertIn("Incident record not found", str(response_data['message']))
 
     def test_edits_incident_location(self):
         data = {
