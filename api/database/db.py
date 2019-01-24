@@ -104,9 +104,9 @@ class Database:
                .format(field_to_update, input_data, incident_id_in, record_type))
         return self.cursor.execute(sql)
 
-    def delete_incident_record(self, incident_id):
-        sql = ("""DELETE from incident_table WHERE incidentid = '{}' """
-               .format(incident_id))
+    def delete_incident_record(self, incident_id, record_type):
+        sql = ("""DELETE from incident_table WHERE incidentid = '{}' AND record_type = '{}' """
+               .format(incident_id, record_type))
         return self.cursor.execute(sql)
 
     def drop_tables(self):
