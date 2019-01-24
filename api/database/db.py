@@ -82,12 +82,13 @@ class Database:
                 incident_location, incident_image_title, incident_image_url,
                 incident_video_title, incident_video_url, comment,
                 incident_status)
-        VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')"""
+        VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');"""
                .format(createdOn, createdBy, record_type, incident_location,
                        incident_image_title, incident_image_url,
                        incident_video_title, incident_video_url,
                        comment, incident_status))
         return self.cursor.execute(sql)
+        
 
     def add_user(self, firstname, lastname, othernames, username, useremail,
                  phoneNumber, userpassword, registered, isAdmin):

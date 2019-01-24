@@ -43,10 +43,13 @@ def signup_user():
     if db_handler().select_one_record('user_table', 'useremail', email):
         return jsonify({'status': 400,
                         'error': 'User account already exists'}), 400
-    db_handler().add_user(user.firstname, user.lastname, user.othernames,
-                          user.username, user.email, user.phoneNumber, user.password, user.registered, user.isAdmin)
-    return jsonify({'status': 201,
-                    'message': 'Your Account was created successfuly'}), 201
+    user = db_handler().add_user(user.firstname, user.lastname, user.othernames,
+                                 user.username, user.email, user.phoneNumber,
+                                 user.password, user.registered, user.isAdmin)
+    data.pop('password')
+    return jsonify({'status': 201, 'data': data,
+                    'message': 'Your Account was created successfuly'
+                    }), 201
 
 
 # function to login a user
