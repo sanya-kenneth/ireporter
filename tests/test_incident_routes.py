@@ -12,7 +12,7 @@ class IncidentTestCase(BaseTest):
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
                 "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -28,7 +28,7 @@ class IncidentTestCase(BaseTest):
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
                 "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -44,7 +44,7 @@ class IncidentTestCase(BaseTest):
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
                 "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -60,7 +60,7 @@ class IncidentTestCase(BaseTest):
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
                 "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 } 
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -76,7 +76,7 @@ class IncidentTestCase(BaseTest):
                 "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
                 "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -92,7 +92,7 @@ class IncidentTestCase(BaseTest):
             "image":{"trytle":"sassaqwqwq","url":"sasasdsdd"},
             "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
             }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -108,7 +108,7 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","ul":"sasasdsdd"},
             "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
             }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -124,7 +124,7 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","url":10},
             "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
             }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -140,7 +140,7 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"ti":"sassaqwqwq","url":"sasasdsdd"}
             }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -156,7 +156,7 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":8,"url":"sasasdsdd"}
             }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,400)
@@ -172,7 +172,7 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":"the Meg","url":"sasasdsdd"}
             }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.admin_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code,403)
@@ -188,7 +188,7 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":"the Meg","url":"sasasdsdd"}
             }
-        res = self.app.post('/api/v1/incidents', content_type="application/json",
+        res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 201)
@@ -205,9 +205,9 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":"the Meg","url":"sasasdsdd"}
             }
-        self.app.post('/api/v1/incidents', content_type="application/json",
+        self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
-        res = self.app.get('/api/v1/incidents', headers = self.user_header())
+        res = self.app.get('/api/v1/red-flags', headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
         self.assertEqual(response_data['status'], 200)
@@ -222,9 +222,9 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":"the Meg","url":"sasasdsdd"}
             }
-        self.app.post('/api/v1/incidents', content_type="application/json",
+        self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
-        res = self.app.get('/api/v1/incidents/1', content_type="application/json",
+        res = self.app.get('/api/v1/red-flags/1', content_type="application/json",
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
@@ -233,7 +233,7 @@ class IncidentTestCase(BaseTest):
         self.assertIn("the pot holes are many", str(response_data['data']))
 
     def test_returns_error_if_the_incident_db_is_empty(self):
-        res = self.app.get('/api/v1/incidents', content_type="application/json",
+        res = self.app.get('/api/v1/red-flags', content_type="application/json",
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
@@ -243,13 +243,13 @@ class IncidentTestCase(BaseTest):
 
 
     def test_returns_error_if_incident_record_not_found(self):
-        res = self.app.get('/api/v1/incidents/1', content_type="application/json",
+        res = self.app.get('/api/v1/red-flags/1', content_type="application/json",
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
         self.assertEqual(response_data['status'], 200)
         self.assertIsInstance(response_data, dict)
-        self.assertIn("incident record not found", str(response_data['message']))
+        self.assertIn("Incident record not found", str(response_data['message']))
 
     def test_edits_incident_location(self):
         data = {
@@ -262,9 +262,9 @@ class IncidentTestCase(BaseTest):
         data2 = {
                 "location": [3.333, 33.3]
                 }
-        self.app.post('/api/v1/incidents', content_type="application/json",
+        self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
-        res = self.app.patch('/api/v1/incidents/1/incident_location', content_type="application/json",
+        res = self.app.patch('/api/v1/red-flags/1/incident_location', content_type="application/json",
          data=json.dumps(data2), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
@@ -283,9 +283,9 @@ class IncidentTestCase(BaseTest):
         data2 = {
                 "comment": "This is urgent"
                 }
-        self.app.post('/api/v1/incidents', content_type="application/json",
+        self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
-        res = self.app.patch('/api/v1/incidents/1/incident_comment', content_type="application/json",
+        res = self.app.patch('/api/v1/red-flags/1/incident_comment', content_type="application/json",
          data=json.dumps(data2), headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
@@ -302,9 +302,9 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":"the Meg","url":"sasasdsdd"}
             }
-        self.app.post('/api/v1/incidents', content_type="application/json",
+        self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
-        res = self.app.delete('/api/v1/incidents/12', content_type="application/json",
+        res = self.app.delete('/api/v1/red-flags/12', content_type="application/json",
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
@@ -320,9 +320,9 @@ class IncidentTestCase(BaseTest):
             "image":{"title":"sassaqwqwq","url":"sasasa"},
             "video":{"title":"the Meg","url":"sasasdsdd"}
             }
-        self.app.post('/api/v1/incidents', content_type="application/json",
+        self.app.post('/api/v1/red-flags', content_type="application/json",
          data=json.dumps(data), headers = self.user_header())
-        res = self.app.delete('/api/v1/incidents/1', content_type="application/json",
+        res = self.app.delete('/api/v1/red-flags/1', content_type="application/json",
          headers = self.user_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)
@@ -341,9 +341,9 @@ class IncidentTestCase(BaseTest):
         data2 = {
                 "status": "resolved"
                 }
-        self.app.post('/api/v1/incidents', content_type="application/json",
+        self.app.post('/api/v1/red-flags', content_type="application/json",
          data=json.dumps(data), headers = self.user_header())
-        res = self.app.patch('/api/v1/incidents/1/status', content_type="application/json",
+        res = self.app.patch('/api/v1/red-flags/1/status', content_type="application/json",
          data=json.dumps(data2), headers = self.admin_header())
         response_data = json.loads(res.data.decode())
         self.assertEqual(res.status_code, 200)

@@ -52,7 +52,7 @@ Type
 
 ```
 $ cd ireporter
-$ git checkout database
+$ git checkout develop
 $ virtualenv venv
 $ pip install -r requirements.txt
 $ python run.py
@@ -62,7 +62,7 @@ $ python run.py
 
 The API is hosted on Heroku. Use the link below to navigate to it.
 
-[heroku](https://ireporterch2.herokuapp.com/)
+[heroku](https://ireporterch3.herokuapp.com/)
 
 ## Testing the Api
 
@@ -78,13 +78,20 @@ Run the tests
 
 | Endpoint          | Functionality |
 | --------          |     --------- |
-| `GET /api/v1/incidents` | Fetch all incident records |
-| `GET /api/v1/incidents/<incident_id>` | Fetch a specific incident record |
-| `DELETE /api/v1/incidents/<incident_id>` | Delete a specific incident record |
-| `PATCH /api/v1/incidents/<incident_id>/location` | Edit incident record's location |
-| `PATCH /api/v1/incidents/<incident_id>/comment` | Edit incident record's comment |
-| `PATCH /api/v1/incidents/<incident_id>/status` | Change incident record's status |
-| `POST /api/v1/incidents` | Create an incident record |
+| `GET /api/v1/red-flags` | Fetch all redflag records |
+| `GET /api/v1/interventions` | Fetch all intervention records |
+| `GET /api/v1/red-flags/<incident_id>` | Fetch a specific redflag record |
+| `GET /api/v1/interventions/<incident_id>` | Fetch a specific intervention record |
+| `DELETE /api/v1/red-flags/<incident_id>` | Delete a specific redflag record |
+| `DELETE /api/v1/interventions/<incident_id>` | Delete a specific intervention record |
+| `PATCH /api/v1/red-flags/<incident_id>/location` | Edit redflag record's location |
+| `PATCH /api/v1/intervention/<incident_id>/location` | Edit intervention record's location |
+| `PATCH /api/v1/red-flags/<incident_id>/comment` | Edit redflag record's comment |
+| `PATCH /api/v1/interventions/<incident_id>/comment` | Edit intervention record's comment |
+| `PATCH /api/v1/red-flags/<incident_id>/status` | Change redflag record's status |
+| `PATCH /api/v1/interventions/<incident_id>/status` | Change intervention record's status |
+| `POST /api/v1/red-flags` | Create a redflag record |
+| `POST /api/v1/interventions` | Create an intervention record |
 | `POST /api/v1/users` | Create user account |
 | `POST /api/v1/users/login` | Login user or admin |
 

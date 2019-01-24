@@ -30,29 +30,25 @@ def check_is_admin(current_user):
     return current_user[9] is True
 
 
-class Jwt_protect:
-    def encode_token(self, user_email):
-        """ 
-        Generates authentication jwt token
-        :param user_email:
+def encode_token(user_email):
+    """
+    Generates authentication jwt token
+    :param user_email:
 
-        """
-        try:
-            payload = {
-                # JWT expiration time
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24),
-                # issued at
-                'iat': datetime.datetime.utcnow(),
-                # token user info
-                'sub': user_email
-            }
-            return jwt.encode(payload, app.config['SECRET'],
-                              algorithm='HS256')
-        except Exception as e:
-            return e
-
-
-jwt_obj = Jwt_protect()
+    """
+    try:
+        payload = {
+            # JWT expiration time
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24),
+            # issued at
+            'iat': datetime.datetime.utcnow(),
+            # token user info
+            'sub': user_email
+        }
+        return jwt.encode(payload, app.config['SECRET'],
+                          algorithm='HS256')
+    except Exception as e:
+        return e
 
 
 def protected_route(f):
@@ -70,7 +66,8 @@ def protected_route(f):
         try:
             data = jwt.decode(
                 token, app.config['SECRET'], algorithms=['HS256'])
-            current_user = db_handler().select_one_user(data['sub'])
+            current_user = db_handler().select_one_record('user_table',
+                                                          'useremail', data['sub'])
         except jwt.ExpiredSignatureError:
             return jsonify({'status': 401,
                             'error': 'Token signature expired. Please login'}), 401
