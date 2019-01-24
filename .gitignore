@@ -7,3 +7,4 @@ api/incident/__pycache__/
 api/database/__pycache__/
 tests/__pycache__/
 .env
+api/__init__.pyc

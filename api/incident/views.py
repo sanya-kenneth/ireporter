@@ -59,10 +59,11 @@ def edit_incident_location(current_user, incident_id):
                         }), 403
     check_record = db_handler().select_one_record('incident_table', 'incidentid',
                                                   incident_id)
-    if int(check_record[2]) != current_user[0]:
-        return jsonify({'status': 403,
-                        'error': 'You can only edit the location of a record you created'
-                        }), 403
+    if check_record:
+        if int(check_record[2]) != current_user[0]:
+            return jsonify({'status': 403,
+                            'error': 'You can only edit the location of a record you created'
+                            }), 403
     return edit_location_of_incident(incident_id, 'red-flag')
 
 
@@ -77,10 +78,11 @@ def edit_intervention_location(current_user, incident_id):
                         }), 403
     check_record = db_handler().select_one_record('incident_table', 'incidentid',
                                                   incident_id)
-    if int(check_record[2]) != current_user[0]:
-        return jsonify({'status': 403,
-                        'error': 'You can only edit the location of a record you created'
-                        }), 403
+    if check_record:
+        if int(check_record[2]) != current_user[0]:
+            return jsonify({'status': 403,
+                            'error': 'You can only edit the location of a record you created'
+                            }), 403
     return edit_location_of_incident(incident_id, 'intervention')
 
 
@@ -95,10 +97,11 @@ def edit_redflag_comment(current_user, incident_id):
                         }), 403
     record_data = db_handler().select_one_record('incident_table', 'incidentid',
                                                  incident_id)
-    if int(record_data[2]) != current_user[0]:
-        return jsonify({'status': 403,
-                        'error': 'You can only edit the location of a record you created'
-                        }), 403
+    if record_data:
+        if int(record_data[2]) != current_user[0]:
+            return jsonify({'status': 403,
+                            'error': 'You can only edit the location of a record you created'
+                            }), 403
     return edit_comment_of_incident(incident_id, 'red-flag')
 
 
@@ -113,32 +116,66 @@ def edit_intervention_comment(current_user, incident_id):
                         }), 403
     update_data = db_handler().select_one_record('incident_table', 'incidentid',
                                                  incident_id)
-    if int(update_data[2]) != current_user[0]:
-        return jsonify({'status': 403,
-                        'error': 'You can only edit the location of a record you created'
-                        }), 403
+    if update_data:
+        if int(update_data[2]) != current_user[0]:
+            return jsonify({'status': 403,
+                            'error': 'You can only edit the location of a record you created'
+                            }), 403
     return edit_comment_of_incident(incident_id, 'intervention')
 
 
-# Delete incident route
+# Delete red-flag route
 @incidents_bp.route('/red-flags/<incident_id>', methods=['DELETE'])
-@incidents_bp.route('/interventions/<incident_id>', methods=['DELETE'])
 @protected_route
-def delete_incident_record(current_user, incident_id):
+def delete_red_flag_record(current_user, incident_id):
     if check_is_admin(current_user):
         return jsonify({'status': 403,
                         'error': 'You do not have permission to perform this action'
                         }), 403
-    return delete_incident(incident_id)
+    delete = db_handler().select_one_incident('incident_table', 'incidentid',
+                                              incident_id, 'red-flag')
+    if delete:
+        if int(delete[2]) != current_user[0]:
+            return jsonify({'status': 403,
+                            'error': 'You can only delete a record you created'
+                            }), 403
+    return delete_incident(incident_id, 'red-flag')
+
+
+# Delete intervention route
+@incidents_bp.route('/interventions/<incident_id>', methods=['DELETE'])
+@protected_route
+def delete_intervention_record(current_user, incident_id):
+    if check_is_admin(current_user):
+        return jsonify({'status': 403,
+                        'error': 'You do not have permission to perform this action'
+                        }), 403
+    delete_data = db_handler().select_one_incident('incident_table', 'incidentid',
+                                                   incident_id, 'intervention')
+    if delete_data:
+        if int(delete_data[2]) != current_user[0]:
+            return jsonify({'status': 403,
+                            'error': 'You can only delete a record you created'
+                            }), 403
+    return delete_incident(incident_id, 'intervention')
 
 
 # change incident status route
 @incidents_bp.route('/red-flags/<incident_id>/status', methods=['PATCH'])
-@incidents_bp.route('/interventions/<incident_id>/status', methods=['PATCH'])
 @protected_route
-def change_incident_status(current_user, incident_id):
+def change_redflag_status(current_user, incident_id):
     if not check_is_admin(current_user):
         return jsonify({'status': 403,
                         'error': 'You do not have permission to perform this action'
                         }), 403
-    return change_status(incident_id)
+    return change_status(incident_id, 'red-flag')
+
+
+@incidents_bp.route('/interventions/<incident_id>/status', methods=['PATCH'])
+@protected_route
+def change_intervention_status(current_user, incident_id):
+    if not check_is_admin(current_user):
+        return jsonify({'status': 403,
+                        'error': 'You do not have permission to perform this action'
+                        }), 403
+    return change_status(incident_id, 'intervention')
