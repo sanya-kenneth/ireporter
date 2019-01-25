@@ -106,6 +106,10 @@ Run the tests
 * Pytest
 * Virtual environment
 
+## Documentation
+
+Documentation can be found [here](https://ireporter17.docs.apiary.io/#)
+
 ## Authors
 
 Sanya Kenneth

@@ -72,4 +72,4 @@ def login_user():
         access_token = encode_token(login_email)
         return jsonify({'status': 200, 'access_token': access_token.decode('UTF-8'),
                         'message': 'You are now loggedin'}), 200
-    return jsonify({'status': 403, 'error': 'Wrong email or password'}), 403
+    return jsonify({'status': 401, 'error': 'Wrong email or password'}), 401
