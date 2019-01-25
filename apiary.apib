@@ -1,0 +1,141 @@
+FORMAT: 1A
+HOST: https://ireporterch3.herokuapp.com/
+
+# Ireporter
+
+iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention
+
+# Signup user [/api/v1/users]
+
+### Create user account [POST]
+You can create a store attendant account by sending a json request with a username, email and a password.
+The username must not contain any white space and the email must be a valid email.
+
++ Request (application/json)
+
+    + Headers
+
+            access_token:'user token'
+
+    + Body
+
+            {
+                "firstname":"zeng",
+                "lastname":"leng",
+                "othernames":"lenpen",
+                "email":"zeng@gmail.com",
+                "phonenumber":2567430531,
+                "username":"leng",
+                "password":"123Abc123456"
+            }
+            
++ Response 201 (application/json)
+            
+            {
+                "data": {
+                    "email": "zeng@gmail.com",
+                    "firstname": "zeng",
+                    "lastname": "leng",
+                    "othernames": "lenpen",
+                    "phonenumber": 2567430531,
+                    "username": "leng"
+                        },
+                "message": "Your Account was created successfuly",
+                "status": 201
+            }
+            
++ Response 400 (application/json)
+
+            {
+                'status': 400,
+                'error': 'A required field is either missing or empty'
+            }
+            
++ Response 400 (application/json)
+
+            {
+                'status': 400,
+                'error': 'Name must be a string and must not contain spaces'
+            }
+            
++ Response 400 (application/json)
+
+            {
+                'status': 400,
+                'error': 'Only numbers are allowed for the phonenumber field'
+            }
+            
++ Response 400 (application/json)
+
+            {
+                'status': 400,
+                'error': 'Invalid email'
+            }
+            
++ Response 400 (application/json)
+
+            {
+                'status': 400,
+                'error': 'Password must be atleast 8 characters and should have atleast one number and one capital letter'
+            }
+            
++ Response 400 (application/json)
+
+            {
+                'status': 400,
+                'error': 'User account already exists'
+            }
+
+# login user [/api/v1/users/login]
+
+### login user [POST]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "email":"zeng@gmail.com",
+                "password":"123Abc123456"
+            }
+            
++ Response 200 (application/json)
+
+    + Body
+            {
+            'status': 200, 'access_token': 'token,
+            'message': 'You are now loggedin'
+            }
+            
++ Response 403 (application/json)
+
+    + Body
+            {
+            'status': 403,
+            'error': 'Wrong email or password'
+            }
+
+            
+# post intervention [/api/v1/interventions]
+
++ Request (application/json)
+
+    + Body
+              { 
+                "incident_type":"intervention",
+                "location":[4.66, 1.55],
+                "comment": "pooor ddddd",
+                "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
+                "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
+              }
+              
++ Response 201 (application/json)
+
+    + Body
+             { 
+                "incident_type":"intervention",
+                "location":[4.66, 1.55],
+                "comment": "pooor ddddd",
+                "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
+                "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
+              }
