@@ -15,7 +15,7 @@ The username must not contain any white space and the email must be a valid emai
 
     + Headers
 
-            access_token:'user token'
+            'access_token':'user token'
 
     + Body
 
@@ -118,7 +118,14 @@ The username must not contain any white space and the email must be a valid emai
             
 # post intervention [/api/v1/interventions]
 
+### create an intervention record [POST]
+
 + Request (application/json)
+
+    + Headers
+
+             'access_token':'user token'
+
 
     + Body
               { 
@@ -132,10 +139,64 @@ The username must not contain any white space and the email must be a valid emai
 + Response 201 (application/json)
 
     + Body
-             { 
-                "incident_type":"intervention",
-                "location":[4.66, 1.55],
-                "comment": "pooor ddddd",
-                "image":{"title":"sassaqwqwq","url":"sasasdsdd"},
-                "video":{"title":"sassaqwqwq","url":"sasasdsdd"}
-              }
+           {
+            "data": {
+                "comment": "pooor d",
+                "createdon": "Fri, 25 Jan 2019 10:25:56 GMT",
+                "image": {
+                    "title": "sassaqwqwq",
+                    "url": "sasasdsdd"
+                },
+                "incident_location": [
+                    4.66,
+                    1.54
+                ],
+                "record_type": "intervention",
+                "status": "Draft",
+                "video": {
+                    "title": "sassaqwqwq",
+                    "url": "sasasdsdd"
+                }
+            },
+            "message": "created intervention record successfuly",
+            "status": 201
+            }
+            
++ Response 400 (application/json)
+
+    + Body
+            {
+            'status': 400,
+            'error': 'A required field is either missing or empty'
+            }
+            
++ Response 400 (application/json)
+
+    + Body 
+            {'status': 400,
+             'error': 'type must a string and must be red-flag or intervention'
+            }
+            
++ Response 400 (application/json)
+
+    + Body 
+            {
+            'status': 400,
+            'error': 'Location field only takes in a list of valid Lat and Long cordinates'
+            }
+
++ Response 400 (application/json)
+
+    + Body 
+            {
+            'status': 400,
+            'error': 'comment must be a string'
+            }
+
++ Response 400 (application/json)
+
+    + Body
+            {
+            'status': 400,
+            'error': 'Image url or title or video url or title is invalid'
+            }
