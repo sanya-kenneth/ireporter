@@ -3,11 +3,12 @@ HOST: https://ireporterch3.herokuapp.com/
 
 # Ireporter
 
-iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention
+IReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention
 
-# Signup user[/api/v1/users]
+## Signup user [/api/v1/users]
 
 ### Create user account [POST]
+
 You can create a store attendant account by sending a json request with a username, email and a password.
 The username must not contain any white space and the email must be a valid email.
 
@@ -15,7 +16,7 @@ The username must not contain any white space and the email must be a valid emai
 
     + Headers
 
-            'access_token':'user token'
+            Authorization: 'user token'
 
     + Body
 
@@ -90,6 +91,8 @@ The username must not contain any white space and the email must be a valid emai
 
 ### login user [POST]
 
+Login user to access the system
+
 + Request (application/json)
 
     + Body
@@ -120,11 +123,14 @@ The username must not contain any white space and the email must be a valid emai
 
 ### create an intervention record [POST]
 
+create an intervention record. Please note that only a registered user can perform this action.
+An admin can not perform this action
+
 + Request (application/json)
 
     + Headers
 
-             'access_token':'user token'
+              Authorization: 'user token'
 
 
     + Body
@@ -200,3 +206,276 @@ The username must not contain any white space and the email must be a valid emai
             'status': 400,
             'error': 'Image url or title or video url or title is invalid'
             }
+
+# Get all interventions [/api/v1/interventions]
+
+### Get all interventions [GET]
+
++ Request (application/json)
+
+     + Headers
+
+              Authorization: 'user token'
+              
++ Response 200 (application/json)
+
+    + Body
+            {
+            "data": [
+                {
+                    "comment": "pooor ddddd",
+                    "createdby": "1",
+                    "createdon": "2019-01-24 22:43:04.152603",
+                    "image": {
+                        "title": "sassaqwqwq",
+                        "url": "sasasdsdd"
+                    },
+                    "incident_location": "[4.66, 1.55]",
+                    "incidentid": 8,
+                    "record_type": "intervention",
+                    "status": "resolved",
+                    "video": {
+                        "title": "sassaqwqwq",
+                        "url": "sasasdsdd"
+                    }
+                },
+                {
+                    "comment": "pooor d",
+                    "createdby": "12",
+                    "createdon": "2019-01-25 10:25:56.077019",
+                    "image": {
+                        "title": "sassaqwqwq",
+                        "url": "sasasdsdd"
+                    },
+                    "incident_location": "[4.66, 1.54]",
+                    "incidentid": 9,
+                    "record_type": "intervention",
+                    "status": "Draft",
+                    "video": {
+                        "title": "sassaqwqwq",
+                        "url": "sasasdsdd"
+                    }
+                }
+            ],
+            "status": 200
+            }
+
+# Get one intervention [/api/v1/interventions]
+
+### Get one intervention [GET]
+
++ Request (application/json)
+
+    + Headers
+
+             Authorization: 'user token'
+              
++ Response 200 (application/json)
+
+    + Body   
+         {
+        "data": {
+            "comment": "pooor ddddd",
+            "createdby": "1",
+            "createdon": "2019-01-24 22:43:04.152603",
+            "image": {
+                "title": "sassaqwqwq",
+                "url": "sasasdsdd"
+            },
+            "incident_location": "[4.66, 1.55]",
+            "incidentid": 8,
+            "record_type": "intervention",
+            "status": "rejected",
+            "video": {
+                "title": "sassaqwqwq",
+                "url": "sasasdsdd"
+            }
+        },
+        "status": 200
+            }
+ 
+   
+# Edit intervention record location [/api/v1/interventions/2/incident_location]
+
+### Edit intervention location  [PATCH]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: 'user token'
+             
+    + Body
+            {
+             "location": [333.33, 44.333]
+            }
+            
++ Response 200 (application/json)
+
+    + Body
+          {
+            "data": {
+                "comment": "pooor d",
+                "createdby": "12",
+                "createdon": "2019-01-25 10:25:56.077019",
+                "image": {
+                    "title": "sassaqwqwq",
+                    "url": "sasasdsdd"
+                },
+                "incident_location": "[33.33, 444.7]",
+                "incidentid": 9,
+                "record_type": "intervention",
+                "status": "Draft",
+                "video": {
+                    "title": "sassaqwqwq",
+                    "url": "sasasdsdd"
+                }
+            },
+            "message": "Updated intervention record's location",
+            "status": 200
+          }
+
+    
++ Response 200 (application/json)
+
+    + Body   
+          {
+            "message": "incident record not found",
+            "status": 200
+         }
+
++ Response 400 (application/json)
+
+    + Body
+          {
+            "error": "You cannot change the location while the incident status is not Draft",
+            "status": 400
+         }
+         
+# Edit intervention record comment [/api/v1/interventions/2/incident_comment]
+
+### Edit intervention comment [PATCH]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: 'user token'
+    
+    + Body
+          {
+           "comment": "poor"
+          }
+
++ Response 200 (application/json)
+
+    + Body
+          {
+            "data": {
+                "comment": "pooor d",
+                "createdby": "12",
+                "createdon": "2019-01-25 10:25:56.077019",
+                "image": {
+                    "title": "sassaqwqwq",
+                    "url": "sasasdsdd"
+                },
+                "incident_location": "[33.33, 444.7]",
+                "incidentid": 9,
+                "record_type": "intervention",
+                "status": "Draft",
+                "video": {
+                    "title": "sassaqwqwq",
+                    "url": "sasasdsdd"
+                }
+            },
+            "message": "Updated intervention record's comment",
+            "status": 200
+          }  
+            
++ Response 200 (application/json)
+
+    + Body   
+          {
+            "message": "incident record not found",
+            "status": 200
+         }
+         
++ Response 400 (application/json)
+
+    + Body
+          {
+            "error": "You cannot change the location while the incident status is not Draft",
+            "status": 400
+            }
+    
+# Delete intervention record [/api/v1/interventions/4]
+
+### Delete intervention  [DELETE]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: 'user token'
+            
++ Response 200 (application/json)
+
+    + Body
+          {
+            "message": "intervention record has been deleted",
+            "status": 200
+         }
+
+# Edit intervention record status [/api/v1/interventions/1/status]
+
+### Edit intervention status [PATCH]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: 'user token'
+            
+    + Body
+          {"status": "rejected"}
+            
++ Response 200 (application/json)
+
+    + Body
+          {
+            "data": {
+                "comment": "pooor d",
+                "createdby": "12",
+                "createdon": "2019-01-25 10:25:56.077019",
+                "image": {
+                    "title": "sassaqwqwq",
+                    "url": "sasasdsdd"
+                },
+                "incident_location": "[33.33, 444.7]",
+                "incidentid": 9,
+                "record_type": "intervention",
+                "status": "rejected",
+                "video": {
+                    "title": "sassaqwqwq",
+                    "url": "sasasdsdd"
+                }
+            },
+            "message": "intervention record's status was successfuly updated",
+            "status": 200
+        }
+          
++ Response 200 (application/json)
+
+    + Body
+          {
+            "message": "incident record not found",
+            "status": 200
+          }
+          
++ Response 400 (application/json)
+    
+    + Body
+          {
+            "error": "incident_id must be a valid number",
+            "status": 400
+         }
