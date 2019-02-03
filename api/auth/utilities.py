@@ -76,3 +76,34 @@ def protected_route(f):
                             'error': 'Invalid token. Please login again'}), 401
         return f(current_user, *args, **kwargs)
     return inner_func
+
+
+def restrict_admin_access(f):
+    """ 
+    Decorator fuction restricts an admin from accessing
+    endpoints that are only to be used by normal users
+    """
+    @wraps(f)
+    def restrict_access(*args, **kwargs):
+        if check_is_admin(args[0]):
+            return jsonify({'status': 403,
+                            'error': 'You do not have permission to perform this action'
+                            }), 403
+        return f(*args, **kwargs)
+    return restrict_access
+
+
+def restrict_normal_user_access(function):
+    """
+    Restrict normal user from accessing endpoints that require
+    admin previledges
+    """
+    @wraps(function)
+    def restrict_normal_user(*args, **kwargs):
+        if not check_is_admin(args[0]):
+            return jsonify({'status': 403,
+                            'error': 'You do not have permission to perform this action'
+                            }), 403
+        return function(*args, **kwargs)
+    return restrict_normal_user
+
