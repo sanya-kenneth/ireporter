@@ -1,6 +1,7 @@
 from api.incident import incidents_bp
 from flask import jsonify
-from api.auth.utilities import check_is_admin, protected_route
+from api.auth.utilities import check_is_admin, protected_route, \
+    restrict_admin_access, restrict_normal_user_access
 from api.incident.controller import fetch_all_incidents, fetch_an_incident,\
     edit_location_of_incident,\
     edit_comment_of_incident,\
@@ -12,11 +13,8 @@ from api.database.db import db_handler
 @incidents_bp.route('/red-flags', methods=['POST'])
 @incidents_bp.route('/interventions', methods=['POST'])
 @protected_route
+@restrict_admin_access
 def post(current_user):
-    if check_is_admin(current_user):
-        return jsonify({'status': 403,
-                        'error': 'You do not have permission to perform this action'
-                        }), 403
     return post_incident(current_user)
 
 
@@ -52,11 +50,8 @@ def get_an_intervention(current_user, incident_id):
 @incidents_bp.route('/red-flags/<incident_id>/incident_location',
                     methods=['PATCH'])
 @protected_route
+@restrict_admin_access
 def edit_incident_location(current_user, incident_id):
-    if check_is_admin(current_user):
-        return jsonify({'status': 403,
-                        'error': 'You do not have permission to perform this action'
-                        }), 403
     check_record = db_handler().select_one_record('incident_table', 'incidentid',
                                                   incident_id)
     if check_record:
@@ -71,11 +66,8 @@ def edit_incident_location(current_user, incident_id):
 @incidents_bp.route('/interventions/<incident_id>/incident_location',
                     methods=['PATCH'])
 @protected_route
+@restrict_admin_access
 def edit_intervention_location(current_user, incident_id):
-    if check_is_admin(current_user):
-        return jsonify({'status': 403,
-                        'error': 'You do not have permission to perform this action'
-                        }), 403
     check_record = db_handler().select_one_record('incident_table', 'incidentid',
                                                   incident_id)
     if check_record:
@@ -90,11 +82,8 @@ def edit_intervention_location(current_user, incident_id):
 @incidents_bp.route('/red-flags/<incident_id>/incident_comment',
                     methods=['PATCH'])
 @protected_route
+@restrict_admin_access
 def edit_redflag_comment(current_user, incident_id):
-    if check_is_admin(current_user):
-        return jsonify({'status': 403,
-                        'error': 'You do not have permission to perform this action'
-                        }), 403
     record_data = db_handler().select_one_record('incident_table', 'incidentid',
                                                  incident_id)
     if record_data:
@@ -109,11 +98,8 @@ def edit_redflag_comment(current_user, incident_id):
 @incidents_bp.route('/interventions/<incident_id>/incident_comment',
                     methods=['PATCH'])
 @protected_route
+@restrict_admin_access
 def edit_intervention_comment(current_user, incident_id):
-    if check_is_admin(current_user):
-        return jsonify({'status': 403,
-                        'error': 'You do not have permission to perform this action'
-                        }), 403
     update_data = db_handler().select_one_record('incident_table', 'incidentid',
                                                  incident_id)
     if update_data:
@@ -127,11 +113,8 @@ def edit_intervention_comment(current_user, incident_id):
 # Delete red-flag route
 @incidents_bp.route('/red-flags/<incident_id>', methods=['DELETE'])
 @protected_route
+@restrict_admin_access
 def delete_red_flag_record(current_user, incident_id):
-    if check_is_admin(current_user):
-        return jsonify({'status': 403,
-                        'error': 'You do not have permission to perform this action'
-                        }), 403
     delete = db_handler().select_one_incident('incident_table', 'incidentid',
                                               incident_id, 'red-flag')
     if delete:
@@ -145,11 +128,8 @@ def delete_red_flag_record(current_user, incident_id):
 # Delete intervention route
 @incidents_bp.route('/interventions/<incident_id>', methods=['DELETE'])
 @protected_route
+@restrict_admin_access
 def delete_intervention_record(current_user, incident_id):
-    if check_is_admin(current_user):
-        return jsonify({'status': 403,
-                        'error': 'You do not have permission to perform this action'
-                        }), 403
     delete_data = db_handler().select_one_incident('incident_table', 'incidentid',
                                                    incident_id, 'intervention')
     if delete_data:
@@ -163,19 +143,13 @@ def delete_intervention_record(current_user, incident_id):
 # change incident status route
 @incidents_bp.route('/red-flags/<incident_id>/status', methods=['PATCH'])
 @protected_route
+@restrict_normal_user_access
 def change_redflag_status(current_user, incident_id):
-    if not check_is_admin(current_user):
-        return jsonify({'status': 403,
-                        'error': 'You do not have permission to perform this action'
-                        }), 403
     return change_status(incident_id, 'red-flag')
 
 
 @incidents_bp.route('/interventions/<incident_id>/status', methods=['PATCH'])
 @protected_route
+@restrict_normal_user_access
 def change_intervention_status(current_user, incident_id):
-    if not check_is_admin(current_user):
-        return jsonify({'status': 403,
-                        'error': 'You do not have permission to perform this action'
-                        }), 403
     return change_status(incident_id, 'intervention')
