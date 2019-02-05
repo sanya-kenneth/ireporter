@@ -3,10 +3,36 @@ body {
     background-size: cover;
     margin: 0px;
 }
+#message_box{
+    background-color: rgba(4, 192, 114, 0.781);
+    color: white;
+    font-size: 15px;
+    text-align: justify;
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 7px;
+    margin: 0px;
+    border-radius: .3em;
+    display: none;
+}
+#error_box{
+    background-color: rgba(255, 0, 0, 0.445);
+    color: white;
+    font-size: 15px;
+    text-align: justify;
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    margin: 0px;
+    border-radius: .3em;
+    display: none;
+}
 
 h3 {
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
     color: rgb(68, 138, 105);
 }
 
@@ -19,13 +45,14 @@ h2 {
 input {
     display: block;
     width: 80%;
+    height: 38px;
     padding: 12px 20px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     display: block;
-    margin: 20px 25px 20px 25px;
+    margin: 18px 25px 18px 25px;
 }
 
 input:hover {
@@ -34,6 +61,27 @@ input:hover {
 
 input:visited {
     border: 2px solid rgba(5, 235, 158, 0.877);
+}
+
+#signup_btn{
+    background-color: rgb(5, 179, 141);
+    border: none;
+    border-radius: 3px;
+    border: 2px solid rgb(4, 196, 154);
+    color: white;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    display: block;
+    width: 80%;
+    margin: 10px 25px 10px 25px;
+}
+
+#signup_btn:hover{
+    background-color: rgb(8, 230, 182);
+    border-color: rgb(8, 230, 182);
 }
 
 #login_btn {
