@@ -7,7 +7,6 @@ from api.database.db import db_handler
 # signup user
 @auths.route('/users', methods=['POST'])
 def signup():
-    db_handler().create_tables()
     return signup_user()
 
 
