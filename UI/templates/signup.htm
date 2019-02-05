@@ -17,18 +17,26 @@
         </div>
         <br><br>
         <div class="Login-container">
+                <div id="message_box"></div>
+            <div id="error_box"></div>
             <h3>Signup</h3>
-            <form action="#">
-                <input type="text" required placeholder="Username">
-                <input type="email" required placeholder="Email">
-                <input type="password" required placeholder="Password">
+            <form>
+                <input id="firstname" type="text" required placeholder="firstname">
+                <input id="lastname" type="text" required placeholder="Lastname">
+                <input id="othernames" type="text" required placeholder="Othernames">
+                <input id="username" type="text" required placeholder="Username">
+                <input id="email" type="email" required placeholder="Email">
+                <input id="phonenumber" type="number" required placeholder="Phonenumber">
+                <input id="password" type="password" required placeholder="Password">
 
-                <button id="login_btn" href="#">Signup</button>
+                <button id="signup_btn" onclick="signUp(event)">Signup</button>
+
             </form><br>
             <p class="h4">Already have an account!<a class="login_link" href="index.htm">  Login</a></p>
             <br>
 
         </div>
+    <script src="../assets/js/signup.js"></script>
 </body>
 
 </html>
