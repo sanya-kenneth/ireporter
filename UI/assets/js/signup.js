@@ -43,7 +43,7 @@ const signUp = (event) => {
             message_box.innerHTML = data.message;
             message_box.style.display = 'block';
             setTimeout(remove_message, 3000)
-            setTimeout(redirectToLogin(), 4000)
+            setTimeout(redirectToLogin(), 1000)
        }
        else{
            let error_box = document.getElementById("error_box");

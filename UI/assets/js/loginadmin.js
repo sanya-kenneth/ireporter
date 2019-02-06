@@ -32,7 +32,7 @@ const logInAdmin = (event) => {
             setTimeout(remve_message, 3000)
             sessionStorage.setItem("access_token", data.access_token)
             setTimeout(()=>{window.location.href = 
-                "../templates/change-status.htm"}, 2500)
+                "../templates/change-status.htm"}, 1000)
             
 
        }

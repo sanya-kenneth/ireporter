@@ -32,7 +32,7 @@ const logIn = (event) => {
             setTimeout(remove_message, 3000)
             sessionStorage.setItem("access_token", data.access_token)
             setTimeout(()=>{ window.location.href =
-                "../templates/create_report.htm"}, 2500)
+                "../templates/create_report.htm"}, 1000)
            
 
        }
