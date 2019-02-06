@@ -9,7 +9,6 @@ class IncidentTestCase(BaseTest):
                 "incident_type":"",
                 "location":[3333.33, 444.1],
                 "comment": "its terrible",
-                "image":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 }
         res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
@@ -24,7 +23,6 @@ class IncidentTestCase(BaseTest):
                 "incident_type":"red",
                 "location":[3333.33, 444.1],
                 "comment": "its terrible",
-                "image":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 }
         res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
@@ -39,7 +37,6 @@ class IncidentTestCase(BaseTest):
                 "incident_type":9,
                 "location":[3333.33, 444.1],
                 "comment": "its terrible",
-                "image":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 }
         res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
@@ -54,7 +51,6 @@ class IncidentTestCase(BaseTest):
                 "incident_type":"red-flag",
                 "location":"2222222",
                 "comment": "its terrible",
-                "image":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 } 
         res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
@@ -69,7 +65,6 @@ class IncidentTestCase(BaseTest):
                 "incident_type":"red-flag",
                 "location":[3333.33, 444.1],
                 "comment": 99,
-                "image":{"title":"sassaqwqwq","url":"sasasdsdd"}
                 }
         res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
@@ -79,58 +74,11 @@ class IncidentTestCase(BaseTest):
         self.assertIsInstance(response_data, dict)
         self.assertEqual(response_data['error'], "comment must be a string")
 
-    def test_returns_error_if_image_title_is_invalid(self):
-        data = {
-            "incident_type":"red-flag",
-            "location":[3333.33, 444.1],
-            "comment": "the pot holes are many",
-            "image":{"trytle":"sassaqwqwq","url":"sasasdsdd"}
-            }
-        res = self.app.post('/api/v1/red-flags', content_type="application/json",
-            data=json.dumps(data), headers = self.user_header())
-        response_data = json.loads(res.data.decode())
-        self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
-
-    def test_returns_error_if_image_url_is_invalid(self):
-        data = {
-            "incident_type":"red-flag",
-            "location":[3333.33, 444.1],
-            "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","ul":"sasasdsdd"}
-            }
-        res = self.app.post('/api/v1/red-flags', content_type="application/json",
-            data=json.dumps(data), headers = self.user_header())
-        response_data = json.loads(res.data.decode())
-        self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
-
-    def test_returns_error_if_image_url_data_is_invalid(self):
-        data = {
-            "incident_type":"red-flag",
-            "location":[3333.33, 444.1],
-            "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":10}
-            }
-        res = self.app.post('/api/v1/red-flags', content_type="application/json",
-            data=json.dumps(data), headers = self.user_header())
-        response_data = json.loads(res.data.decode())
-        self.assertEqual(res.status_code,400)
-        self.assertEqual(response_data['status'], 400)
-        self.assertIsInstance(response_data, dict)
-        self.assertEqual(response_data['error'], "Image url or title or video url or title is invalid")
-
     def test_returns_error_if_unauthorised_user_tries_to_post_record(self):
         data = {
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":"sasasa"},
-            "video":{"title":"the Meg","url":"sasasdsdd"}
             }
         res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.admin_header())
@@ -145,8 +93,6 @@ class IncidentTestCase(BaseTest):
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":"sasasa"},
-            "video":{"title":"the Meg","url":"sasasdsdd"}
             }
         res = self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
@@ -162,8 +108,6 @@ class IncidentTestCase(BaseTest):
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":"sasasa"},
-            "video":{"title":"the Meg","url":"sasasdsdd"}
             }
         self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
@@ -179,8 +123,6 @@ class IncidentTestCase(BaseTest):
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":"sasasa"},
-            "video":{"title":"the Meg","url":"sasasdsdd"}
             }
         self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
@@ -216,8 +158,6 @@ class IncidentTestCase(BaseTest):
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":"sasasa"},
-            "video":{"title":"the Meg","url":"sasasdsdd"}
             }
         data2 = {
                 "location": [3.333, 33.3]
@@ -237,8 +177,6 @@ class IncidentTestCase(BaseTest):
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":"sasasa"},
-            "video":{"title":"the Meg","url":"sasasdsdd"}
             }
         data2 = {
                 "comment": "This is urgent"
@@ -248,6 +186,7 @@ class IncidentTestCase(BaseTest):
         res = self.app.patch('/api/v1/red-flags/1/incident_comment', content_type="application/json",
          data=json.dumps(data2), headers = self.user_header())
         response_data = json.loads(res.data.decode())
+        # print(response_data['error'])
         self.assertEqual(res.status_code, 200)
         self.assertEqual(response_data['status'], 200)
         self.assertIsInstance(response_data, dict)
@@ -259,8 +198,6 @@ class IncidentTestCase(BaseTest):
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":"sasasa"},
-            "video":{"title":"the Meg","url":"sasasdsdd"}
             }
         self.app.post('/api/v1/red-flags', content_type="application/json",
             data=json.dumps(data), headers = self.user_header())
@@ -277,8 +214,6 @@ class IncidentTestCase(BaseTest):
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":"sasasa"},
-            "video":{"title":"the Meg","url":"sasasdsdd"}
             }
         self.app.post('/api/v1/red-flags', content_type="application/json",
          data=json.dumps(data), headers = self.user_header())
@@ -295,8 +230,6 @@ class IncidentTestCase(BaseTest):
             "incident_type":"red-flag",
             "location":[3333.33, 444.1],
             "comment": "the pot holes are many",
-            "image":{"title":"sassaqwqwq","url":"sasasa"},
-            "video":{"title":"the Meg","url":"sasasdsdd"}
             }
         data2 = {
                 "status": "resolved"
