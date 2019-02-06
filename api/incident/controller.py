@@ -16,9 +16,8 @@ def post_incident(current_user):
     location = details.get('location')
     comment = details.get('comment')
     image = details.get('image')
-    video = details.get('video')
-    if not incident_type or not location or not comment or not image\
-         or not video:
+    # video = details.get('video')
+    if not incident_type or not location or not comment or not image:
         return jsonify({'status': 400,
                         'error': 'A required field is either missing or empty'
                         }), 400
@@ -32,22 +31,21 @@ def post_incident(current_user):
     if not validateIncident.validate_comment(comment):
         return jsonify({'status': 400,
                         'error': 'comment must be a string'}), 400
-    if not isinstance(image, dict) or not isinstance(video, dict) or not\
-            validateIncident.validate_images_and_video(image) or not\
-            validateIncident.validate_images_and_video(video):
+    if not isinstance(image, dict) or not \
+        validateIncident.validate_images_and_video(image):
         return jsonify({'status': 400,
                         'error': 'Image url or title or video url or title is invalid'}), 400
     incident = Incident(
-        current_user[0], incident_type, location, image, video, comment)
+        current_user[0], incident_type, location, image, comment)
     db_handler().add_incident_record(incident.createdOn, incident.createdBy, incident.record_type,
-    incident.location, incident.Images['title'], incident.Images['url'], incident.Videos['title'],
-    incident.Videos['url'], incident.comment, incident.status)
+    incident.location, incident.Images['title'], incident.Images['url'], incident.comment,
+    incident.status)
     data_dict = {
         "createdon": incident.createdOn,
         "record_type": incident.record_type,
         "incident_location": incident.location,
         "image": {"title": incident.Images['title'], "url": incident.Images['url']},
-        "video": {"title": incident.Videos['title'], "url": incident.Videos['url']},
+        # "video": {"title": incident.Videos['title'], "url": incident.Videos['url']},
         "comment": incident.comment,
         "status": incident.status
         }
@@ -67,9 +65,8 @@ def fetch_all_incidents(record_type):
     incident_records = []
     for data in fetched_data:
         image = {"title": data[5], "url": data[6]}
-        video = {"title": data[7], "url": data[8]}
         records = [data[0], data[1], data[2], data[3], data[4],
-        image, video, data[9], data[10]]
+        image, data[7], data[8]]
         # incident_records = []
         incident_records.append(dict(zip(keys, records)))
     return jsonify({'data': incident_records, 'status': 200}), 200
@@ -94,9 +91,8 @@ def fetch_an_incident(incident_id, record_type):
                 "record_type": record_data[3],
                 "incident_location": record_data[4],
                 "image": {"title": record_data[5], "url": record_data[6]},
-                "video": {"title": record_data[7], "url": record_data[8]},
-                "comment": record_data[9],
-                "status": record_data[10]
+                "comment": record_data[7],
+                "status": record_data[8]
             }
     return jsonify({'data': data_dict,
                     'status': 200}), 200
@@ -125,7 +121,7 @@ def edit_location_of_incident(incident_id, record_type):
     if not redflag_data_fetch:
         return jsonify({'status': 200,
                     'message': 'incident record not found'}), 200
-    if redflag_data_fetch[10] != 'Draft':
+    if redflag_data_fetch[8] != 'Draft':
         return jsonify({'status': 400,
                         'error': 'You cannot change the location while the incident status is not Draft'}), 400
     db_handler().update_incident_record(
@@ -140,9 +136,8 @@ def edit_location_of_incident(incident_id, record_type):
             "record_type": redflag_data_fetch[3],
             "incident_location": redflag_data_fetch[4],
             "image": {"title": redflag_data_fetch[5], "url": redflag_data_fetch[6]},
-            "video": {"title": redflag_data_fetch[7], "url": redflag_data_fetch[8]},
-            "comment": redflag_data_fetch[9],
-            "status": redflag_data_fetch[10]
+            "comment": redflag_data_fetch[7],
+            "status": redflag_data_fetch[8]
             }
     return jsonify({'status': 200, 'data': data_dict,
                     'message': f"Updated {incident_record_type} record's location"
@@ -170,7 +165,7 @@ def edit_comment_of_incident(incident_id, record_type):
     if not incident_result:
         return jsonify({'status': 200,
                 'message': 'incident record not found'}), 200
-    if incident_result[10] != 'Draft':
+    if incident_result[8] != 'Draft':
         return jsonify({'status': 400,
                         'error': 'You cannot change the location while the incident status is not Draft'}), 400
     db_handler().update_incident_record('comment', incident_Id, comment, 'redflag')
@@ -184,9 +179,8 @@ def edit_comment_of_incident(incident_id, record_type):
             "record_type": incident_result[3],
             "incident_location": incident_result[4],
             "image": {"title": incident_result[5], "url": incident_result[6]},
-            "video": {"title": incident_result[7], "url": incident_result[8]},
-            "comment": incident_result[9],
-            "status": incident_result[10]
+            "comment": incident_result[7],
+            "status": incident_result[8]
             }
     return jsonify({'status': 200, 'data': redflag_dict,
                 'message': f"Updated {returned_type} record's comment"}), 200
@@ -242,9 +236,8 @@ def change_status(incident_id, record_type):
         "record_type": incident_record_data[3],
         "incident_location": incident_record_data[4],
         "image": {"title": incident_record_data[5], "url": incident_record_data[6]},
-        "video": {"title": incident_record_data[7], "url": incident_record_data[8]},
-        "comment": incident_record_data[9],
-        "status": incident_record_data[10]
+        "comment": incident_record_data[7],
+        "status": incident_record_data[8]
             }
     return jsonify({'status': 200, 'data': data_dict,
                     'message': f"{incident_record_data[3]} record's status was successfuly updated"

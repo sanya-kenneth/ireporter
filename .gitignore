@@ -8,3 +8,4 @@ api/database/__pycache__/
 tests/__pycache__/
 .env
 api/__init__.pyc
+node_modules/
