@@ -67,9 +67,10 @@ def login_user():
                         'error': 'Password must be atleast 8 characters and should have atleast one number and one capital letter'}), 400
     user_data = db_handler().select_one_record(
         'user_table', 'useremail', login_email)
-    if user_data[5] == login_email and \
-            check_password_hash(user_data[7], login_password):
-        access_token = encode_token(login_email)
-        return jsonify({'status': 200, 'access_token': access_token.decode('UTF-8'),
-                        'message': 'You are now loggedin'}), 200
+    if user_data:
+        if user_data[5] == login_email and \
+                check_password_hash(user_data[7], login_password):
+            access_token = encode_token(login_email)
+            return jsonify({'status': 200, 'access_token': access_token.decode('UTF-8'),
+                            'message': 'You are now loggedin'}), 200
     return jsonify({'status': 401, 'error': 'Wrong email or password'}), 401
