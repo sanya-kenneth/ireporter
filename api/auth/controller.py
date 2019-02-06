@@ -72,7 +72,13 @@ def login_user(user_type):
         if user_type == "admin":
             if user_data[9] is False:
                 return jsonify({'status': 401,
-                                'error': "You can't login as a normal user from here"}), 401
+                                'error': "You can't login as a normal user from here"
+                                }), 401
+        if user_type == "normal_user":
+            if user_data[9] is True:
+                return jsonify({'status': 401,
+                                'error': "You can't login as an admin from here"
+                                }), 401
         if user_data[5] == login_email and \
                 check_password_hash(user_data[7], login_password):
             access_token = encode_token(login_email)
