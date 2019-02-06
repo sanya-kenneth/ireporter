@@ -30,7 +30,7 @@ const logInAdmin = (event) => {
             message_box.innerHTML = data.message;
             message_box.style.display = 'block';
             setTimeout(remve_message, 3000)
-            sessionStorage.setItem("access_toke", data.access_token)
+            sessionStorage.setItem("access_token", data.access_token)
             window.location.href = "../templates/change-status.htm"
 
        }

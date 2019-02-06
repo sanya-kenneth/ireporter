@@ -3,11 +3,15 @@ body {
     background-size: cover;
     margin: 0px;
 }
+.response_container{
+    margin-right: 45%;
+    margin-bottom: 5px;
+}
 
 .flex-container-grid {
     display: grid;
     grid-template-columns: 3fr 9fr;
-    margin-top: 2%;
+    margin-top: 4%;
 }
 
 .menu-container {
