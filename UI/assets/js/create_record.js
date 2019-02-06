@@ -22,7 +22,7 @@ const createRecord = (event) => {
     let comment  = document.getElementById('comment').value;
     let latCordinate = document.getElementById('lat_cordinate').value;
     let longCordinate  = document.getElementById('long_cordinate').value;
-    let imageInput = document.getElementById('image_input').value;
+    let incidentLocation = [latCordinate, longCordinate]
 
     fetch(url(incidentType), {
           method: 'POST',
@@ -33,9 +33,8 @@ const createRecord = (event) => {
           },
           body: JSON.stringify({
                "incident_type": incidentType,
-               "location": [latCordinate, longCordinate],
+               "location": incidentLocation,
                "comment": comment,
-               "image": imageInput,
           })
     })
     .then((response) => response.json())
