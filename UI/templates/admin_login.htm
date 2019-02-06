@@ -17,17 +17,20 @@
         </div>
         <br><br>
         <div class="Login-container">
+                <div id="message_box"></div>
+                <div id="error_box"></div>
             <h3>Login</h3>
-            <form action="change-status.htm">
-                <input type="email" required placeholder="Email">
-                <input type="password" required placeholder="Password">
+            <form >
+                <input id="email" type="email" required placeholder="Email">
+                <input id="password" type="password" required placeholder="Password">
 
-                <button id="login_btn" href="change-status.htm">Login</button>
+                <button id="login_btn" onclick="logInAdmin(event)">Login</button>
             </form><br>
             <p class="h4">Login as <a class="login_link" href="index.htm">  User</a></p>
             <br>
 
         </div>
+    <script src="../assets/js/loginadmin.js"></script>
 </body>
 
 </html>

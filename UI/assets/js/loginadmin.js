@@ -1,13 +1,13 @@
-function remove_error(){
+function remve_error(){
     document.getElementById("error_box").style.display = 'none';
 }
 
-function remove_message(){
+function remve_message(){
     document.getElementById("message_box").style.display = 'none';
 }
 
 
-const logIn = (event) => {
+const logInAdmin = (event) => {
     event.preventDefault()
     let userEmail = document.getElementById('email').value;
     let password = document.getElementById('password').value;
@@ -29,16 +29,16 @@ const logIn = (event) => {
             let message_box = document.getElementById("message_box");
             message_box.innerHTML = data.message;
             message_box.style.display = 'block';
-            setTimeout(remove_message, 3000)
+            setTimeout(remve_message, 3000)
             sessionStorage.setItem("access_toke", data.access_token)
-            window.location.href = "../templates/create_report.htm"
+            window.location.href = "../templates/change-status.htm"
 
        }
        else{
            let error_box = document.getElementById("error_box");
            error_box.innerHTML = data.error;
            error_box.style.display = 'block';
-           setTimeout(remove_error, 3000)  
+           setTimeout(remve_error, 3000)  
        }
     })
 
