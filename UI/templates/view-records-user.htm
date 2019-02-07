@@ -35,20 +35,32 @@
 
         </div>
         <div class="content-container">
-            <div class="content">
-                <h3 class="h3heading">Your records</h3>
-                <p class="user-records">Water system in Seeta town is damaged <img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>
-                <p class="user-records">Some street lights in seeta town are not working <img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>
-                <p class="user-records">An electricity pole fell in Bajo town <img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>
-                <p class="user-records">The jinja road high has a very big hole on the sides just after seeta town. <img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>
-                <p class="user-records">The roads in seeta town have so many pot holes. <img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>
-                <p class="user-records">An electricity pole fell in Bajo town <img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>
-                <p class="user-records">The jinja road high has a very big hole on the sides just after seeta town. <img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>
-                <p class="user-records">The roads in seeta town have so many pot holes. <img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>
-                <p class="user-records">An electricity pole fell in Bajo town <img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>
+            <div  class="content">
+                <!---<h3 onclick="fetchIncidents()" class="h3heading">Your records</h3>-->
+                <label >Select record type</label>
+                <select onclick="fetchIncidents()" id="select_type">
+                    <option  value="red-flags">red-flags</option>
+                    <option  value="interventions">interventions</option>
+                </select>
+                <table>
+                    <thead>
+                        <tr>
+                    <th>created by</th>
+                    <th>created on</th>
+                    <th>comment</th>
+                    <th>record id</th>
+                    <th>recorded from</th>
+                    <th>record type</th>
+                    <th>record status</th>
+                    </tr>
+                    </thead>
+                </table>
+                <div id="display_record"></div>
+                <!--<p  class="user-records"><img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>-->
             </div>
         </div>
     </div>
+    <script src="../assets/js/view_records.js"></script>
 </body>
 
 </html>

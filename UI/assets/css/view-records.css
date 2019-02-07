@@ -46,3 +46,8 @@ img {
     float: right;
     cursor: pointer;
 }
+#select_type{
+    height: 40px;
+    width: auto;
+    font-size: auto;
+}
