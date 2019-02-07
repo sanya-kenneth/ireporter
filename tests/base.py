@@ -30,7 +30,7 @@ class BaseTest(unittest.TestCase):
             "email": "ken@gmail.com",
             "password": "Ken1234567"
         }
-        res = self.app.post('/api/v1/users/login', content_type="application/json",
+        res = self.app.post('/api/v1/users/login/admin', content_type="application/json",
                             data=json.dumps(admin_data_login))
         data = json.loads(res.data.decode())
         return data['access_token']

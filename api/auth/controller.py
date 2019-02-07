@@ -53,7 +53,7 @@ def signup_user():
 
 
 # function to login a user
-def login_user():
+def login_user(user_type):
     login_info = request.get_json()
     login_email = login_info.get('email')
     login_password = login_info.get('password')
@@ -64,12 +64,24 @@ def login_user():
         return jsonify({'status': 400, 'error': 'Invalid email'}), 400
     if not validateUser.validate_password(login_password):
         return jsonify({'status': 400,
-                        'error': 'Password must be atleast 8 characters and should have atleast one number and one capital letter'}), 400
+                        'error': 'Password must be atleast 8 characters and should have atleast one number and one capital letter'
+                        }), 400
     user_data = db_handler().select_one_record(
         'user_table', 'useremail', login_email)
-    if user_data[5] == login_email and \
-            check_password_hash(user_data[7], login_password):
-        access_token = encode_token(login_email)
-        return jsonify({'status': 200, 'access_token': access_token.decode('UTF-8'),
-                        'message': 'You are now loggedin'}), 200
+    if user_data:
+        if user_type == "admin":
+            if user_data[9] is False:
+                return jsonify({'status': 401,
+                                'error': "You can't login as a normal user from here"
+                                }), 401
+        if user_type == "normal_user":
+            if user_data[9] is True:
+                return jsonify({'status': 401,
+                                'error': "You can't login as an admin from here"
+                                }), 401
+        if user_data[5] == login_email and \
+                check_password_hash(user_data[7], login_password):
+            access_token = encode_token(login_email)
+            return jsonify({'status': 200, 'access_token': access_token.decode('UTF-8'),
+                            'message': 'You are now loggedin'}), 200
     return jsonify({'status': 401, 'error': 'Wrong email or password'}), 401

@@ -43,10 +43,7 @@ class Database:
                     createdBy VARCHAR(50) NOT NULL,
                     record_type VARCHAR(50) NOT NULL,
                     incident_location TEXT NOT NULL,
-                    incident_image_title VARCHAR(50) NOT NULL,
-                    incident_image_url TEXT NOT NULL,
-                    incident_video_title VARCHAR(50) NOT NULL,
-                    incident_video_url TEXT NOT NULL,
+                    incident_image_name TEXT,
                     comment TEXT NOT NULL,
                     incident_status VARCHAR(50) NOT NULL
                     )
@@ -75,18 +72,12 @@ class Database:
         return self.cursor.fetchone()
 
     def add_incident_record(self, createdOn, createdBy, record_type,
-                            incident_location, incident_image_title,
-                            incident_image_url, incident_video_title,
-                            incident_video_url, comment, incident_status):
+                            incident_location, comment, incident_status):
         sql = ("""INSERT INTO incident_table(createdOn, createdBy, record_type,
-                incident_location, incident_image_title, incident_image_url,
-                incident_video_title, incident_video_url, comment,
-                incident_status)
-        VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');"""
+                incident_location, comment, incident_status)
+        VALUES ('{}', '{}', '{}', '{}', '{}', '{}');"""
                .format(createdOn, createdBy, record_type, incident_location,
-                       incident_image_title, incident_image_url,
-                       incident_video_title, incident_video_url,
-                       comment, incident_status))
+                    comment, incident_status))
         return self.cursor.execute(sql)
         
 
