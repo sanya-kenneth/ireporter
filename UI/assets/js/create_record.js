@@ -22,7 +22,7 @@ const createRecord = (event) => {
     let comment  = document.getElementById('comment').value;
     let latCordinate = document.getElementById('lat_cordinate').value;
     let longCordinate  = document.getElementById('long_cordinate').value;
-    let incidentLocation = [latCordinate, longCordinate]
+    let incidentLocation = [Number(latCordinate), Number(longCordinate)]
 
     fetch(url(incidentType), {
           method: 'POST',
@@ -39,6 +39,7 @@ const createRecord = (event) => {
     })
     .then((response) => response.json())
     .then((data) => {
+        console.log(data)
         if(data.status == 201){
             let message_box = document.getElementById("message_box");
             message_box.innerHTML = data.message;
