@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>View Records</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/create_report.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/view-records.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/response_messages.css" />
+
+</head>
+
+<body onload="fetchIncidents('interventions')">
+    <div class="flex-container-grid">
+        <div class="menu-container">
+            <div class="banner">
+                <img class="banner-img" src="../assets/img/logo.png">
+            </div>
+            <div class="menu">
+                <ul class="menu-items">
+                    <li><a href="create_report.htm">Create record</a></li>
+                    <li><a class="active" href="#">View records</a></li>
+                    <li><a class="extend-link" href="profile.htm">Profile</a></li>
+                </ul>
+            </div>
+            <div class="extra-space">
+                <img class="pp" src="../assets/img/sanya.jpg">
+                <h5>Sanya Kenneth</h5>
+                <ul class="menu-items">
+
+                    <li><a class="extend-link signout" href="index.htm">signout</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="content-container">
+            <div   class="content">
+                <label >Select record type</label>
+                <select onchange="switchPage('red-flags')" id="select_type">
+                    <option  >interventions</option>
+                    <option  >red-flags</option>
+                </select>
+           <div id="display_record">
+            <div class="response_container">
+                <div id="message_box"></div>
+                <div id="error_box"></div>
+            </div>
+           </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- view one record Modal -->
+<div id="dataModal"  class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span onclick="closeModal();" class="close">&times;</span>
+     <div class="tabs">
+         <div class="buttons">
+                <button onclick="switchTab(event, 'Record_details')" class="tablinks active">Record Details</button>
+                <button onclick="switchTab(event, 'Edit_location')"  class="tablinks">Edit Location</button>
+                <button onclick="switchTab(event, 'Edit_comment')" class="tablinks">Edit comment</button>
+         </div>
+        
+         
+         <div class="tabdiv">
+            <div onload="dettailsView()" id="Record_details" class="tabcontent">
+                <div class="details_container">
+                    <label>Record Type:</label>
+                    <div id="record_type_data" class="data">
+                    </div>
+
+                    <label>Created by:</label>
+                    <div id="created_by_data" class="data">
+                    </div>
+                    <label>Created on:</label>
+                    <div id="created_on_data" class="data">
+                    </div>
+                    <label>comment</label>
+                    <div id="record_comment_data" class="data">
+                       
+                    </div>
+                    <label>Location:</label>
+                    <div id="location_data" class="data">
+                    </div>
+                    <label >Record status:</label>
+                    <div id="record_status" class="data">
+                    </div>
+                </div>
+            </div>
+            <div id="Edit_location" class="tabcontent">
+               <h3 class="h3">Edit location</h3>
+               <p>Hey its Kenneth. Am now in Busia.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+           </div>
+           <div id="Edit_comment" class="tabcontent">
+               <h3 class="h3">Edit comment</h3>
+               <p>Hey its Kenneth. Am now in Kabale.ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc</p>
+         </div>
+        
+        </div>
+     </div>
+      
+    </div>
+  
+  </div>
+
+
+
+
+    <script src="../assets/js/view_records.js"></script>
+</body>
+
+</html>
