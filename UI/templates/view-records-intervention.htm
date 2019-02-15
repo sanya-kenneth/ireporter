@@ -98,8 +98,12 @@
            </div>
            <div id="Edit_comment" class="tabcontent">
                <h3 class="h3">Edit comment</h3>
-               <form>
+               <form id="edit_comment_form">
                <textarea id="newcomment" placeholder="comment"></textarea>
+               <div class="response_container">
+                    <div id="edit_comment_message_box"></div>
+                    <div id="edit_comment_error_box"></div>
+                </div>
                <button onclick="editComment(event);" id="update_comment">Update</button>
                <button  id="cancel">cancel</button>
                </form>
