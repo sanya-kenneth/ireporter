@@ -42,7 +42,7 @@ class Database:
                     createdOn TEXT NOT NULL,
                     createdBy VARCHAR(50) NOT NULL,
                     record_type VARCHAR(50) NOT NULL,
-                    incident_location TEXT NOT NULL,
+                    incident_location TEXT [] NOT NULL,
                     incident_image_name TEXT,
                     comment TEXT NOT NULL,
                     incident_status VARCHAR(50) NOT NULL
@@ -72,12 +72,13 @@ class Database:
         return self.cursor.fetchone()
 
     def add_incident_record(self, createdOn, createdBy, record_type,
-                            incident_location, comment, incident_status):
+                            incident_location_lat, incident_location_long,
+                            comment, incident_status):
         sql = ("""INSERT INTO incident_table(createdOn, createdBy, record_type,
                 incident_location, comment, incident_status)
-        VALUES ('{}', '{}', '{}', '{}', '{}', '{}');"""
-               .format(createdOn, createdBy, record_type, incident_location,
-                    comment, incident_status))
+        VALUES ('{}', '{}', '{}', ARRAY['{}','{}'], '{}', '{}');"""
+               .format(createdOn, createdBy, record_type, incident_location_lat,
+               incident_location_long, comment, incident_status))
         return self.cursor.execute(sql)
         
 

@@ -33,7 +33,7 @@ def post_incident(current_user):
     incident = Incident(
         current_user[0], incident_type, location, comment)
     db_handler().add_incident_record(incident.createdOn, incident.createdBy, incident.record_type,
-    incident.location, incident.comment, incident.status)
+    incident.location[0], incident.location[1], incident.comment, incident.status)
     data_dict = {
         "createdon": incident.createdOn,
         "record_type": incident.record_type,
