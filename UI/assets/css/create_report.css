@@ -68,10 +68,12 @@ ul li {
 }
 
 .content-container {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(228, 228, 228, 0.24);
+    /* ba */
     margin-right: 10%;
     margin-left: 1%;
     padding: 5px;
+    border-radius: .3em;
 }
 
 .banner-img {
