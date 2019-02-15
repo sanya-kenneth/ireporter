@@ -9,11 +9,11 @@ let urlLocationEdit = (recordType) => {
 
 
 function remove_error(){
-    document.getElementById("edit_comment_error_box").style.display = 'none';
+    document.getElementById("edit_location_error_box").style.display = 'none';
 }
 
 function remove_message(){
-    document.getElementById("edit_comment_message_box").style.display = 'none';
+    document.getElementById("edit_location_message_box").style.display = 'none';
 }
 
 const editLocation = (event) => {
@@ -39,28 +39,28 @@ const editLocation = (event) => {
 .then((res) => res.json())
 .then((data) => {
 
-    if (data.message == `Updated ${newrecordCurrentType} record's location`){
-        let comment_form = document.getElementById("edit_comment_form");
-        let edit_comment_message_box = 
-        document.getElementById("edit_comment_message_box");
-        edit_comment_message_box.innerHTML = data.message;
-        edit_comment_message_box.style.display = 'block';
+    if (data.message == `Updated ${locationrecordCurrentType} record's location`){
+        let location_form = document.getElementById("edit_location_form");
+        let edit_location_message_box = 
+        document.getElementById("edit_location_message_box");
+        edit_location_message_box.innerHTML = data.message;
+        edit_location_message_box.style.display = 'block';
         setTimeout(remove_message, 3000);
-        comment_form.reset();
+        location_form.reset();
 
     }
     else if(data.message === "incident record not found"){
-        let edit_comment_error_box = 
-        document.getElementById("edit_comment_error_box");
-        edit_comment_error_box.innerHTML = data.message;
+        let edit_location_error_box = 
+        document.getElementById("edit_location_error_box");
+        edit_location_error_box.innerHTML = data.message;
         console.log(data.message)
-        edit_comment_error_box.style.display = 'block';
+        edit_location_error_box.style.display = 'block';
         setTimeout(remove_error, 3000);
     }
     else{
-        edit_comment_error_box.innerHTML = data.error;
+        edit_location_error_box.innerHTML = data.error;
         console.log(data.error)
-        edit_comment_error_box.style.display = 'block';
+        edit_location_error_box.style.display = 'block';
         setTimeout(remove_error, 3000);
     }
 
