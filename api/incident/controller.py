@@ -155,7 +155,7 @@ def edit_comment_of_incident(incident_id, record_type):
     if incident_result[7] != 'Draft':
         return jsonify({'status': 400,
                         'error': 'You cannot change the location while the incident status is not Draft'}), 400
-    db_handler().update_incident_record('comment', incident_Id, comment, 'redflag')
+    db_handler().update_incident_record('comment', incident_Id, comment, record_type)
     returned_type=incident_result[3]
     incident_result=db_handler().select_one_incident('incident_table', 'incidentid',
                                                         incident_Id, record_type)
