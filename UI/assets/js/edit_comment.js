@@ -21,7 +21,6 @@ const editComment = (event) => {
     let newrecord_id = localStorage.getItem("incidentDataId");
     let newrecordCurrentType = localStorage.getItem("incidentDataCurrentType")
     let newComment = document.getElementById("newcomment").value;
-    console.log(newComment);
     fetch(urlEdit(newrecordCurrentType) + "/" + `${newrecord_id}` + "/" .concat("incident_comment"),
     {
         method: 'PATCH',

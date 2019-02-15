@@ -96,8 +96,17 @@
                 </div>
                 <div id="Edit_location" class="tabcontent">
                    <h3 class="h3">Edit location</h3>
-                   <p>Hey its Kenneth. Am now in Busia.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-               </div>
+                   <form id="edit_location_form">
+                <input type="number" placeholder="Lat cordinates" id="newlocationlat" >
+                <input type="number" placeholder="Long cordinates" id="newlocationlong"> 
+                <div class="response_container">
+                        <div id="edit_location_message_box"></div>
+                        <div id="edit_location_error_box"></div>
+                    </div>
+                <button onclick="editLocation(event);" id="update_comment">Update</button>
+                <button  id="cancel">cancel</button>
+                </form>
+                </div>
                <div id="Edit_comment" class="tabcontent">
                    <h3 class="h3">Edit comment</h3>
                    <form id="edit_comment_form">
@@ -120,6 +129,7 @@
 
     <script src="../assets/js/view_records.js"></script>
     <script src="../assets/js/edit_comment.js"></script>
+    <script src="../assets/js/edit_location.js"></script>
 </body>
 
 </html>
