@@ -112,8 +112,7 @@ def edit_location_of_incident(incident_id, record_type):
     if redflag_data_fetch[7] != 'Draft':
         return jsonify({'status': 400,
                         'error': 'You cannot change the location while the incident status is not Draft'}), 400
-    db_handler().update_incident_record(
-        'incident_location', incident_Id, location, record_type)
+    db_handler().update_incident_record_location( incident_Id, location[0], location[1], record_type)
     incident_record_type=redflag_data_fetch[3]
     redflag_data_fetch=db_handler().select_one_incident('incident_table', 'incidentid',
                                                         incident_Id, record_type)

@@ -97,6 +97,13 @@ class Database:
                .format(field_to_update, input_data, incident_id_in, record_type))
         return self.cursor.execute(sql)
 
+    def update_incident_record_location(self,  incident_id_in,
+                               input_data1, input_data2, record_type):
+        sql = ("""UPDATE incident_table SET incident_location [ 1 ] = '{}',
+        incident_location [ 2 ] = '{}' WHERE incidentid = '{}' AND record_type = '{}'"""
+               .format(input_data1, input_data2, incident_id_in, record_type))
+        return self.cursor.execute(sql)
+
     def delete_incident_record(self, incident_id, record_type):
         sql = ("""DELETE from incident_table WHERE incidentid = '{}' AND record_type = '{}' """
                .format(incident_id, record_type))
