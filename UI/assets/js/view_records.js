@@ -77,7 +77,8 @@ let fetchOne = (data) => {
    dataRcordCreatedBy.innerHTML = data.createdby;
    dataRecordCreatedOn.innerHTML = data.createdon;
    dataRecordComment.innerHTML = data.comment;
-   dataRecordLocation.innerHTML = data.incident_location;
+   dataRecordLocation.innerHTML = `Lat: ${data.incident_location[0]}  
+      Long: ${data.incident_location[1]}`;
    dataRecordStatus.innerHTML = data.status;
 
 }
