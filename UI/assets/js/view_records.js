@@ -4,7 +4,6 @@ function remove_error(){
 
 
 let url = (recordType) => {
-    // console.log(recordType)
     if(recordType === 'red-flag'){
         return 'http://127.0.0.1:5000/api/v1/red-flags'
     }
@@ -115,7 +114,6 @@ const fetchIncidents = (incidentRecordType) => {
 }
 
 const fetchOneIncident = () => {
-    // console.log(localStorage.getItem("incidentDataType"));
     let record_id = localStorage.getItem("incidentDataId");
     let recordCurrentType = localStorage.getItem("incidentDataCurrentType");
     console.log(recordCurrentType);
@@ -147,7 +145,7 @@ const fetchOneIncident = () => {
         });
     }
 
-let currentid = (idInput) =>{
+let currentid = (idInput) => {
     localStorage.setItem("incidentDataId", idInput);
 }
 
