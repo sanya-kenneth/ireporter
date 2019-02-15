@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>View Records</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/create_report.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/view-records.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/create_report.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/response_messages.css" />
 
 </head>
@@ -38,7 +38,7 @@
         <div class="content-container">
             <div   class="content">
                 <label >Select record type</label>
-                <select onchange="switchPage('red-flags')" id="select_type">
+                <select onchange="switchPage('redflags')" id="select_type">
                     <option  >interventions</option>
                     <option  >red-flags</option>
                 </select>
@@ -98,7 +98,15 @@
            </div>
            <div id="Edit_comment" class="tabcontent">
                <h3 class="h3">Edit comment</h3>
-               <p>Hey its Kenneth. Am now in Kabale.ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc</p>
+               <form id="edit_comment_form">
+               <textarea id="newcomment" placeholder="comment"></textarea>
+               <div class="response_container">
+                    <div id="edit_comment_message_box"></div>
+                    <div id="edit_comment_error_box"></div>
+                </div>
+               <button onclick="editComment(event);" id="update_comment">Update</button>
+               <button  id="cancel">cancel</button>
+               </form>
          </div>
         
         </div>
@@ -112,6 +120,7 @@
 
 
     <script src="../assets/js/view_records.js"></script>
+    <script src="../assets/js/edit_comment.js"></script>
 </body>
 
 </html>

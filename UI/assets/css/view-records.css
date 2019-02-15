@@ -2,14 +2,11 @@
     margin-left: 80px;
     margin-bottom: 5px;
     padding-right: 50px;
-    /* overflow: scroll; */
 }
 .content-container{
-    margin-bottom: 250px;
-   
-    /* opacity: 0.7; */
-   
+    margin-bottom: 250px;   
 }
+
 .menu-container{
     overflow: hidden;
     margin-bottom: 250px;
@@ -63,58 +60,19 @@ img {
     width: auto;
     font-size: auto;
 }
-.border_class{
-    background-color: rgba(92, 92, 92, 0.575);
-    /* padding-top: 7px;
-    padding-bottom: 15px;
-    padding-left: 20px;
-    padding-right: 20px; */
-    border-radius: .3em;
-    color:white;
-    /* border: 2px solid cornflowerblue; */
-}
-.td{
-    /* background-color: red; */
-    padding: 10px;
-    /* padding-left:100px ; */
-    /* margin-left: 200px !important; */
-    /* border: 2px solid cornflowerblue; */
-    /* text-align: center; */
-}
 
-.th{
-   
-    background-color: rgb(82, 78, 78);
-    margin: 0px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 30px;
-    padding-left: 30px;
-}
-tr:nth-child(even) {background-color: #686666;}
-
-tr:hover{
-    background-color: rgb(60, 60, 65);
-    cursor: pointer;
-    border-radius: .3em;
-}
 #display_record{
-    /* overflow-x: auto; */
     overflow: auto;
-    /* border: 2px solid gray; */
     margin-right: 100px;
 }
 
 #incident_id{
-    /* float: left; */
     display: inline;
 }
 #record_type{
-    /* float: unset; */
     display: inline;
 }
 #data_card{
-    /* border: 2px solid rebeccapurple; */
     margin: 10px;
     margin-top: 15px;
     margin-bottom:10px; 
@@ -134,7 +92,6 @@ h6,#meta_data1, #meta_data2{
     margin-left: 15px;
 }
 hr{
-    /* border-color: rgba(71, 70, 70, 0.096); */
     border: 1px solid rgba(71, 70, 70, 0.096);
 }
 #comment{
@@ -144,12 +101,10 @@ hr{
 #comment:hover{
     background-color: #9696961e;
     border-radius: .3em;
-    /* padding-left: 4px; */
 }
 
 @media (max-width:700px) {
     .display_record {
-        /* margin-top: 7px; */
         margin-right: 0px !important;
     }
 }
@@ -202,16 +157,13 @@ hr{
   /* tab style*/
   .tabs{
       overflow: hidden;
-      /* border: 1px solid #ccc; */
-      /* background-color: #f1f1f1; */
 
   }
 
-  .tabs button{
+  .tablinks{
       background-color: rgb(121, 14, 124);
       width: auto;
       height: 40px;
-      /* float: left; */
       border: 1px solid rgb(123, 9, 129);
       outline: none;
       display: inline;
@@ -219,7 +171,6 @@ hr{
       padding-bottom:30px !important;
       margin-left: 2px;
       margin-right: 2px;
-      /* padding: 14px 16px; */
       transition: 0.3s;
       font-size: 17px;
   }
@@ -230,6 +181,23 @@ hr{
   .tabs button.active{
       background-color: rgb(170, 14, 136);
       border: none;
+  }
+  #update_comment{
+      border: none;
+      height: 43px;
+      width: auto;
+      display: inline;
+  }
+  #update_comment:hover{
+   background-color: rgba(34, 117, 72, 0.795);
+}
+  #cancel{
+    border: none;
+    background-color: rgba(161, 15, 45, 0.815);
+    height: 43px;
+    width: auto;
+    display: inline;
+    margin-left: 0px;
   }
   .tabcontent{
       display: none;
@@ -251,10 +219,9 @@ hr{
 }
 #Record_details{
     display: block;
-    /* margin-left: 5%; */
 }
 .h3{
-    margin: 0px 5% 0px 45%;
+    margin: 0px 5% 0px 35%;
 }
 .buttons{
     margin: 0% 10% 0% 20%;
@@ -269,6 +236,8 @@ hr{
     padding: 1px 6px 1px 6px;
     border-radius: .3em;
     background-color: rgba(214, 210, 210, 0.24);
+    padding: 8px 15px 8px 15px;
+    
 }
 
 #record_comment_data{
@@ -276,6 +245,8 @@ hr{
     padding-top: 15px;
 }
 label{
-    margin-left: 40%;
-    text-align: center;
+    margin-left: 20% !important;
+}
+form{
+    margin: 0px 10px 0px 170px; 
 }

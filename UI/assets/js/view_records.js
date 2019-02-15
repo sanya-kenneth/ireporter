@@ -2,7 +2,6 @@ function remove_error(){
     document.getElementById("error_box").style.display = 'none';
 }
 
-let currenttype;
 
 let url = (recordType) => {
     if(recordType === 'red-flag'){
@@ -17,20 +16,16 @@ var incidentRecordId;
 
 function switchPage(incidentrecordType){
     console.log(incidentrecordType)
-    if (incidentrecordType === "red-flags"){
+    if (incidentrecordType === "redflags"){
+        localStorage.setItem("incidentDataCurrentType", "red-flag");
         window.location.href = "../templates/view-records-user.htm";
     } 
     else{
+        localStorage.setItem("incidentDataCurrentType", "intervention");
         window.location.href = "../templates/view-records-intervention.htm";
     }
     }
 
-
-
-let returnType = (theType) => {
-    currenttype = theType;
-    return theType
-}
 
 let showData = (data) => {
     data.forEach(incident => {
@@ -46,8 +41,8 @@ let showData = (data) => {
         let infoTypeheader = `<h6> Incident type: ${incident.record_type} </h6>`;
        
         let comment = `<article id="comment" onclick=
-        "fetchOneIncident(${incident.incidentid}); activateModal();
-        returnType(${incident.record_type});  "> ${incident.comment} </article>`
+        "currentid(${incident.incidentid}); fetchOneIncident(); activateModal();
+        "> ${incident.comment} </article>`
         recordDataId.textContent = incident.incidentid;
         infoType.textContent = incident.record_type;
         recordDataId.setAttribute("id", "incident_id");
@@ -84,6 +79,7 @@ let fetchOne = (data) => {
    dataRecordComment.innerHTML = data.comment;
    dataRecordLocation.innerHTML = data.incident_location;
    dataRecordStatus.innerHTML = data.status;
+
 }
 
 const fetchIncidents = (incidentRecordType) => {
@@ -117,9 +113,11 @@ const fetchIncidents = (incidentRecordType) => {
        
 }
 
-const fetchOneIncident = (recordId) => {
-    
-    fetch(url(currenttype) + "/".concat(recordId), {
+const fetchOneIncident = () => {
+    let record_id = localStorage.getItem("incidentDataId");
+    let recordCurrentType = localStorage.getItem("incidentDataCurrentType");
+    console.log(recordCurrentType);
+    fetch(url(recordCurrentType) + "/".concat(record_id), {
         method: 'GET',
         headers: {
                     'Content-type': 'application/json',
@@ -146,6 +144,10 @@ const fetchOneIncident = (recordId) => {
             }
         });
     }
+
+let currentid = (idInput) => {
+    localStorage.setItem("incidentDataId", idInput);
+}
 
 // Get the modal
 var modal = document.getElementById("dataModal");
