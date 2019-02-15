@@ -7,6 +7,7 @@
     <title>Create-Record</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/create_report.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/response_messages.css" />
 </head>
 
 <body>
@@ -34,28 +35,30 @@
 
         </div>
         <div class="content-container">
+            <div class="response_container">
+                <div id="message_box"></div>
+                <div id="error_box"></div>
+            </div>
             <div class="content">
                 <form>
 
                     <label>Select record Category:</label>
-                    <select>
-                                <option>red-flag </option>
-                                <option>intervention</option>
+                    <select id="select_category">
+                                <option value="red-flag">red-flag </option>
+                                <option value="intervention">intervention</option>
                             </select>
-                    <input type="text" placeholder="Title">
-
-                    <textarea placeholder="Details"></textarea>
+                    <textarea id="comment" placeholder="Comment"></textarea>
                     <label>Add geolocation (Lat Long Coordinates):</label>
-                    <input type="number" placeholder="Lat coordinates">
-                    <input type="number" placeholder="Long coordinates">
-                    <label>Add image/video:</label>
-                    <input class="file" type="file">
-                    <button>Post record</button>
+                    <input id="lat_cordinate" type="number" placeholder="Lat coordinates">
+                    <input id="long_cordinate" type="number" placeholder="Long coordinates">
+                    <button onclick="createRecord(event)" id="post_record">Post record</button>
                 </form>
 
             </div>
         </div>
     </div>
+
+    <script src="../assets/js/create_record.js"></script>
 </body>
 
 </html>

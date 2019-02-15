@@ -3,17 +3,20 @@ body {
     background-size: cover;
     margin: 0px;
 }
+.response_container{
+    margin-right: 45%;
+    margin-bottom: 5px;
+}
 
 .flex-container-grid {
     display: grid;
     grid-template-columns: 3fr 9fr;
-    margin-top: 2%;
+    margin-top: 4%;
 }
 
 .menu-container {
     background-color: rgb(70, 67, 67);
     margin-left: 1%;
-    /* margin-right: 1%; */
     padding: 8px;
 }
 
@@ -41,7 +44,7 @@ ul li a {
 }
 
 .extra-space {
-    margin-top: 100px;
+    margin-top: 40px;
 }
 
 .pp {
@@ -66,7 +69,7 @@ ul li {
 
 .content-container {
     background-color: rgb(255, 255, 255);
-    margin-right: 1%;
+    margin-right: 10%;
     margin-left: 1%;
     padding: 5px;
 }

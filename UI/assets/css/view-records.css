@@ -1,6 +1,18 @@
 .content {
-    margin-left: 50px;
-    padding-left: 30px;
+    margin-left: 80px;
+    margin-bottom: 5px;
+    padding-right: 50px;
+    /* overflow: scroll; */
+}
+.content-container{
+    margin-bottom: 250px;
+   
+    /* opacity: 0.7; */
+   
+}
+.menu-container{
+    overflow: hidden;
+    margin-bottom: 250px;
 }
 
 .h3heading {
@@ -45,4 +57,225 @@ img {
     margin-right: 10px;
     float: right;
     cursor: pointer;
+}
+#select_type{
+    height: 40px;
+    width: auto;
+    font-size: auto;
+}
+.border_class{
+    background-color: rgba(92, 92, 92, 0.575);
+    /* padding-top: 7px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px; */
+    border-radius: .3em;
+    color:white;
+    /* border: 2px solid cornflowerblue; */
+}
+.td{
+    /* background-color: red; */
+    padding: 10px;
+    /* padding-left:100px ; */
+    /* margin-left: 200px !important; */
+    /* border: 2px solid cornflowerblue; */
+    /* text-align: center; */
+}
+
+.th{
+   
+    background-color: rgb(82, 78, 78);
+    margin: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+tr:nth-child(even) {background-color: #686666;}
+
+tr:hover{
+    background-color: rgb(60, 60, 65);
+    cursor: pointer;
+    border-radius: .3em;
+}
+#display_record{
+    /* overflow-x: auto; */
+    overflow: auto;
+    /* border: 2px solid gray; */
+    margin-right: 100px;
+}
+
+#incident_id{
+    /* float: left; */
+    display: inline;
+}
+#record_type{
+    /* float: unset; */
+    display: inline;
+}
+#data_card{
+    /* border: 2px solid rebeccapurple; */
+    margin: 10px;
+    margin-top: 15px;
+    margin-bottom:10px; 
+    padding: 10px;
+    border-radius: .3em;
+    background-color: white;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-top: 3px black !important;
+}
+h6,#meta_data1, #meta_data2{
+    color: rgba(48, 51, 50, 0.89);
+    font-size: 14px;
+    display: inline;
+}
+#meta_data2{
+    margin-left: 15px;
+}
+hr{
+    /* border-color: rgba(71, 70, 70, 0.096); */
+    border: 1px solid rgba(71, 70, 70, 0.096);
+}
+#comment{
+    color: #363535e8;
+    cursor: pointer;
+}
+#comment:hover{
+    background-color: #9696961e;
+    border-radius: .3em;
+    /* padding-left: 4px; */
+}
+
+@media (max-width:700px) {
+    .display_record {
+        /* margin-top: 7px; */
+        margin-right: 0px !important;
+    }
+}
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+    
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: .3em;
+    overflow: auto;
+    margin-bottom: 200px;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }  
+
+  /* tab style*/
+  .tabs{
+      overflow: hidden;
+      /* border: 1px solid #ccc; */
+      /* background-color: #f1f1f1; */
+
+  }
+
+  .tabs button{
+      background-color: rgb(121, 14, 124);
+      width: auto;
+      height: 40px;
+      /* float: left; */
+      border: 1px solid rgb(123, 9, 129);
+      outline: none;
+      display: inline;
+      cursor: pointer;
+      padding-bottom:30px !important;
+      margin-left: 2px;
+      margin-right: 2px;
+      /* padding: 14px 16px; */
+      transition: 0.3s;
+      font-size: 17px;
+  }
+  .tabs button:hover{
+      background-color: rgb(149, 10, 184);
+      border: none;
+  }
+  .tabs button.active{
+      background-color: rgb(170, 14, 136);
+      border: none;
+  }
+  .tabcontent{
+      display: none;
+      padding: 6px 12px;
+      -webkit-animation: fadeEffect 1s;
+      animation: fadeEffect 1s;
+  }
+  @-webkit-keyframes fadeEffect{
+      from {opacity: 0;}
+      to {opacity: 1;}
+  }
+  @keyframes fadeEffect{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+.tabdiv{
+    margin-top: 10px;
+    display: block;
+}
+#Record_details{
+    display: block;
+    /* margin-left: 5%; */
+}
+.h3{
+    margin: 0px 5% 0px 45%;
+}
+.buttons{
+    margin: 0% 10% 0% 20%;
+}
+.data{
+    border: 1px solid rgba(128, 128, 128, 0.274);
+    width: 70%;
+    margin-top: 15px;
+    margin-bottom:10px;
+    margin-left: 20% !important;
+    color: #252525dc;
+    padding: 1px 6px 1px 6px;
+    border-radius: .3em;
+    background-color: rgba(214, 210, 210, 0.24);
+}
+
+#record_comment_data{
+    overflow: auto;
+    padding-top: 15px;
+}
+label{
+    margin-left: 40%;
+    text-align: center;
 }
