@@ -269,13 +269,16 @@ hr{
     padding: 1px 6px 1px 6px;
     border-radius: .3em;
     background-color: rgba(214, 210, 210, 0.24);
+    padding: 8px 15px 8px 15px;
+    
 }
 
 #record_comment_data{
     overflow: auto;
     padding-top: 15px;
+    /* padding-bottom: 15px; */
 }
 label{
-    margin-left: 40%;
-    text-align: center;
+    margin-left: 20%;
+    /* text-align: center; */
 }

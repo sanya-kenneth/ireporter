@@ -53,6 +53,63 @@
             </div>
         </div>
     </div>
+
+
+<!-- view one record Modal -->
+<div id="dataModal"  class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span onclick="closeModal();" class="close">&times;</span>
+         <div class="tabs">
+             <div class="buttons">
+                    <button onclick="switchTab(event, 'Record_details')" class="tablinks active">Record Details</button>
+                    <button onclick="switchTab(event, 'Edit_location')"  class="tablinks">Edit Location</button>
+                    <button onclick="switchTab(event, 'Edit_comment')" class="tablinks">Edit comment</button>
+             </div>
+            
+             
+             <div class="tabdiv">
+                <div onload="dettailsView()" id="Record_details" class="tabcontent">
+                    <div class="details_container">
+                        <label>Record Type:</label>
+                        <div id="record_type_data" class="data">
+                        </div>
+    
+                        <label>Created by:</label>
+                        <div id="created_by_data" class="data">
+                        </div>
+                        <label>Created on:</label>
+                        <div id="created_on_data" class="data">
+                        </div>
+                        <label>comment</label>
+                        <div id="record_comment_data" class="data">
+                           
+                        </div>
+                        <label>Location:</label>
+                        <div id="location_data" class="data">
+                        </div>
+                        <label >Record status:</label>
+                        <div id="record_status" class="data">
+                        </div>
+                    </div>
+                </div>
+                <div id="Edit_location" class="tabcontent">
+                   <h3 class="h3">Edit location</h3>
+                   <p>Hey its Kenneth. Am now in Busia.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+               </div>
+               <div id="Edit_comment" class="tabcontent">
+                   <h3 class="h3">Edit comment</h3>
+                   <p>Hey its Kenneth. Am now in Kabale.ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc</p>
+             </div>
+            
+            </div>
+         </div>
+          
+        </div>
+      
+      </div>
+
     <script src="../assets/js/view_records.js"></script>
 </body>
 
