@@ -7,11 +7,11 @@ let urlEdit = (recordType) => {
     }
 }
 
-function remove_error(){
+function remove_error_comment(){
     document.getElementById("edit_comment_error_box").style.display = 'none';
 }
 
-function remove_message(){
+function remove_message_comment(){
     document.getElementById("edit_comment_message_box").style.display = 'none';
 }
 
@@ -41,7 +41,7 @@ const editComment = (event) => {
             document.getElementById("edit_comment_message_box");
             edit_comment_message_box.innerHTML = data.message;
             edit_comment_message_box.style.display = 'block';
-            setTimeout(remove_message, 3000);
+            setTimeout(remove_message_comment, 3000);
             comment_form.reset();
   
         }
@@ -51,13 +51,13 @@ const editComment = (event) => {
             edit_comment_error_box.innerHTML = data.message;
             console.log(data.message)
             edit_comment_error_box.style.display = 'block';
-            setTimeout(remove_error, 3000);
+            setTimeout(remove_error_comment, 3000);
         }
         else{
             edit_comment_error_box.innerHTML = data.error;
             console.log(data.error)
             edit_comment_error_box.style.display = 'block';
-            setTimeout(remove_error, 3000);
+            setTimeout(remove_error_comment, 3000);
         }
     });
 

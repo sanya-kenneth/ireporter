@@ -77,4 +77,16 @@
     border-radius: .3em;
     display: none;
 }
+@media (max-width:700px) {
+
+    .response_container{
+        margin-right: 5% !important;
+          }
+    
+
+}
+
+
+
+
 

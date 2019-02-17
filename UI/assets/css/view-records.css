@@ -107,7 +107,42 @@ hr{
     .display_record {
         margin-right: 0px !important;
     }
+
+#display_record{
+    overflow: auto;
+    margin-right: 0px;
 }
+    #data_card{
+        margin:0px;  
+      
+    }
+    .content {
+        margin-left: 20px;
+        margin-bottom: 3px;
+        padding-right: 10px;
+    }
+
+.menu-container{
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+form{
+    margin:0px !important; 
+}
+#cancel{
+    margin-left: 23px !important;
+    display: block;
+  }
+  .h3{
+      margin-left: 15% !important;
+  }
+  .response_container{
+margin-right: 5% !important;
+  }
+
+}
+
 
 
 
