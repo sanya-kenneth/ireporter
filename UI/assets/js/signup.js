@@ -20,7 +20,7 @@ const signUp = (event) => {
     let phoneNumber = document.getElementById('phonenumber').value;
     let password = document.getElementById('password').value;
 
-    fetch('http://127.0.0.1:5000/api/v1/users', {
+    fetch('https://ireporterch3.herokuapp.com/api/v1/users', {
           method: 'POST',
           mode: 'cors',
           headers: {

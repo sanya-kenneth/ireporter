@@ -12,7 +12,7 @@ const logIn = (event) => {
     let userEmail = document.getElementById('email').value;
     let password = document.getElementById('password').value;
 
-    fetch('http://127.0.0.1:5000/api/v1/users/login', {
+    fetch('https://ireporterch3.herokuapp.com/api/v1/users/login', {
           method: 'POST',
           mode: 'cors',
           headers: {

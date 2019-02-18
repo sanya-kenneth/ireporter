@@ -9,10 +9,10 @@ function remove_message(){
 
 let url = (recordType) => {
     if(recordType == 'red-flag'){
-        return 'http://127.0.0.1:5000/api/v1/red-flags'
+        return 'https://ireporterch3.herokuapp.com/api/v1/red-flags'
     }
     else{
-        return 'http://127.0.0.1:5000/api/v1/interventions'
+        return 'https://ireporterch3.herokuapp.com/api/v1/interventions'
     }
 }
 
