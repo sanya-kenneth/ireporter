@@ -3,6 +3,16 @@ body {
     background-size: cover;
     margin: 0px;
 }
+#map { position:inherit; 
+    top:0; 
+    bottom:0; 
+    height: 40%;
+     width:90%;
+ }
+ .map{
+     margin-top: 30px;
+ }
+    
 .response_container{
     margin-right: 45%;
     margin-bottom: 5px;
