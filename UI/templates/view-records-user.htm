@@ -12,7 +12,7 @@
 
 </head>
 
-<body onload="fetchIncidents('red-flag')">
+<body onload="fetchIncidents('red-flag'); defaultRecordType();">
     <div class="flex-container-grid">
         <div class="menu-container">
             <div class="banner">
@@ -40,7 +40,7 @@
                 <!---<h3 onclick="fetchIncidents()" class="h3heading">Your records</h3>-->
                 <label >Select record type</label>
                 <select onchange="switchPage('interventions')" id="select_type">
-                    <option >red-flags</option>
+                    <option id="redflagvalue">red-flags</option>
                     <option  >interventions</option>
                 </select>
                 <!--<p  class="user-records"><img class="trash" src="../assets/img/delete.png"><img class="edit" src="../assets/img/edit.png"></p>-->

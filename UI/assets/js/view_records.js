@@ -12,15 +12,17 @@ let url = (recordType) => {
     }
 }
 
-var incidentRecordId;
+let defaultRecordType = () => {
+    localStorage.setItem("incidentDataCurrentType", "red-flag");
+}
 
 function switchPage(incidentrecordType){
-    console.log(incidentrecordType)
-    if (incidentrecordType === "redflags"){
+    if (incidentrecordType == "redflags"){
         localStorage.setItem("incidentDataCurrentType", "red-flag");
         window.location.href = "../templates/view-records-user.htm";
     } 
     else{
+        localStorage.removeItem("incidentDataCurrentType");
         localStorage.setItem("incidentDataCurrentType", "intervention");
         window.location.href = "../templates/view-records-intervention.htm";
     }
