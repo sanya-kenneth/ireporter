@@ -47,19 +47,30 @@ def post_incident(current_user):
 
 
 # function for getting all incidents
-def fetch_all_incidents(record_type):
+def fetch_all_incidents(record_type, current_user):
     fetched_data = db_handler().select_all_incidents(record_type)
-    if not fetched_data:
-        return jsonify({'status': 200,
-                        'message': 'No incidents recorded yet'}), 200
     keys = ["incidentid", "createdon", "createdby", "record_type",
              "incident_location", "comment", "status"]
     incident_records = []
-    for data in fetched_data:
-        records = [data[0], data[1], data[2], data[3], data[4],
-        data[6], data[7]]
-        incident_records.append(dict(zip(keys, records)))
-    return jsonify({'data': incident_records, 'status': 200}), 200
+    user_incident_records = []
+    if current_user[9] is False:
+        fetch_specific_user_data = db_handler().select_records_by_one_user(
+            record_type, current_user[0])
+        for data_fetched in fetch_specific_user_data:
+            data_records = [data_fetched[0], data_fetched[1],
+            data_fetched[2], data_fetched[3], data_fetched[4],
+            data_fetched[4], data_fetched[6], data_fetched[7]]
+            user_incident_records.append(dict(zip(keys, data_records)))
+            return jsonify({'data': user_incident_records, 'status': 200
+            }), 200
+    else:
+        for data in fetched_data:
+            records = [data[0], data[1], data[2], data[3], data[4],
+            data[6], data[7]]
+            incident_records.append(dict(zip(keys, records)))
+            return jsonify({'data': incident_records, 'status': 200}), 200
+    return jsonify({'status': 200,
+                    'message': 'No incidents recorded yet'}), 200
 
 
 # function for getting a single incident

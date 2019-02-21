@@ -59,6 +59,12 @@ class Database:
         self.cursor.execute(sql)
         return self.cursor.fetchall()
 
+    def select_records_by_one_user(self, record_type, user_info):
+        sql = ("""SELECT * from incident_table WHERE record_type = '{}'
+               AND createdby = '{}'""".format(record_type, user_info))
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
     def select_one_record(self, table_name, criteria, input_data):
         sql = ("""SELECT * from {} WHERE {} = '{}' """
                .format(table_name, criteria, input_data))
