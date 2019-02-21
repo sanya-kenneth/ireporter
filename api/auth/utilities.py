@@ -30,7 +30,7 @@ def check_is_admin(current_user):
     return current_user[9] is True
 
 
-def encode_token(user_email):
+def encode_token(user_email, user_role):
     """
     Generates authentication jwt token
     :param user_email:
@@ -43,7 +43,9 @@ def encode_token(user_email):
             # issued at
             'iat': datetime.datetime.utcnow(),
             # token user info
-            'sub': user_email
+            'sub': user_email,
+            # user role
+            'user_role': user_role
         }
         return jwt.encode(payload, app.config['SECRET'],
                           algorithm='HS256')

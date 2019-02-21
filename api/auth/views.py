@@ -13,13 +13,13 @@ def signup():
 # login user route
 @auths.route('/users/login', methods=['POST'])
 def login():
-    return login_user('normal_user')
+    return login_user()
 
 
-# login admin route
-@auths.route('/users/login/admin', methods=['POST'])
-def login_admin():
-    return login_user('admin')
+# # login admin route
+# @auths.route('/users/login/admin', methods=['POST'])
+# def login_admin():
+#     return login_user('admin')
 
 
 # custom error handler
