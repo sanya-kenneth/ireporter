@@ -73,5 +73,5 @@ def login_user():
                 check_password_hash(user_data[7], login_password):
             access_token = encode_token(login_email, user_data[9])
             return jsonify({'status': 200, 'access_token': access_token.decode('UTF-8'),
-                            'message': 'You are now loggedin'}), 200
+                            'message': 'You are now loggedin', 'user_role': user_data[9]}), 200
     return jsonify({'status': 401, 'error': 'Wrong email or password'}), 401
