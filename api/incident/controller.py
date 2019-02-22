@@ -61,14 +61,16 @@ def fetch_all_incidents(record_type, current_user):
             data_fetched[2], data_fetched[3], data_fetched[4],
             data_fetched[4], data_fetched[6], data_fetched[7]]
             user_incident_records.append(dict(zip(keys, data_records)))
-            return jsonify({'data': user_incident_records.reverse(), 'status': 200
+            user_incident_records.reverse()
+            return jsonify({'data': user_incident_records, 'status': 200
             }), 200
     else:
         for data in fetched_data:
             records = [data[0], data[1], data[2], data[3], data[4],
             data[6], data[7]]
             incident_records.append(dict(zip(keys, records)))
-            return jsonify({'data': incident_records.reverse(), 'status': 200}), 200
+            incident_records.reverse()
+            return jsonify({'data': incident_records, 'status': 200}), 200
     return jsonify({'status': 200,
                     'message': 'No incidents recorded yet'}), 200
 
