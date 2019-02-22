@@ -97,6 +97,11 @@ class Database:
                        phoneNumber, userpassword, registered, isAdmin))
         return self.cursor.execute(sql)
 
+    def get_all_users(self):
+        sql = ("""SELECT * from user_table""")
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
     def update_incident_record(self, field_to_update, incident_id_in,
                                input_data, record_type):
         sql = ("""UPDATE incident_table SET {} = '{}' WHERE incidentid = '{}' AND record_type = '{}'"""

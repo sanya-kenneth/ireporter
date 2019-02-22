@@ -6,6 +6,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from api.database.db import db_handler
 
 
+user_list = []
+
+
 # function to signup a user
 def signup_user():
     data = request.get_json()
@@ -75,3 +78,24 @@ def login_user():
             return jsonify({'status': 200, 'access_token': access_token.decode('UTF-8'),
                             'message': 'You are now loggedin', 'user_role': user_data[9]}), 200
     return jsonify({'status': 401, 'error': 'Wrong email or password'}), 401
+
+
+def get_all_users(current_user):
+    if current_user[9] is False:
+        return jsonify({'status': 403,
+                        'error': 'You are not allowed to perform this action'}), 403
+    all_users = db_handler().get_all_users()
+    if not all_users:
+        return jsonify({'status': 200,
+                        'message': 'There no users registered yet'}), 200
+    user_keys = ["userid", "firstname", "lastname", "othernames", "username",
+    "useremail", "phonenumber", "Joined", "User type"]
+    user_list = []
+    for user in all_users:
+        user_details = [user[0], user[1], user[2], user[3], user[4], user[5],
+        user[6], user[8], user[9]]
+        user_list.append(dict(zip(user_keys, user_details)))
+    user_list.reverse()
+    return jsonify({'data': user_list, 'status': 200}), 200
+
+
