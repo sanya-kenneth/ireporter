@@ -125,3 +125,4 @@ class Database:
 def db_handler():
     database_obj = Database(app.config['DATABASE_URI'])
     return database_obj
+

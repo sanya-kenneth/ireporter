@@ -6,7 +6,7 @@ from api.database.db import db_handler
 
 incident_records = []
 
-intervention_records = []
+user_incidents = []
 
 
 # function for posting an incident
@@ -48,31 +48,39 @@ def post_incident(current_user):
 
 # function for getting all incidents
 def fetch_all_incidents(record_type, current_user):
-    fetched_data = db_handler().select_all_incidents(record_type)
-    keys = ["incidentid", "createdon", "createdby", "record_type",
-             "incident_location", "comment", "status"]
-    incident_records = []
-    user_incident_records = []
     if current_user[9] is False:
-        fetch_specific_user_data = db_handler().select_records_by_one_user(
-            record_type, current_user[0])
-        for data_fetched in fetch_specific_user_data:
-            data_records = [data_fetched[0], data_fetched[1],
-            data_fetched[2], data_fetched[3], data_fetched[4],
-            data_fetched[4], data_fetched[6], data_fetched[7]]
-            user_incident_records.append(dict(zip(keys, data_records)))
-            user_incident_records.reverse()
-            return jsonify({'data': user_incident_records, 'status': 200
-            }), 200
+        info_get = db_handler().select_records_by_one_user(record_type, current_user[0])
+        if not info_get:
+            return jsonify({'status': 200,
+                            'message': 'No incidents recorded yet'}), 200
+        info_keys = ["incidentid", "createdon", "createdby", "record_type",
+                "incident_location", "comment", "status"]
+        user_incidents = []
+        for info in info_get:
+            info_details = [info[0], info[1], info[2], info[3], info[4],
+            info[6], info[7]]
+            # zip keys and data fetched
+            user_incidents.append(dict(zip(info_keys, info_details)))
+        # Reverse the list so that records added last appear first
+        user_incidents.reverse()
+        return jsonify({'data': user_incidents, 'status': 200}), 200
     else:
+        fetched_data = db_handler().select_all_incidents(record_type)
+        if not fetched_data:
+            return jsonify({'status': 200,
+                            'message': 'No incidents recorded yet'}), 200
+        keys = ["incidentid", "createdon", "createdby", "record_type",
+                "incident_location", "comment", "status"]
+        incident_records = []
         for data in fetched_data:
             records = [data[0], data[1], data[2], data[3], data[4],
             data[6], data[7]]
+            # zip keys and data fetched
             incident_records.append(dict(zip(keys, records)))
-            incident_records.reverse()
-            return jsonify({'data': incident_records, 'status': 200}), 200
-    return jsonify({'status': 200,
-                    'message': 'No incidents recorded yet'}), 200
+        # Reverse the list so that records added last appear first
+        incident_records.reverse()
+        return jsonify({'data': incident_records, 'status': 200}), 200
+  
 
 
 # function for getting a single incident
