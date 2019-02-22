@@ -1,5 +1,6 @@
 from api.auth import auths
-from api.auth.controller import signup_user, login_user, get_all_users
+from api.auth.controller import signup_user, login_user,\
+    get_all_users, get_one_user
 from flask import make_response, jsonify
 from api.database.db import db_handler
 from api.auth.utilities import protected_route
@@ -22,6 +23,12 @@ def login():
 @protected_route
 def get_users(current_user):
     return get_all_users(current_user)
+
+# get one user route
+@auths.route('/users/<user_id>', methods=['GET'])
+@protected_route
+def get_a_user(current_user, user_id):
+    return get_one_user(user_id)
 
 
 # custom error handler

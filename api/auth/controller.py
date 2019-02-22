@@ -89,7 +89,7 @@ def get_all_users(current_user):
         return jsonify({'status': 200,
                         'message': 'There no users registered yet'}), 200
     user_keys = ["userid", "firstname", "lastname", "othernames", "username",
-    "useremail", "phonenumber", "Joined", "User type"]
+    "useremail", "phonenumber", "joined", "usertype"]
     user_list = []
     for user in all_users:
         user_details = [user[0], user[1], user[2], user[3], user[4], user[5],
@@ -98,4 +98,28 @@ def get_all_users(current_user):
     user_list.reverse()
     return jsonify({'data': user_list, 'status': 200}), 200
 
+def get_one_user(user_id):
+    try:
+        user_Id=int(user_id)
+    except:
+        return jsonify({'status': 400,
+                        'error': 'user_id must be a valid number'
+                        }), 400
+    user_particulars = db_handler().select_one_record('user_table', 'userid',
+                                                      user_Id)
+    if not user_particulars:
+        return jsonify({'status': 200,
+                        'message': 'User info not found'}), 200
+    user_dict = {
+                'userid': user_particulars[0],
+                'first name': user_particulars[1],
+                'lastname': user_particulars[2],
+                'othernames': user_particulars[3],
+                'username': user_particulars[4],
+                'useremail': user_particulars[5],
+                'phonenumber': user_particulars[6],
+                'joined': user_particulars[8],
+                'usertype': user_particulars[9]
+                }
+    return jsonify({'status': 200, 'data': user_dict}), 200
 
