@@ -12,7 +12,7 @@ const logIn = (event) => {
     let userEmail = document.getElementById('email').value;
     let password = document.getElementById('password').value;
 
-    fetch('https://ireporterch3.herokuapp.com/api/v1/users/login', {
+    fetch('http://127.0.0.1:5000/api/v1/users/login', {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -31,8 +31,15 @@ const logIn = (event) => {
             message_box.style.display = 'block';
             setTimeout(remove_message, 3000)
             sessionStorage.setItem("access_token", data.access_token)
-            setTimeout(()=>{ window.location.href =
-                "../templates/create_report.htm"}, 1000)
+            if (data.user_role == false){
+                setTimeout(()=>{ window.location.href =
+                    "../templates/create_report.htm"}, 1000)
+            }
+            else{
+                setTimeout(()=>{window.location.href = 
+                    "../templates/change-status.htm"}, 1000)
+            }
+          
            
 
        }
