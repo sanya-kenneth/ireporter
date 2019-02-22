@@ -25,10 +25,10 @@ def get_users(current_user):
     return get_all_users(current_user)
 
 # get one user route
-@auths.route('/users/<user_id>', methods=['GET'])
+@auths.route('/user', methods=['GET'])
 @protected_route
-def get_a_user(current_user, user_id):
-    return get_one_user(user_id)
+def get_a_user(current_user):
+    return get_one_user(current_user[0])
 
 
 # custom error handler
