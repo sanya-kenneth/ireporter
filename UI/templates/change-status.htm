@@ -14,7 +14,7 @@
 
 </head>
 
-<body onload="fetchIncidents('red-flag'); setDefaultType();">
+<body onload="fetchIncidents('red-flag'); setDefaultType(); fetchUserDetails();">
     <div class="flex-container-grid">
         <div class="menu-container">
             <div class="banner">
@@ -25,7 +25,7 @@
             </div>
             <div class="extra-space">
                 <img class="pp" src="../assets/img/sanya.jpg">
-                <h5>Admin</h5>
+                <h5 id="logged_user_name"></h5>
                 <ul class="menu-items">
 
                     <li><a class="extend-link signout" href="index.htm">signout</a></li>
@@ -118,6 +118,7 @@
 
     <script src="../assets/js/view_records.js"></script>
     <script src="../assets/js/change_status.js"></script>
+    <script src="../assets/js/user_profile.js"></script>
 </body>
 
 </html>

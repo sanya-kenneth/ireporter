@@ -12,7 +12,7 @@
 
 </head>
 
-<body onload="fetchIncidents('red-flag'); defaultRecordType();">
+<body onload="fetchIncidents('red-flag'); defaultRecordType(); fetchUserDetails();">
     <div class="flex-container-grid">
         <div class="menu-container">
             <div class="banner">
@@ -27,7 +27,7 @@
             </div>
             <div class="extra-space">
                 <img class="pp" src="../assets/img/sanya.jpg">
-                <h5>Sanya Kenneth</h5>
+                <h5 id="logged_user_name"></h5>
                 <ul class="menu-items">
 
                     <li><a class="extend-link signout" href="index.htm">signout</a></li>
@@ -132,6 +132,7 @@
     <script src="../assets/js/edit_comment.js"></script>
     <script src="../assets/js/edit_location.js"></script>
     <script src="../assets/js/delete_record.js"></script>
+    <script src="../assets/js/user_profile.js"></script>
 </body>
 
 </html>
