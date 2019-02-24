@@ -112,7 +112,7 @@ def get_one_user(user_id):
                         'message': 'User info not found'}), 200
     user_dict = {
                 'userid': user_particulars[0],
-                'first name': user_particulars[1],
+                'firstname': user_particulars[1],
                 'lastname': user_particulars[2],
                 'othernames': user_particulars[3],
                 'username': user_particulars[4],
