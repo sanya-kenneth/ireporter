@@ -52,3 +52,13 @@ ul {
     color: white;
     margin-right: 30%;
 }
+.flex-container-display{
+    display: flexbox;
+    display: grid;
+    grid-template-columns: 5fr 7fr; 
+    flex-direction: row;
+    background-color: rgba(131, 130, 130, 0.274);
+    padding-left: 10%;
+    border-radius: .3em;
+    border: 2px solid rgba(100, 99, 99, 0.411);
+}

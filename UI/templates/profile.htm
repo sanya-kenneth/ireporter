@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body onload="fetchUserDetails();">
     <div class="flex-container-grid">
         <div class="menu-container">
             <div class="banner">
@@ -27,7 +27,7 @@
             </div>
             <div class="extra-space">
                 <img class="pp" src="../assets/img/sanya.jpg">
-                <h5>Sanya Kenneth</h5>
+                <h5 id="logged_user_name""></h5>
                 <ul class="menu-items">
 
                     <li><a class="extend-link signout" href="index.htm">signout</a></li>
@@ -37,8 +37,26 @@
         </div>
         <div class="content-container">
             <div class="content">
-                <h3 class="h3heading">Profile</h3>
-                <h4>Number of red-flag/intervention records resolved
+                <h3 class="h3heading">Profile</h3> 
+                <div class="flex-container-display">
+                    <div class="display-right">
+                        <div class="display_user_info">   <h4>Firstname:</h4><p id="user_firstname"></p></div>
+                        <div class="display_user_info">   <h4>Lastname:</h4><p id="user_lastname"></p></div>
+                        <div class="display_user_info">   <h4>Username:</h4><p id="user_username"></p></div>
+                        <div class="display_user_info">   <h4>Othernames:</h4><p id="user_othernames"></p></div>
+                    </div>
+                    <div class="display-left">
+                        <div class="display_user_info">   <h4>Email:</h4><p id="user_email"></p></div>
+                        <div class="display_user_info">   <h4>Phone number:</h4><p id="user_phonenumber"></p></div>
+                        <div class="display_user_info">   <h4>ID number:</h4><p id="user_id"></p></div>
+                        <div class="display_user_info">   <h4>User type:</h4><p id="user_type"></p></div>
+                    </div>
+
+                </div>
+               
+            
+             
+                <!-- <h4>Number of red-flag/intervention records resolved
                     <p class="number-info">4</p>
                 </h4>
                 <h4>Number of red-flag/intervention records pending
@@ -49,9 +67,9 @@
                 </h4>
                 <h4>Number of red-flag/intervention records rejected
                     <p class="number-info">0</p>
-                </h4>
+                </h4> -->
 
-                <h3 class="h3heading">All Records</h3>
+                <!-- <h3 class="h3heading">All Records</h3>
                 <div class="wrap-all-records">
                     <ul>
                         <li><a class="list-records">Water system in Seeta town is damaged</a> </li>
@@ -70,10 +88,12 @@
                         <p class="dot">.</p>
                         <li><a class="list-records">The roads in seeta town have so many pot holes</a> </li>
                     </ul>
-                </div><br>
+                </div><br> -->
             </div>
         </div>
     </div>
+
+    <script src="../assets/js/user_profile.js"></script>
 </body>
 
 </html>
