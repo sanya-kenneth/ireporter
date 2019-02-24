@@ -3,7 +3,7 @@ let urlDelete = (recordType) => {
         return 'https://ireporterch3.herokuapp.com/api/v1/red-flags'
     }
     else{
-        return 'https://ireporterch3.herokuapp.com/api/v1/interventions'
+        return 'http://127.0.0.1:5000/api/v1/interventions'
     }
 }
 
@@ -31,7 +31,7 @@ let deleteMethod = (event) => {
             alert(data.message)
         }
         else{
-            alert(error.message)
+            alert(data.error)
         }
     })
      

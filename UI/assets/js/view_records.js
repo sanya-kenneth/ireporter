@@ -104,12 +104,10 @@ const fetchIncidents = (incidentRecordType) => {
                 let error_box = document.getElementById("error_box");
                 error_box.innerHTML = data.message;
                 error_box.style.display = 'block';
-                console.log(data);
             }
             else{
                 let error_box = document.getElementById("error_box");
                 error_box.innerHTML = data.error;
-                console.log(data.message);
                 error_box.style.display = 'block';
             }
         })

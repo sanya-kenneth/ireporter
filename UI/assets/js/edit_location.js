@@ -1,9 +1,9 @@
 let urlLocationEdit = (recordType) => {
     if(recordType === 'red-flag'){
-        return 'https://ireporterch3.herokuapp.com/api/v1/red-flags'
+        return 'http://127.0.0.1:5000/api/v1/red-flags'
     }
     else{
-        return 'https://ireporterch3.herokuapp.com/api/v1/interventions'
+        return 'http://127.0.0.1:5000/api/v1/interventions'
     }
 }
 
@@ -53,13 +53,11 @@ const editLocation = (event) => {
         let edit_location_error_box = 
         document.getElementById("edit_location_error_box");
         edit_location_error_box.innerHTML = data.message;
-        console.log(data.message)
         edit_location_error_box.style.display = 'block';
         setTimeout(remove_error, 3000);
     }
     else{
         edit_location_error_box.innerHTML = data.error;
-        console.log(data.error)
         edit_location_error_box.style.display = 'block';
         setTimeout(remove_error, 3000);
     }

@@ -18,17 +18,37 @@ let fetchUserDetails = () => {
     })
     .then((res) => res.json())
     .then((data) => {
-        console.log(data.data)
         currentUserName.innerHTML = data.data.username;
-        displayFirstname.innerHTML = data.data.firstname;
-        displayLastname.innerHTML = data.data.lastname;
-        displayOthernames.innerHTML = data.data.othernames;
-        displayUsername.innerHTML = data.data.username;
+        if (displayFirstname != null){
+            displayFirstname.innerHTML = data.data.firstname;
+        }
+        if (displayLastname != null){
+            displayLastname.innerHTML = data.data.lastname;
+        }
+        if (displayOthernames != null){
+            displayOthernames.innerHTML = data.data.othernames;
+        }
+        if (displayUsername != null){
+            displayUsername.innerHTML = data.data.username;
+        }
+       if (displayPhonenumber != null){
         displayPhonenumber.innerHTML = data.data.phonenumber;
+       }
+       if ( displayUseremail != null){
         displayUseremail.innerHTML = data.data.useremail;
+       }
+       if (displayUserid != null){
         displayUserid.innerHTML = data.data.userid;
+       }
         if (data.data.usertype == false){
-            displayUsertype.innerHTML = "Normal"
+            if (displayUsertype != null){
+                displayUsertype.innerHTML = "Normal";
+            } 
+        }
+        else{
+            if(displayUsertype != null){
+                displayUsertype.innerHTML = "Administrator";
+            }
         }
     })
 }
