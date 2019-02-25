@@ -1,20 +1,20 @@
 .number-info {
-    display: inline;
-    margin-left: 90px;
+    display: inline-flex;
+    /* margin-left: 90px; */
     padding: 5px 10px 5px 10px;
     background-color: rgb(0, 128, 68);
     border-radius: 30px;
     color: white;
 }
 
-.number-info-big {
+/* .number-info-big {
     display: inline;
     margin-left: 12px;
     padding: 5px 10px 5px 10px;
     background-color: rgb(0, 128, 68);
     border-radius: 30px;
     color: white;
-}
+} */
 
 .dot {
     display: none;
@@ -23,6 +23,10 @@
 h4 {
     color: rgb(7, 65, 41);
     margin-top: 20px;
+}
+h4:hover{
+    color: forestgreen;
+    cursor: pointer;
 }
 
 ul li {
@@ -51,4 +55,21 @@ ul {
     border-radius: .2em;
     color: white;
     margin-right: 30%;
+}
+.flex-container-display{
+    display: flexbox;
+    display: grid;
+    grid-template-columns: 5fr 7fr; 
+    flex-direction: row;
+    background-color: rgba(131, 130, 130, 0.274);
+    padding-left: 10%;
+    border-radius: .3em;
+    border: 2px solid rgba(100, 99, 99, 0.411);
+}
+.banner-img{
+    width: 100% !important;
+}
+.stat-flexbox{
+    display: grid;
+    grid-template-columns: 9fr 3fr;
 }

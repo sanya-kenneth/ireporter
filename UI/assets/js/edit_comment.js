@@ -49,13 +49,11 @@ const editComment = (event) => {
             let edit_comment_error_box = 
             document.getElementById("edit_comment_error_box");
             edit_comment_error_box.innerHTML = data.message;
-            console.log(data.message)
             edit_comment_error_box.style.display = 'block';
             setTimeout(remove_error_comment, 3000);
         }
         else{
             edit_comment_error_box.innerHTML = data.error;
-            console.log(data.error)
             edit_comment_error_box.style.display = 'block';
             setTimeout(remove_error_comment, 3000);
         }

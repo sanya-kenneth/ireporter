@@ -53,13 +53,11 @@ const editLocation = (event) => {
         let edit_location_error_box = 
         document.getElementById("edit_location_error_box");
         edit_location_error_box.innerHTML = data.message;
-        console.log(data.message)
         edit_location_error_box.style.display = 'block';
         setTimeout(remove_error, 3000);
     }
     else{
         edit_location_error_box.innerHTML = data.error;
-        console.log(data.error)
         edit_location_error_box.style.display = 'block';
         setTimeout(remove_error, 3000);
     }

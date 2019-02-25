@@ -31,8 +31,15 @@ const logIn = (event) => {
             message_box.style.display = 'block';
             setTimeout(remove_message, 3000)
             sessionStorage.setItem("access_token", data.access_token)
-            setTimeout(()=>{ window.location.href =
-                "../templates/create_report.htm"}, 1000)
+            if (data.user_role == false){
+                setTimeout(()=>{ window.location.href =
+                    "../templates/create_report.htm"}, 1000)
+            }
+            else{
+                setTimeout(()=>{window.location.href = 
+                    "../templates/change-status.htm"}, 1000)
+            }
+          
            
 
        }

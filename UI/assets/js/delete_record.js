@@ -31,7 +31,7 @@ let deleteMethod = (event) => {
             alert(data.message)
         }
         else{
-            alert(error.message)
+            alert(data.error)
         }
     })
      

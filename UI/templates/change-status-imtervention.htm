@@ -14,18 +14,22 @@
 
 </head>
 
-<body onload="fetchIncidents('interventions'); ">
+<body onload="fetchIncidents('interventions'); fetchUserDetails(); ">
     <div class="flex-container-grid">
         <div class="menu-container">
             <div class="banner">
                 <img class="banner-img" src="../assets/img/logo.png">
             </div>
             <div class="menu">
-
+                    <ul class="menu-items">
+                            <li><a class="active" href="change-status-imtervention.htm">Change status</a></li>
+                            <li><a href="admin_profile.html">Profile</a></li>
+                            <li><a class="extend-link"  href="statistics.html">Statistics</a></li>
+                       </ul>
             </div>
             <div class="extra-space">
                 <img class="pp" src="../assets/img/sanya.jpg">
-                <h5>Admin</h5>
+                <h5 id="logged_user_name"></h5>
                 <ul class="menu-items">
 
                     <li><a class="extend-link signout" href="index.htm">signout</a></li>
@@ -119,6 +123,7 @@
 
     <script src="../assets/js/view_records.js"></script>
     <script src="../assets/js/change_status.js"></script>
+    <script src="../assets/js/user_profile.js"></script>
 </body>
 
 </html>

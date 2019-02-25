@@ -1,6 +1,6 @@
 .flex-container-grid {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 3fr 9fr;
     margin-top: 2%;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .extra-space {
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
 .pp {

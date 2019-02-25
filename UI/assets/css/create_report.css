@@ -54,7 +54,7 @@ ul li a {
 }
 
 .extra-space {
-    margin-top: 40px;
+    margin-top: 90px;
 }
 
 .pp {
@@ -66,6 +66,7 @@ ul li a {
 h5 {
     color: rgb(196, 195, 195);
     margin-left: 43px;
+    font-size: 16px;
 }
 
 ul li a:hover {

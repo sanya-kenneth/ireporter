@@ -104,12 +104,10 @@ const fetchIncidents = (incidentRecordType) => {
                 let error_box = document.getElementById("error_box");
                 error_box.innerHTML = data.message;
                 error_box.style.display = 'block';
-                console.log(data);
             }
             else{
                 let error_box = document.getElementById("error_box");
                 error_box.innerHTML = data.error;
-                console.log(data.message);
                 error_box.style.display = 'block';
             }
         })
@@ -119,7 +117,6 @@ const fetchIncidents = (incidentRecordType) => {
 const fetchOneIncident = () => {
     let record_id = localStorage.getItem("incidentDataId");
     let recordCurrentType = localStorage.getItem("incidentDataCurrentType");
-    console.log(recordCurrentType);
     fetch(url(recordCurrentType) + "/".concat(record_id), {
         method: 'GET',
         headers: {
@@ -137,12 +134,10 @@ const fetchOneIncident = () => {
                 let error_box = document.getElementById("error_box");
                 error_box.innerHTML = data.message;
                 error_box.style.display = 'block';
-                console.log(data);
             }
             else{
                 let error_box = document.getElementById("error_box");
                 error_box.innerHTML = data.error;
-                console.log(data.message);
                 error_box.style.display = 'block';
             }
         });

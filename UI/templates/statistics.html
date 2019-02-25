@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/create_report.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/view-records.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/profile.css" />
+
+</head>
+
+<body onload="fetchUserDetails(); fetchRecords('red-flag'); fetchRecords('intervention');">
+    <div class="flex-container-grid">
+        <div class="menu-container">
+            <div class="banner">
+                <img class="banner-img" src="../assets/img/logo.png">
+            </div>
+            <div class="menu">
+                <ul class="menu-items">
+                    <li><a href="change-status.htm">Change status</a></li>
+                    <li><a href="admin_profile.html">Profile</a></li>
+                    <li><a class="active extend-link"  href="#">Statistics</a></li>
+                </ul>
+            </div>
+            <div class="extra-space">
+                <img class="pp" src="../assets/img/sanya.jpg">
+                <h5 id="logged_user_name"></h5>
+                <ul class="menu-items">
+
+                    <li><a class="extend-link signout" href="index.htm">signout</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="content-container">
+            <div class="content">
+                <h3 class="h3heading">Record statistics</h3>
+
+                <div class="stat-flexbox">
+                    <div class="stat-header">
+                        <h4 onclick="showRedflags();" >Total number of red-flag records created  </h4>
+                    </div>
+                    <div class="stat-data">
+                        <p id="total_redflags" class="number-info"></p>
+                    </div>
+                </div>
+                <div class="stat-flexbox">
+                        <div class="stat-header">
+                            <h4 onclick="showInterventions();">Total number of intervention records created  </h4>
+                        </div>
+                        <div class="stat-data">
+                            <p id="total_interventions" class="number-info"></p>
+                        </div>
+                    </div>
+                <div class="stat-flexbox">
+                        <div class="stat-header">
+                            <h4 onclick="showResolved();">red-flag/intervention records resolved  </h4>
+                        </div>
+                        <div class="stat-data">
+                            <p id="resolved_records" class="number-info"></p>
+                        </div>
+                    </div>
+                <div class="stat-flexbox">
+                        <div class="stat-header">
+                            <h4 onclick="showDraft();">red-flag/intervention records in Draft  </h4>
+                        </div>
+                        <div class="stat-data">
+                            <p id="draft_records" class="number-info"></p>
+                        </div>
+                    </div>
+                    <div class="stat-flexbox">
+                            <div class="stat-header">
+                                <h4 onclick="showunderInv();">red-flag/intervention records under investigation  </h4>
+                            </div>
+                            <div class="stat-data">
+                                <p  id="under_investigation_records" class="number-info"></p>
+                            </div>
+                        </div>
+                    <div class="stat-flexbox">
+                            <div class="stat-header">
+                                <h4 onclick="showRejected();">red-flag/intervention records rejected</h4>
+                            </div>
+                            <div class="stat-data">
+                                <p id="rejected_records" class="number-info"></p>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/user_profile.js"></script>
+    <script src="../assets/js/statistics.js"></script>
+</body>
+
+</html>
