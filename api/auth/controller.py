@@ -6,6 +6,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from api.database.db import db_handler
 
 
+user_list = []
+
+
 # function to signup a user
 def signup_user():
     data = request.get_json()
@@ -53,7 +56,7 @@ def signup_user():
 
 
 # function to login a user
-def login_user(user_type):
+def login_user():
     login_info = request.get_json()
     login_email = login_info.get('email')
     login_password = login_info.get('password')
@@ -69,19 +72,54 @@ def login_user(user_type):
     user_data = db_handler().select_one_record(
         'user_table', 'useremail', login_email)
     if user_data:
-        if user_type == "admin":
-            if user_data[9] is False:
-                return jsonify({'status': 401,
-                                'error': "You can't login as a normal user from here"
-                                }), 401
-        if user_type == "normal_user":
-            if user_data[9] is True:
-                return jsonify({'status': 401,
-                                'error': "You can't login as an admin from here"
-                                }), 401
         if user_data[5] == login_email and \
                 check_password_hash(user_data[7], login_password):
-            access_token = encode_token(login_email)
+            access_token = encode_token(login_email, user_data[9])
             return jsonify({'status': 200, 'access_token': access_token.decode('UTF-8'),
-                            'message': 'You are now loggedin'}), 200
+                            'message': 'You are now loggedin', 'user_role': user_data[9]}), 200
     return jsonify({'status': 401, 'error': 'Wrong email or password'}), 401
+
+
+def get_all_users(current_user):
+    if current_user[9] is False:
+        return jsonify({'status': 403,
+                        'error': 'You are not allowed to perform this action'}), 403
+    all_users = db_handler().get_all_users()
+    if not all_users:
+        return jsonify({'status': 200,
+                        'message': 'There no users registered yet'}), 200
+    user_keys = ["userid", "firstname", "lastname", "othernames", "username",
+    "useremail", "phonenumber", "joined", "usertype"]
+    user_list = []
+    for user in all_users:
+        user_details = [user[0], user[1], user[2], user[3], user[4], user[5],
+        user[6], user[8], user[9]]
+        user_list.append(dict(zip(user_keys, user_details)))
+    user_list.reverse()
+    return jsonify({'data': user_list, 'status': 200}), 200
+
+def get_one_user(user_id):
+    try:
+        user_Id=int(user_id)
+    except:
+        return jsonify({'status': 400,
+                        'error': 'user_id must be a valid number'
+                        }), 400
+    user_particulars = db_handler().select_one_record('user_table', 'userid',
+                                                      user_Id)
+    if not user_particulars:
+        return jsonify({'status': 200,
+                        'message': 'User info not found'}), 200
+    user_dict = {
+                'userid': user_particulars[0],
+                'firstname': user_particulars[1],
+                'lastname': user_particulars[2],
+                'othernames': user_particulars[3],
+                'username': user_particulars[4],
+                'useremail': user_particulars[5],
+                'phonenumber': user_particulars[6],
+                'joined': user_particulars[8],
+                'usertype': user_particulars[9]
+                }
+    return jsonify({'status': 200, 'data': user_dict}), 200
+

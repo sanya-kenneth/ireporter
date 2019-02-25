@@ -59,6 +59,12 @@ class Database:
         self.cursor.execute(sql)
         return self.cursor.fetchall()
 
+    def select_records_by_one_user(self, record_type, user_info):
+        sql = ("""SELECT * from incident_table WHERE record_type = '{}'
+               AND createdby = '{}'""".format(record_type, user_info))
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
     def select_one_record(self, table_name, criteria, input_data):
         sql = ("""SELECT * from {} WHERE {} = '{}' """
                .format(table_name, criteria, input_data))
@@ -91,6 +97,11 @@ class Database:
                        phoneNumber, userpassword, registered, isAdmin))
         return self.cursor.execute(sql)
 
+    def get_all_users(self):
+        sql = ("""SELECT * from user_table""")
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
     def update_incident_record(self, field_to_update, incident_id_in,
                                input_data, record_type):
         sql = ("""UPDATE incident_table SET {} = '{}' WHERE incidentid = '{}' AND record_type = '{}'"""
@@ -119,3 +130,4 @@ class Database:
 def db_handler():
     database_obj = Database(app.config['DATABASE_URI'])
     return database_obj
+

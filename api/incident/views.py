@@ -22,14 +22,14 @@ def post(current_user):
 @incidents_bp.route('/red-flags', methods=['GET'])
 @protected_route
 def get_all_red_flags(current_user):
-    return fetch_all_incidents('red-flag')
+    return fetch_all_incidents('red-flag', current_user)
 
 
 # fetch all interventions route
 @incidents_bp.route('/interventions', methods=['GET'])
 @protected_route
 def get_all_interventions(current_user):
-    return fetch_all_incidents('intervention')
+    return fetch_all_incidents('intervention', current_user)
 
 
 # fetch a specific red-flag route
