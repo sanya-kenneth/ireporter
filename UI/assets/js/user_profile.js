@@ -8,7 +8,7 @@ let fetchUserDetails = () => {
     let displayUseremail = document.getElementById("user_email");
     let displayUserid = document.getElementById("user_id");
     let displayUsertype = document.getElementById("user_type");
-    fetch('http://127.0.0.1:5000/api/v1/user', 
+    fetch('https://ireporterch3.herokuapp.com/api/v1/user', 
     {
         method: 'GET',
         headers: {
